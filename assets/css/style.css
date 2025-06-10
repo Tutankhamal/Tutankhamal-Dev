@@ -1399,34 +1399,34 @@
   }
   
   .social-icon.youtube {
-    color: #ff0000;
-    border: 2px solid #ff0000;
+    color: #8400ff;
+    border: 2px solid #8400ff;
   }
   
   .social-icon.youtube:hover {
-    background-color: #ff0000;
+    background-color: #ff000062;
     color: #fff;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
   }
   
   .social-icon.discord {
-    color: #7289da;
-    border: 2px solid #7289da;
+    color: #8400ff;
+    border: 2px solid #8400ff;
   }
   
   .social-icon.discord:hover {
-    background-color: #7289da;
+    background-color: #7289da62;
     color: #fff;
     box-shadow: 0 0 15px rgba(114, 137, 218, 0.7);
   }
   
   .social-icon.github {
-    color: #bcbcbc;
-    border: 2px solid #bcbcbc;
+    color: #8400ff;
+    border: 2px solid #8400ff;
   }
   
   .social-icon.github:hover {
-    background-color: #bcbcbc;
+    background-color: #bcbcbc62;
     color: #fff;
     box-shadow: 0 0 15px rgba(188, 188, 188, 0.7);
   }
@@ -1443,19 +1443,19 @@
   }
   
   .social-icon.instagram {
-    color: #e1306c;
-    border: 2px solid #e1306c;
+    color: #8400ff;
+    border: 2px solid #8400ff;
   }
   
   .social-icon.instagram:hover {
-    background-color: #e1306c;
+    background-color: #e1306c62;
     color: #fff;
     box-shadow: 0 0 15px rgba(225, 48, 108, 0.7);
   }
   
   .social-icon.twitter {
-    color: #1da1f2;
-    border: 2px solid #1da1f2;
+    color: #8400ff;
+    border: 2px solid #8400ff;
   }
   
   .social-icon.twitter:hover {
@@ -1487,12 +1487,12 @@
   }
   
   .social-icon.linkedin {
-    color: #0077b5;
-    border: 2px solid #0077b5;
+    color: #8400ff;
+    border: 2px solid #8400ff;
   }
   
   .social-icon.linkedin:hover {
-    background-color: #0077b5;
+    background-color: #0077b562;
     color: #fff;
     box-shadow: 0 0 15px rgba(0, 119, 181, 0.7);
   }
@@ -1520,23 +1520,23 @@
   }
   
   .social-icon.soundcloud {
-    color: #ff8800;
-    border: 2px solid #ff8800;
+    color: #8400ff;
+    border: 2px solid #8400ff;
   }
   
   .social-icon.soundcloud:hover {
-    background-color: #ff8800;
+    background-color: #ff880062;
     color: #fff;
     box-shadow: 0 0 15px rgba(255, 136, 0, 0.7);
   }
   
   .social-icon.steam {
-    color: #66c0f4;
-    border: 2px solid #66c0f4;
+    color: #8400ff;
+    border: 2px solid #8400ff;
   }
   
   .social-icon.steam:hover {
-    background-color: #66c0f4;
+    background-color: #66c0f462;
     color: #fff;
     box-shadow: 0 0 15px rgba(102, 192, 244, 0.7);
   }
