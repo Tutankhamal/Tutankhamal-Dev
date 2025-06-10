@@ -371,14 +371,14 @@
   }
 
   #hero-title {
-    font-size: 12vw;
+    font-size: 10vw;
     margin-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
   }
 
   #typing-text {
-    font-size: 2vw;
+    font-size: 5vw;
     margin-top: 8px;
   }
 }
@@ -398,7 +398,7 @@
   }
 
   #hero-title {
-    font-size: 12vw;
+    font-size: 10vw;
     margin-top: 12px;
     padding-left: 12px;
     padding-right: 12px;
