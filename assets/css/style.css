@@ -284,6 +284,7 @@
     box-sizing: border-box;
     text-align: center;
     pointer-events: none;
+    margin-bottom: 100px;
   }
   #hero-title {
     font-family: 'Bebas Neue', sans-serif;
