@@ -2,6 +2,7 @@
 :root {
   --primary-color: #6c17db;
   --border-color-main: #6c17db62;
+  --border-color-main2:rgba(108, 23, 219, 0.726)2;
   --secondary-color: #280069;
   --accent-color: #4c1dce;
   --text-color: #ffffff;
@@ -359,7 +360,7 @@ main {
     0 0 12px rgba(255, 255, 255, 0.2);
   filter: drop-shadow(0 0 6px rgba(119, 0, 255, 0.4));
   animation:
-    glitch 2s infinite,
+    glitch 5s infinite,
     pulse 4s ease-in-out infinite,
     fadeZoom 1s ease forwards;
   opacity: 0;
@@ -384,10 +385,11 @@ main {
 
 @keyframes glitch {
   0%, 100% { transform: translate(0); }
-  20% { transform: translate(-0.5px, 0.5px); }
-  40% { transform: translate(-1px, -0.5px); }
-  60% { transform: translate(0.5px, 1px); }
-  80% { transform: translate(1px, -1px); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(-2px, -1px); }
+  60% { transform: translate(1px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  
 }
 
 @keyframes pulse {
@@ -742,4 +744,154 @@ footer {
 .top-button:hover {
   transform: scale(1.1); /* Leve zoom ao passar o mouse */
   box-shadow: 0 0 25px rgb(125, 28, 190); /* Glow vermelho mais intenso */
+}
+
+.tech-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+.tech-box {
+  width: 300px;
+  background-color: rgba(204, 0, 255, 0.11);
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  transform: translateY(0); /* <--- ADICIONE ESTA LINHA */
+  opacity: 1; /* <--- assegura visibilidade */
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(2px);
+  border: 2px solid var(--border-color-main);
+}
+
+
+
+.tech-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(140, 0, 255, 0.671);
+  background-color: rgba(204, 0, 255, 0.192);
+  transition: transform 0.3s ease;
+  
+}
+.tech-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  animation: bounceZoom 2s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.tech-box h3 {
+  pointer-events: none;
+}
+
+.tech-box p {
+
+  pointer-events: none;
+
+}
+
+.html { color: #E44D26; }
+.css { color: #1572B6; }
+.js { color: #F7DF1E; }
+@keyframes bounceZoom {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.2) translateY(-10px); }
+}
+
+
+
+.importance-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px 20px;
+  background-color: #1a0a3d; /* fundo escuro para destacar a box */
+  align-items: center;
+}
+
+.importance-box {
+  max-width: 940px;
+  background-color: rgba(204, 0, 255, 0.11);
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  transform: translateY(0); /* <--- ADICIONE ESTA LINHA */
+  opacity: 1; /* <--- assegura visibilidade */
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(2px);
+  border: 2px solid var(--border-color-main);
+  
+}
+
+.importance-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(140, 0, 255, 0.671);
+  background-color: rgba(204, 0, 255, 0.192);
+  transition: transform 0.3s ease;
+  
+}
+
+.importance-box h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 900;
+  text-shadow: 0 0 5px #bf80ff;
+  pointer-events: none;
+}
+
+.importance-box p {
+  margin-bottom: 18px;
+  font-size: 1rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 5px #4c00af,
+      0 0 10px #4c00af,
+      0 0 20px #4c00af,
+      0 0 40px #4c00af;
+    color: #0088c7;
+  }
+  50% {
+    text-shadow:
+      0 0 8px #4c00af,
+      0 0 18px #4c00af,
+      0 0 35px #4c00af,
+      0 0 50px #4c00af;
+    color: #40c4ff;
+  }
+}
+
+@keyframes floatAround {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(3px, -2px);
+  }
+  50% {
+    transform: translate(-3px, 2px);
+  }
+  75% {
+    transform: translate(2px, 3px);
+  }
+}
+
+.neon-section-title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 2rem 0;
+  animation: neonPulse 3.5s ease-in-out infinite, floatAround 6s ease-in-out infinite;
+  user-select: none;
 }

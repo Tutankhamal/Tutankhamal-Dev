@@ -1300,5 +1300,3 @@ function startTypingCycle() {
 document.addEventListener("DOMContentLoaded", () => {
   typeTerminal();
 });
-
-
