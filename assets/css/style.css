@@ -227,6 +227,7 @@
     pointer-events: none;
     padding: 20px;
     box-sizing: border-box;
+    
   }
   
   #terminal-box {
@@ -246,6 +247,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    pointer-events: auto;
   }
   
   .terminal-header {
@@ -279,6 +281,7 @@
     margin-top: 10px;
     max-width: 90%;
     margin-bottom: 150px;
+    pointer-events: none;
   }
   
   #hero-title {
@@ -296,6 +299,7 @@
       fadeZoom 1s ease forwards;
     opacity: 0;
     margin: 0;
+    pointer-events: none;
   }
   
   #typing-text {
@@ -304,6 +308,7 @@
     color: #fff;
     font-family: 'Courier New', monospace;
     text-shadow: 0 0 4px #8800ff;
+    pointer-events: none;
   }
   
   @keyframes glitch {
@@ -341,6 +346,7 @@
     height: 24px;
     line-height: 24px;
     vertical-align: top;
+    pointer-events: none;
   }
 
 
@@ -2446,6 +2452,7 @@
   
   .footer-content p {
     color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
   }
   
   .social-icons {
