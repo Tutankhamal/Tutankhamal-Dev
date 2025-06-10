@@ -278,10 +278,13 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
     padding: 0 20px;
+    box-sizing: border-box;
+    text-align: center;
+    pointer-events: none;
   }
-  
   #hero-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(48px, 10vw, 120px);
@@ -296,11 +299,13 @@
       pulse 4s ease-in-out infinite,
       fadeZoom 1s ease forwards;
     opacity: 0;
-    margin: 0;
+    margin: 0 auto;
     text-align: center;
     font-weight: bold;
     pointer-events: none;
-    width: 100%; /* <- força ocupar a largura toda */
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   #typing-text {
