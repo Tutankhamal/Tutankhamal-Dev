@@ -284,6 +284,7 @@
     box-sizing: border-box;
     text-align: center;
     pointer-events: none;
+    margin-bottom: 100px;
   }
   #hero-title {
     font-family: 'Bebas Neue', sans-serif;
@@ -385,8 +386,9 @@
 /* Telas médias (entre 421px e 768px) */
 @media (min-width: 421px) and (max-width: 768px) {
   #hero-wrapper {
-    padding-top: 60px;
+    padding-top: 20px;
     min-height: 100dvh;
+    margin-bottom: 100px;
   }
 
   #terminal-box {
@@ -396,7 +398,7 @@
   }
 
   #hero-title {
-    font-size: 9vw;
+    font-size: 12vw;
     margin-top: 12px;
     padding-left: 12px;
     padding-right: 12px;
