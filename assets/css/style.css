@@ -94,7 +94,7 @@
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 15px;
+  
 }
 
 .logo {
@@ -104,7 +104,7 @@
 }
 
 .site-title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
   background: linear-gradient(90deg, #ffffff, #fdfdfd);
   -webkit-background-clip: text;
@@ -147,7 +147,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 12px;
+  border-radius: 5px;
   padding: 2px;
   background: linear-gradient(270deg, var(--primary-color), var(--secondary-color), var(--primary-color));
   background-size: 600% 600%;
@@ -3830,7 +3830,7 @@
   
   .top-button {
     position: fixed;
-    bottom: 10px; /* Eleva o botão acima da footer */
+    bottom: 180px; /* Eleva o botão acima da footer */
     right: 10px;
     background-color: rgba(0, 0, 0, 0.562); /* Vermelho transparente */
     color: white;
