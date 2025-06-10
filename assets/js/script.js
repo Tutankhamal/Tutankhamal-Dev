@@ -48,7 +48,13 @@ backToTopButton.addEventListener("click", () => {
   
     console.log("Scroll:", scrollTop, "Último Scroll:", lastScrollTop); // Para depuração
   }
-    
+  
+  function toggleMenu() {
+    hamburger.classList.toggle("active")
+    navLinks.classList.toggle("active")
+    document.body.classList.toggle("no-scroll")
+  }
+
 })
 
 
@@ -1215,10 +1221,11 @@ animate();
 // Hero Terminal Style //
 
 const codeLines = [
-  "const terminalEl = document.getElementById('terminal-content')",
-  "const terminalBox = document.getElementById('terminal-box')",
-  "const heroContent = document.getElementById('hero-content')",
-  "const heroTitle = document.getElementById('hero-title')"    
+  "> Carregando Conteúdos...",
+  "> Otimizando identidade visual...",
+  "> Expandindo Horizontes...",
+  "> Caregamento completo.",    
+  "> Seja bem vindo(a)!" 
 ];
 
 let terminalIndex = 0;
@@ -1232,7 +1239,7 @@ function typeTerminal() {
     terminalEl.innerHTML += codeLines[terminalIndex] + "\n";
     terminalEl.scrollTop = terminalEl.scrollHeight;
     terminalIndex++;
-    setTimeout(typeTerminal, 400);
+    setTimeout(typeTerminal, 800);
   } else {
     setTimeout(() => {
       terminalBox.style.transition = "opacity 1s ease, transform 1s ease";
@@ -1257,10 +1264,10 @@ function showHeroContent() {
 }
 
 const phrases = [
-  "Web Designer & Front-End Dev",
-  "Dê vida a sua imaginação. 💜",
-  "Mostre sua Identidade Visual. 📈",
-  "Expanda o alcance da sua marca. 🌎"
+  "Web Designer & Front-End Dev 💻",
+  "Dê vida a sua imaginação 💜",
+  "Mostre sua Identidade Visual ⭐️",
+  "Expanda seu alcance 🌎"
 ];
 
 let currentPhrase = 0;
@@ -1274,7 +1281,7 @@ function startTypingCycle() {
 
   if (!isDeleting && charIndex < current.length) {
     charIndex++;
-    setTimeout(startTypingCycle, 80);
+    setTimeout(startTypingCycle, 100);
   } else if (isDeleting && charIndex > 0) {
     charIndex--;
     setTimeout(startTypingCycle, 50);
