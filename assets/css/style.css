@@ -52,7 +52,7 @@
     height: 100vh;
     z-index: 0;
     
-    touch-action: none;   /* impede o arrasto no canvas */
+    
   }
 
   a {

@@ -1734,3 +1734,9 @@ container.addEventListener("touchmove", e => {
 
 
 
+window.addEventListener('scroll', () => {
+  const canvas = document.querySelector('canvas');
+  if (canvas) {
+    canvas.style.top = window.scrollY + 'px';
+  }
+});
