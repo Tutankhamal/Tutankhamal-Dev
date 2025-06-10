@@ -3834,7 +3834,7 @@
     right: 10px;
     background-color: rgba(0, 0, 0, 0.562); /* Vermelho transparente */
     color: white;
-    border: 2px solid rgb(112, 28, 190); /* Borda mais opaca */
+    border: 2px solid rgba(78, 3, 148, 0.493); /* Borda mais opaca */
     padding: 7px 7px;
     font-size: 16px;
     border-radius: 5px;
@@ -3848,6 +3848,7 @@
   .top-button:hover {
     transform: scale(1.1); /* Leve zoom ao passar o mouse */
     box-shadow: 0 0 5px rgb(85, 28, 190); /* Glow vermelho mais intenso */
+    border: 2px solid rgb(132, 0, 255);
   }
   
   .top-button.show {

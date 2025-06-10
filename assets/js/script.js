@@ -357,7 +357,7 @@ function initStarField() {
   stars = [];
   
   for (let layer = 1; layer <= 5; layer++) {
-    const count = Math.floor(2000 / layer); // Aumentado para mais estrelas
+    const count = Math.floor(1000 / layer); // Aumentado para mais estrelas
     for (let i = 0; i < count; i++) {
       // Distribuição uniforme por toda a tela
       const x = Math.random() * w;
