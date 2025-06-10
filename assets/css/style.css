@@ -356,6 +356,57 @@
     pointer-events: none;
   }
 
+/* Para telas pequenas (até 420px de largura) */
+@media (max-width: 420px) {
+  #hero-wrapper {
+    padding-top: 40px;
+    min-height: 100dvh;
+  }
+
+  #terminal-box {
+    width: 100%;
+    height: 260px;
+    padding: 15px;
+  }
+
+  #hero-title {
+    font-size: 10vw;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #typing-text {
+    font-size: 5vw;
+    margin-top: 8px;
+  }
+}
+
+/* Telas médias (entre 421px e 768px) */
+@media (min-width: 421px) and (max-width: 768px) {
+  #hero-wrapper {
+    padding-top: 60px;
+    min-height: 100dvh;
+  }
+
+  #terminal-box {
+    width: 90%;
+    height: 300px;
+    padding: 18px;
+  }
+
+  #hero-title {
+    font-size: 9vw;
+    margin-top: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  #typing-text {
+    font-size: 4vw;
+    margin-top: 10px;
+  }
+}
 
 
 
