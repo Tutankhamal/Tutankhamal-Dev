@@ -273,19 +273,23 @@
   }
   
   #hero-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
     text-align: center;
-    z-index: 2;
-    pointer-events: auto;
-    margin-top: 10px;
-    max-width: 90%;
-    margin-bottom: 150px;
     pointer-events: none;
+    margin-bottom: 150px;
   }
   
   #hero-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(48px, 10vw, 120px);
-    color: #fff;
+    color: #ffffffd2;
     text-shadow:
       0 0 4px rgb(119, 0, 255),
       0 0 8px rgb(0, 89, 255),
@@ -299,6 +303,7 @@
     margin: 0;
     pointer-events: none;
     text-align: center;
+    font-weight: bold;
   }
   
   #typing-text {
@@ -308,6 +313,7 @@
     font-family: 'Courier New', monospace;
     text-shadow: 0 0 4px #8800ff;
     pointer-events: none;
+    font-weight: bold;
   }
   
   @keyframes glitch {

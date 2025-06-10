@@ -429,9 +429,9 @@ function initNebulae() {
     nebulae.push({
       x: w * (0.2 + Math.random() * 0.6),
       y: h * (0.2 + Math.random() * 0.6),
-      radius: Math.random() * 300 + 200,
+      radius: Math.random() * 10 + 10,
       hue: Math.random() * 360,
-      opacity: Math.random() * 0.03 + 0.01,
+      opacity: Math.random() * 0.01 + 0.1,
       speed: {
         x: (Math.random() - 0.5) * 0.2,
         y: (Math.random() - 0.5) * 0.2
@@ -879,9 +879,9 @@ function drawBackground() {
     w/2, h/2, 0,
     w/2, h/2, Math.max(w, h)
   );
-  bgGradient.addColorStop(0, 'rgba(10, 5, 20, 1)');
-  bgGradient.addColorStop(0.5, 'rgba(5, 2, 12, 1)');
-  bgGradient.addColorStop(1, 'rgba(0, 0, 3, 1)');
+  bgGradient.addColorStop(0, 'rgb(3, 1, 7)');
+  bgGradient.addColorStop(0.5, 'rgb(0, 0, 0)');
+  bgGradient.addColorStop(1, 'rgb(0, 0, 0)');
   
   ctx.fillStyle = bgGradient;
   ctx.fillRect(0, 0, w, h);
@@ -914,7 +914,7 @@ function drawNebulae() {
     
     nebulaGradient.addColorStop(0, `hsla(${currentHue}, 70%, 40%, ${nebula.opacity * 1.5})`);
     nebulaGradient.addColorStop(0.5, `hsla(${currentHue + 30}, 60%, 30%, ${nebula.opacity})`);
-    nebulaGradient.addColorStop(1, 'rgba(0,0,0,0)');
+    nebulaGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
     
     ctx.fillStyle = nebulaGradient;
     ctx.beginPath();
@@ -934,8 +934,8 @@ function drawStars() {
     const twinkle = Math.sin(star.twinkle) * 0.3 + 0.7;
     const brightness = star.brightness * twinkle;
     
-    const parallaxX = mouseVelocity.x * star.layer * 0.02;
-    const parallaxY = mouseVelocity.y * star.layer * 0.02;
+    const parallaxX = mouseVelocity.x * star.layer * 0.01;
+    const parallaxY = mouseVelocity.y * star.layer * 0.01;
     
     if (star.size > 1) {
       ctx.shadowColor = `rgba(${star.color.r}, ${star.color.g}, ${star.color.b}, 0.5)`;
@@ -1051,7 +1051,7 @@ function drawSpacecrafts() {
     ctx.translate(craft.x, craft.y);
     ctx.rotate(craft.angle);
     
-    ctx.fillStyle = `rgba(60, 60, 80, ${craft.opacity * 0.6})`;
+    ctx.fillStyle = `rgba(60, 60, 80, ${craft.opacity * 0.9})`;
     
     switch(craft.type) {
       case 'fighter':
