@@ -934,8 +934,8 @@ function drawStars() {
     const twinkle = Math.sin(star.twinkle) * 0.3 + 0.7;
     const brightness = star.brightness * twinkle;
     
-    const parallaxX = mouseVelocity.x * star.layer * 0.01;
-    const parallaxY = mouseVelocity.y * star.layer * 0.01;
+    const parallaxX = mouseVelocity.x * star.layer * 0.00;
+    const parallaxY = mouseVelocity.y * star.layer * 0.00;
     
     if (star.size > 1) {
       ctx.shadowColor = `rgba(${star.color.r}, ${star.color.g}, ${star.color.b}, 0.5)`;
