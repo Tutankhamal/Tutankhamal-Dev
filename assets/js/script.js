@@ -1256,11 +1256,13 @@ animate();
 // Hero Terminal Style //
 
 const codeLines = [
-  "✅ Carregando Conteúdos...",
-  "✅ Otimizando Experiências...",
-  "🌐 Expandindo Horizontes...",
-  "✅ CARREGAMENTO CONCUÍDO",    
-  "💜 Boas-Vindas!" 
+  ">_ Carregando Conteúdos......💾",
+  ">_ Otimizando Experiências...✨",
+  ">_ Expandindo Horizontes.....🌐",
+  "-------------------------------",  
+  ">_ CARREGAMENTO CONCUÍDO.....✅",
+  "-------------------------------",     
+  ">_ BOAS-VINDAS!..............💜" 
 ];
 
 let terminalIndex = 0;
@@ -1274,7 +1276,7 @@ function typeTerminal() {
     terminalEl.innerHTML += codeLines[terminalIndex] + "\n";
     terminalEl.scrollTop = terminalEl.scrollHeight;
     terminalIndex++;
-    setTimeout(typeTerminal, 800);
+    setTimeout(typeTerminal, 900);
   } else {
     setTimeout(() => {
       terminalBox.style.transition = "opacity 1s ease, transform 1s ease";
