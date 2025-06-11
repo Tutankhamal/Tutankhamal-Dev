@@ -1,41 +1,74 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
   // Variables
-  const navbar = document.querySelector(".navbar")
-  const hamburger = document.querySelector(".hamburger")
-  const navLinks = document.querySelector(".nav-links")
-  const faqItems = document.querySelectorAll(".faq-item")
-  const partnerCards = document.querySelectorAll(".partner-card")
-  const modalOverlay = document.querySelector(".modal-overlay")
-  const closeModal = document.querySelector(".close-modal")
-  const filterButtons = document.querySelectorAll(".filter-button")
-  let lastScrollTop = 0
+  const navbar = document.querySelector(".navbar");
+  const hamburger = document.querySelector(".hamburger");
+  const navLinks = document.querySelector(".nav-links");
+  const faqItems = document.querySelectorAll(".faq-item");
+  const partnerCards = document.querySelectorAll(".partner-card");
+  const modalOverlay = document.querySelector(".modal-overlay");
+  const closeModal = document.querySelector(".close-modal");
+  const filterButtons = document.querySelectorAll(".filter-button");
+  let lastScrollTop = 0;
 
-  
-const backToTopButton = document.getElementById("backToTop");
+  const backToTopButton = document.getElementById("backToTop");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 100) {
-    backToTopButton.classList.add("show");
-  } else {
-    backToTopButton.classList.remove("show");
-  }
-});
-
-backToTopButton.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
-
+  // Scroll-down button functionality
+  const scrollDownButton = document.querySelector(".scroll-down-button");
 
   // Event Listeners
-  window.addEventListener("scroll", handleScroll)
-  hamburger.addEventListener("click", toggleMenu)
+  window.addEventListener("scroll", handleScroll);
+  hamburger.addEventListener("click", toggleMenu);
 
-   
+  if (backToTopButton) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        backToTopButton.classList.add("show");
+      } else {
+        backToTopButton.classList.remove("show");
+      }
+    });
+
+    backToTopButton.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  const scrollDownButtons = document.querySelectorAll(".scroll-down-button");
+
+  scrollDownButtons.forEach(button => {
+    button.addEventListener("click", function(e) {
+      e.preventDefault();
+  
+      // Encontra a seção mais próxima do botão clicado
+      const currentSection = button.closest("section");
+      if (!currentSection) return;
+  
+      const allSections = Array.from(document.querySelectorAll("section"));
+      const currentIndex = allSections.indexOf(currentSection);
+  
+      // Pega a próxima seção, se existir
+      const nextSection = allSections[currentIndex + 1];
+      if (nextSection) {
+        // Usa scrollIntoView com opções para garantir o alinhamento superior
+        nextSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"  // Garante que o topo da seção encoste no topo do viewport
+        });
+      }
+    });
+  });
+
+  // ✅ Mostrar botão scroll-down após 10 segundos
+  setTimeout(() => {
+    scrollDownButtons.forEach(button => {
+      button.classList.add("visible");
+    });
+  }, 10000); // 10 segundos
 
   // Functions
   function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
+
     if (scrollTop > lastScrollTop && scrollTop > 100) {
       // Oculte a navbar ao rolar para baixo
       navbar.classList.add("hidden");
@@ -43,19 +76,21 @@ backToTopButton.addEventListener("click", () => {
       // Exiba a navbar ao rolar para cima
       navbar.classList.remove("hidden");
     }
-  
+
     lastScrollTop = scrollTop; // Atualiza corretamente o último scroll
-  
+
     console.log("Scroll:", scrollTop, "Último Scroll:", lastScrollTop); // Para depuração
   }
-  
+
   function toggleMenu() {
-    hamburger.classList.toggle("active")
-    navLinks.classList.toggle("active")
-    document.body.classList.toggle("no-scroll")
+    hamburger.classList.toggle("active");
+    navLinks.classList.toggle("active");
+    document.body.classList.toggle("no-scroll");
   }
 
-})
+  // Outras funções e inicializações que dependem do DOM podem vir aqui
+
+});
 
 
 // Background Universe //
@@ -110,7 +145,7 @@ function initStarField() {
   stars = [];
   
   for (let layer = 1; layer <= 5; layer++) {
-    const count = Math.floor(1000 / layer); // Aumentado para mais estrelas
+    const count = Math.floor(800 / layer); // Aumentado para mais estrelas
     for (let i = 0; i < count; i++) {
       // Distribuição uniforme por toda a tela
       const x = Math.random() * w;
@@ -392,7 +427,7 @@ function createMeteor() {
 }
 
 function createComet() {
-  if (Math.random() < 0.0008) {
+  if (Math.random() < 0.002) {
     const side = Math.floor(Math.random() * 4);
     let startX, startY, targetX, targetY;
     
@@ -1222,9 +1257,9 @@ animate();
 
 const codeLines = [
   "> Carregando Conteúdos...",
-  "> Otimizando identidade visual...",
+  "> Otimizando Experiências...",
   "> Expandindo Horizontes...",
-  "> Caregamento completo.",    
+  "> Carregamento Completo.",    
   "> Seja bem vindo(a)!" 
 ];
 
@@ -1265,9 +1300,9 @@ function showHeroContent() {
 
 const phrases = [
   "Web Designer & Front-End Dev 💻",
-  "Dê vida a sua imaginação 💜",
+  "Dê vida a sua Imaginação 💜",
   "Mostre sua Identidade Visual ⭐️",
-  "Expanda seu alcance 🌎"
+  "Expanda seu Alcance 🌎"
 ];
 
 let currentPhrase = 0;
