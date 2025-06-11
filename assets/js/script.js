@@ -1256,11 +1256,11 @@ animate();
 // Hero Terminal Style //
 
 const codeLines = [
-  "> Carregando Conteúdos...",
-  "> Otimizando Experiências...",
-  "> Expandindo Horizontes...",
-  "> Carregamento Completo.",    
-  "> Seja bem vindo(a)!" 
+  "✅ Carregando Conteúdos...",
+  "✅ Otimizando Experiências...",
+  "🌐 Expandindo Horizontes...",
+  "✅ CARREGAMENTO CONCUÍDO",    
+  "💜 Boas-Vindas!" 
 ];
 
 let terminalIndex = 0;

@@ -109,7 +109,8 @@ transition: all 0.3s ease;
 }
 
 .site-title {
-font-size: 1.3rem;
+  font-family: 'Bebas Neue';
+font-size: 1.9rem;
 font-weight: 700;
 background: linear-gradient(90deg, #ffffff, #fdfdfd);
 -webkit-background-clip: text;
