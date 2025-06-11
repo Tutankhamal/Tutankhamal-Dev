@@ -883,7 +883,8 @@ section {
   transition: transform 0.3s ease;
   backdrop-filter: blur(2px);
   border: 2px solid var(--border-color-main);
-  
+  margin: 30px;
+  margin-bottom: 100px;
 }
 
 .importance-box:hover {
@@ -905,7 +906,7 @@ section {
 }
 
 .importance-box p {
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   font-size: 1rem;
   text-align: center;
   pointer-events: none;
