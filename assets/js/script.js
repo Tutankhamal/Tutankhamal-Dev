@@ -1260,7 +1260,7 @@ const codeLines = [
   ">_ Otimizando Experiências...✨",
   ">_ Expandindo Horizontes.....🌐",
   "-------------------------------",  
-  ">_ CARREGAMENTO CONCLUÍDO...✅",
+  ">_ CARREGAMENTO CONCLUÍDO....✅",
   "-------------------------------",     
   ">_ BOAS-VINDAS!..............💜" 
 ];
