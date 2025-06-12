@@ -1337,3 +1337,71 @@ function startTypingCycle() {
 document.addEventListener("DOMContentLoaded", () => {
   typeTerminal();
 });
+
+// ... existing code ...
+document.addEventListener('DOMContentLoaded', function () {
+  const track = document.querySelector('.benefits-carousel-track');
+  const cards = Array.from(document.querySelectorAll('.benefit-card'));
+  const prevBtn = document.querySelector('.carousel-nav.prev');
+  const nextBtn = document.querySelector('.carousel-nav.next');
+  let current = 0;
+  let autoSlide;
+  let isTransitioning = false;
+
+  function showCard(idx, direction = 1) {
+    if (isTransitioning || idx === current) return;
+    isTransitioning = true;
+    const leaving = cards[current];
+    leaving.classList.remove('active');
+    leaving.classList.add('leaving');
+    setTimeout(() => {
+      leaving.classList.remove('leaving');
+      isTransitioning = false;
+    }, 700);
+    cards[idx].classList.add('active');
+    current = idx;
+  }
+
+  function nextCard() {
+    showCard((current + 1) % cards.length, 1);
+  }
+
+  function prevCard() {
+    showCard((current - 1 + cards.length) % cards.length, -1);
+  }
+
+  function startAutoSlide() {
+    stopAutoSlide();
+    autoSlide = setInterval(nextCard, 5000);
+  }
+
+  function stopAutoSlide() {
+    if (autoSlide) clearInterval(autoSlide);
+  }
+
+  prevBtn.addEventListener('click', () => {
+    prevCard();
+    startAutoSlide();
+  });
+  nextBtn.addEventListener('click', () => {
+    nextCard();
+    startAutoSlide();
+  });
+
+  track.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevCard();
+      startAutoSlide();
+    } else if (e.key === 'ArrowRight') {
+      nextCard();
+      startAutoSlide();
+    }
+  });
+  track.setAttribute('tabindex', '0');
+
+  cards.forEach((card, i) => card.classList.remove('active', 'leaving'));
+  cards[0].classList.add('active');
+  current = 0;
+  startAutoSlide();
+});
+// ... existing code ...
