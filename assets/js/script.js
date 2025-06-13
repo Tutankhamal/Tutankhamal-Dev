@@ -168,34 +168,48 @@ const ACCRETION_MAX_RADIUS = 120;
 const ATTRACT_SPEED = 0.035; // velocidade de atração (mais lento)
 const RETURN_SPEED = 0.035;  // velocidade de retorno (mais lento)
 
-// Função auxiliar para iniciar o buraco negro
+// Variável global para supernova do buraco negro
+let blackHoleSupernova = null;
+let blackHoleSupernovaActive = false;
+
 function startBlackHoleEffect(clientX, clientY) {
     blackHoleActive = true;
     blackHoleReturning = false;
     const rect = canvas.getBoundingClientRect();
-    blackHoleCenter = {
-        x: (clientX - rect.left) * (canvas.width / rect.width),
-        y: (clientY - rect.top) * (canvas.height / rect.height)
+    blackHoleCenter.x = (clientX - rect.left) * (canvas.width / rect.width);
+    blackHoleCenter.y = (clientY - rect.top) * (canvas.height / rect.height);
+    blackHoleStarData = [];
+    for (let i = 0; i < stars.length; i++) {
+        if (!stars[i].destroyed) {
+            blackHoleStarData.push({
+                star: stars[i],
+                originalX: stars[i].x,
+                originalY: stars[i].y,
+                state: 'toDisk',
+                currentRadius: null,
+                targetRadius: Math.random() * 80 + 40,
+                angle: Math.random() * Math.PI * 2,
+                angularSpeed: (Math.random() - 0.5) * 0.02
+            });
+        }
+    }
+    // Cria supernova central e ativa
+    blackHoleSupernova = {
+        x: blackHoleCenter.x,
+        y: blackHoleCenter.y,
+        radius: 0, // começa em 0 para efeito de zoom in
+        maxRadius: 80,
+        expandSpeed: 2.5, // ajuste conforme desejado
+        contractSpeed: 2.5,
+        phase: 'expand',
+        opacity: 0, // começa em 0 para fade in
+        maxOpacity: 0.7, // ajuste conforme desejado
+        color: { r: 255, g: 220, b: 80 }
     };
-    const shuffled = stars.slice().sort(() => Math.random() - 0.5);
-    const selected = shuffled.slice(0, Math.floor(stars.length * 0.5));
-    blackHoleStarData = selected.map(star => {
-        const angle = Math.random() * Math.PI * 2;
-        const targetRadius = ACCRETION_MIN_RADIUS + Math.random() * (ACCRETION_MAX_RADIUS - ACCRETION_MIN_RADIUS);
-        return {
-            star: star,
-            originalX: star.x,
-            originalY: star.y,
-            state: 'toDisk',
-            angle: angle,
-            targetRadius: targetRadius,
-            currentRadius: null,
-            angularSpeed: 0.008 + Math.random() * 0.008
-        };
-    });
+    blackHoleSupernovaActive = true;
 }
 
-// Função auxiliar para parar/reverter o buraco negro
+// Função para encerrar o ápice da supernova ao soltar o mouse
 function stopBlackHoleEffect() {
     if (blackHoleTimer) {
         clearTimeout(blackHoleTimer);
@@ -206,6 +220,7 @@ function stopBlackHoleEffect() {
         blackHoleStarData.forEach(data => {
             data.state = 'returning';
         });
+        blackHoleSupernovaActive = false;
     }
 }
 
@@ -1491,11 +1506,50 @@ function animate() {
   drawSupernovas();
   checkCollisions();
 
-  // LÓGICA DE RESET DO BURACO NEGRO MOVIDA PARA CÁ
-  if (blackHoleReturning && blackHoleStarData.length > 0 && blackHoleStarData.every(d => d.state === 'done')) {
+  // Desenhar supernova do buraco negro se existir
+  if (blackHoleSupernova) {
+    if (!blackHoleSupernovaActive && blackHoleSupernova.phase === 'peak') {
+      blackHoleSupernova.phase = 'contract';
+    }
+    if (blackHoleSupernova.phase === 'expand') {
+      blackHoleSupernova.radius += blackHoleSupernova.expandSpeed;
+      blackHoleSupernova.opacity = Math.min(blackHoleSupernova.maxOpacity, blackHoleSupernova.radius / blackHoleSupernova.maxRadius * blackHoleSupernova.maxOpacity);
+      if (blackHoleSupernova.radius >= blackHoleSupernova.maxRadius) {
+        blackHoleSupernova.phase = 'peak';
+      }
+    } else if (blackHoleSupernova.phase === 'contract') {
+      blackHoleSupernova.radius -= blackHoleSupernova.contractSpeed;
+      blackHoleSupernova.opacity = Math.max(0, blackHoleSupernova.opacity - 0.03);
+      if (blackHoleSupernova.radius <= 0 || blackHoleSupernova.opacity <= 0) {
+        blackHoleSupernova = null;
+      }
+    }
+    // Desenhar supernova
+    if (blackHoleSupernova) {
+      const gradient = ctx.createRadialGradient(
+        blackHoleSupernova.x, blackHoleSupernova.y, 0,
+        blackHoleSupernova.x, blackHoleSupernova.y, blackHoleSupernova.radius
+      );
+      gradient.addColorStop(0, `rgba(255,255,255,${blackHoleSupernova.opacity})`);
+      gradient.addColorStop(0.2, `rgba(${blackHoleSupernova.color.r},${blackHoleSupernova.color.g},${blackHoleSupernova.color.b},${blackHoleSupernova.opacity * 0.8})`);
+      gradient.addColorStop(0.7, `rgba(${blackHoleSupernova.color.r},${blackHoleSupernova.color.g},${blackHoleSupernova.color.b},${blackHoleSupernova.opacity * 0.3})`);
+      gradient.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(blackHoleSupernova.x, blackHoleSupernova.y, blackHoleSupernova.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  if (blackHoleReturning && blackHoleStarData.length > 0 && blackHoleStarData.every(d => d.state === 'done' || d.star.destroyed)) {
     blackHoleActive = false;
     blackHoleReturning = false;
     blackHoleStarData = [];
+    stars.forEach(star => {
+        star.x = star.originalX;
+        star.y = star.originalY;
+    });
+    blackHoleSupernova = null;
   }
 
   requestAnimationFrame(animate);
