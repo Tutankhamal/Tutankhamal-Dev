@@ -1,3 +1,6 @@
+console.log("Script.js carregado e executando!");
+// ... existing code ...
+
 document.addEventListener("DOMContentLoaded", function() {
   // Variables
   const navbar = document.querySelector(".navbar");
@@ -90,6 +93,49 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Outras funções e inicializações que dependem do DOM podem vir aqui
 
+  // Modal Interaction Logic (já fornecido anteriormente)
+  const modalTriggers = document.querySelectorAll('[data-modal-target]');
+  const modals = document.querySelectorAll('.modal');
+  const closeButtons = document.querySelectorAll('.close-button');
+
+  modalTriggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const modalId = trigger.getAttribute('data-modal-target');
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.style.display = 'block';
+      }
+    });
+  });
+
+  closeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = button.closest('.modal');
+      if (modal) {
+        modal.style.display = 'none';
+      }
+    });
+  });
+
+  window.addEventListener('click', (event) => {
+    modals.forEach(modal => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  });
+
+  // Optional: Close modal with Escape key
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      modals.forEach(modal => {
+        if (modal.style.display === 'block') {
+          modal.style.display = 'none';
+        }
+      });
+    }
+  });
+
 });
 
 
@@ -122,37 +168,35 @@ const ACCRETION_MAX_RADIUS = 120;
 const ATTRACT_SPEED = 0.035; // velocidade de atração (mais lento)
 const RETURN_SPEED = 0.035;  // velocidade de retorno (mais lento)
 
-canvas.addEventListener('mousedown', function (e) {
-    if (blackHoleTimer) return;
-    blackHoleTimer = setTimeout(() => {
-        blackHoleActive = true;
-        blackHoleReturning = false;
-        const rect = canvas.getBoundingClientRect();
-        blackHoleCenter = {
-            x: (e.clientX - rect.left) * (canvas.width / rect.width),
-            y: (e.clientY - rect.top) * (canvas.height / rect.height)
+// Função auxiliar para iniciar o buraco negro
+function startBlackHoleEffect(clientX, clientY) {
+    blackHoleActive = true;
+    blackHoleReturning = false;
+    const rect = canvas.getBoundingClientRect();
+    blackHoleCenter = {
+        x: (clientX - rect.left) * (canvas.width / rect.width),
+        y: (clientY - rect.top) * (canvas.height / rect.height)
+    };
+    const shuffled = stars.slice().sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, Math.floor(stars.length * 0.5));
+    blackHoleStarData = selected.map(star => {
+        const angle = Math.random() * Math.PI * 2;
+        const targetRadius = ACCRETION_MIN_RADIUS + Math.random() * (ACCRETION_MAX_RADIUS - ACCRETION_MIN_RADIUS);
+        return {
+            star: star,
+            originalX: star.x,
+            originalY: star.y,
+            state: 'toDisk',
+            angle: angle,
+            targetRadius: targetRadius,
+            currentRadius: null,
+            angularSpeed: 0.008 + Math.random() * 0.008
         };
-        // Seleciona 50% das estrelas aleatoriamente
-        const shuffled = stars.slice().sort(() => Math.random() - 0.5);
-        const selected = shuffled.slice(0, Math.floor(stars.length * 0.5));
-        blackHoleStarData = selected.map(star => {
-            const angle = Math.random() * Math.PI * 2;
-            const targetRadius = ACCRETION_MIN_RADIUS + Math.random() * (ACCRETION_MAX_RADIUS - ACCRETION_MIN_RADIUS);
-            return {
-                star: star,
-                originalX: star.x,
-                originalY: star.y,
-                state: 'toDisk',
-                angle: angle,
-                targetRadius: targetRadius,
-                currentRadius: null,
-                angularSpeed: 0.008 + Math.random() * 0.008
-            };
-        });
-    }, 3000);
-});
+    });
+}
 
-canvas.addEventListener('mouseup', function () {
+// Função auxiliar para parar/reverter o buraco negro
+function stopBlackHoleEffect() {
     if (blackHoleTimer) {
         clearTimeout(blackHoleTimer);
         blackHoleTimer = null;
@@ -163,6 +207,45 @@ canvas.addEventListener('mouseup', function () {
             data.state = 'returning';
         });
     }
+}
+
+canvas.addEventListener('mousedown', function (e) {
+    // Prevenir múltiplos timers se já houver um clique pressionado ou se as estrelas estiverem retornando
+    if (blackHoleTimer || blackHoleActive || blackHoleReturning) return;
+    
+    blackHoleTimer = setTimeout(() => {
+        startBlackHoleEffect(e.clientX, e.clientY);
+        blackHoleTimer = null; // Limpar o timer após a execução
+    }, 3000);
+});
+
+canvas.addEventListener('mouseup', function () {
+    stopBlackHoleEffect();
+});
+
+// Eventos de Toque para Dispositivos Móveis
+canvas.addEventListener('touchstart', function (e) {
+    // Prevenir múltiplos timers ou se o buraco negro já estiver ativo ou se as estrelas estiverem retornando
+    if (blackHoleTimer || blackHoleActive || blackHoleReturning) return;
+
+    // Usar o primeiro ponto de toque
+    if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        blackHoleTimer = setTimeout(() => {
+            startBlackHoleEffect(touch.clientX, touch.clientY);
+            blackHoleTimer = null; // Limpar o timer após a execução
+        }, 3000);
+    }
+    // Prevenir comportamento padrão do navegador (como scroll ou zoom)
+    // e.preventDefault(); // Descomente se necessário, mas pode impedir o scroll da página se o canvas for grande
+}, { passive: false }); // passive: false é necessário para chamar preventDefault, se usado.
+
+canvas.addEventListener('touchend', function (e) {
+    stopBlackHoleEffect();
+});
+
+canvas.addEventListener('touchcancel', function (e) {
+    stopBlackHoleEffect(); // Tratar cancelamento de toque da mesma forma que touchend
 });
 
 window.addEventListener('resize', () => {
@@ -192,8 +275,9 @@ let supernovas = [];
 let nebulae = [];
 let spacecrafts = [];
 let iss = null;
-let issCooldown = 0; // cooldown em frames
-const ISS_COOLDOWN_DURATION = 1200; // ajuste conforme desejar (ex: 1200 frames ~20s a 60fps)
+let issCooldown = 0; // Cooldown em frames. Inicia em 0 para a primeira aparição ser possível.
+const ISS_COOLDOWN_DURATION = 10800; // 3 minutos a 60fps (180 segundos * 60 fps)
+const ISS_FADE_DURATION = 200; // Duração do fade-in/out em frames (aprox 3.3s a 60fps)
 
 function initAll() {
   initStarField();
@@ -361,46 +445,41 @@ function createSpacecraft() {
 // === ISS (ESTAÇÃO ESPACIAL INTERNACIONAL) ===
 const issImg = new Image();
 issImg.src = 'assets/images/iss_sprite.png';
-function createISS() {
-  if (issCooldown > 0) {
-    issCooldown--;
-    return;
+
+function createNewISSInstance() {
+  const side = Math.floor(Math.random() * 4);
+  let startX, startY, targetX, targetY;
+  const margin = 50; // Margem para garantir que a ISS comece fora da tela
+
+  switch(side) {
+    case 0: startX = Math.random() * w; startY = -margin; targetX = Math.random() * w; targetY = h + margin; break;
+    case 1: startX = w + margin; startY = Math.random() * h; targetX = -margin; targetY = Math.random() * h; break;
+    case 2: startX = Math.random() * w; startY = h + margin; targetX = Math.random() * w; targetY = -margin; break;
+    case 3: startX = -margin; startY = Math.random() * h; targetX = w + margin; targetY = Math.random() * h; break;
   }
-  // Chance muito rara de criar a ISS
-  if (Math.random() < 0.002 && !iss) {
-    const side = Math.floor(Math.random() * 4);
-    let startX, startY, targetX, targetY;
-    switch(side) {
-      case 0: startX = Math.random() * w; startY = -40; targetX = Math.random() * w; targetY = h + 40; break;
-      case 1: startX = w + 40; startY = Math.random() * h; targetX = -40; targetY = Math.random() * h; break;
-      case 2: startX = Math.random() * w; startY = h + 40; targetX = Math.random() * w; targetY = -40; break;
-      case 3: startX = -40; startY = Math.random() * h; targetX = w + 40; targetY = Math.random() * h; break;
-    }
-    const dx = targetX - startX;
-    const dy = targetY - startY;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    const speed = 0.4;
-    // Proporção do sprite: 100x63 = 1.587, reduzido para 80x50.4
-    const baseWidth = 100, baseHeight = 63;
-    const scale = 0.45; // ISS ficará com 45% do tamanho original
-    iss = {
-      x: startX,
-      y: startY,
-      velocity: {
-        x: (dx / distance) * speed,
-        y: (dy / distance) * speed
-      },
-      width: baseWidth * scale,
-      height: baseHeight * scale,
-      angle: Math.atan2(dy, dx),
-      rotation: 0,
-      opacity: 0,
-      fadePhase: 'fadein',
-      fadeTimer: 0,
-      fadeDuration: 800,
-      life: Math.random() * 1800 + 1200
-    };
-  }
+  const dx = targetX - startX;
+  const dy = targetY - startY;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+  const speed = 0.4;
+  const baseWidth = 100, baseHeight = 63;
+  const scale = 0.45;
+  
+  return {
+    x: startX,
+    y: startY,
+    velocity: {
+      x: (dx / distance) * speed,
+      y: (dy / distance) * speed
+    },
+    width: baseWidth * scale,
+    height: baseHeight * scale,
+    angle: Math.atan2(dy, dx),
+    rotation: 0,
+    opacity: 0,
+    fadePhase: 'fadein',
+    fadeTimer: 0,
+    fadeDuration: ISS_FADE_DURATION
+  };
 }
 
 // === METEOROS E COMETAS ATRAVESSANDO A TELA ===
@@ -779,10 +858,11 @@ function checkSupernova() {
 }
 
 // === EFEITOS SUTIS DE MOUSE ===
+// Função applySubtleMouseEffects MODIFICADA
 function applySubtleMouseEffects(object) {
   if (object.destroyed) return;
-  if (blackHoleActive && blackHoleStarData.length > 0) {
-    let allReturned = true;
+  // A verificação de blackHoleActive e blackHoleStarData.length > 0 ainda é necessária aqui
+  if (blackHoleActive && blackHoleStarData.length > 0) { 
     const data = blackHoleStarData.find(d => d.star === object);
     if (data) {
       if (data.state === 'toDisk') {
@@ -796,14 +876,11 @@ function applySubtleMouseEffects(object) {
         data.star.y = blackHoleCenter.y + data.currentRadius * Math.sin(data.angle);
         if (Math.abs(data.currentRadius - data.targetRadius) < 1.5) {
           data.state = 'inDisk';
-        } else {
-          allReturned = false;
         }
       } else if (data.state === 'inDisk') {
         data.angle += data.angularSpeed;
         data.star.x = blackHoleCenter.x + data.targetRadius * Math.cos(data.angle);
         data.star.y = blackHoleCenter.y + data.targetRadius * Math.sin(data.angle);
-        allReturned = false;
       } else if (data.state === 'returning') {
         data.star.x += (data.originalX - data.star.x) * RETURN_SPEED;
         data.star.y += (data.originalY - data.star.y) * RETURN_SPEED;
@@ -811,17 +888,11 @@ function applySubtleMouseEffects(object) {
           data.star.x = data.originalX;
           data.star.y = data.originalY;
           data.state = 'done';
-        } else {
-          allReturned = false;
         }
       }
+      // O bloco que estava aqui (if blackHoleReturning && blackHoleStarData.every...) FOI REMOVIDO
+      return; // Retorna se esta estrela foi processada pelo buraco negro
     }
-    if (blackHoleReturning && blackHoleStarData.every(d => d.state === 'done')) {
-      blackHoleActive = false;
-      blackHoleReturning = false;
-      blackHoleStarData = [];
-    }
-    if (data) return;
   }
   object.orbitAngle += object.orbitSpeed;
   const orbitX = Math.cos(object.orbitAngle) * object.orbitRadius;
@@ -924,7 +995,7 @@ function drawStars() {
     ctx.arc(star.x + parallaxX, star.y + parallaxY, star.size, 0, Math.PI * 2);
     ctx.fill();
     
-    ctx.shadowBlur = 0;
+    ctx.shadowBlur = 0; // ✅ Ótimo! Isso já está aqui.
   }
 }
 
@@ -1074,33 +1145,65 @@ function drawSpacecrafts() {
 }
 
 function drawISS() {
-  createISS();
-  if (iss) {
-    iss.fadeTimer++;
-    switch(iss.fadePhase) {
-      case 'fadein':
-        iss.opacity = Math.min(0.8, iss.fadeTimer / iss.fadeDuration);
-        if (iss.fadeTimer >= iss.fadeDuration) { iss.fadePhase = 'active'; iss.fadeTimer = 0; }
-        break;
-      case 'active':
-        iss.opacity = 0.8;
-        iss.life--;
-        if (iss.life < 1 || iss.x < -150 || iss.x > w + 150 || iss.y < -150 || iss.y > h + 150) {
-          createSubtleExplosion(iss.x, iss.y, Math.max(iss.width, iss.height), {r:200,g:200,b:255});
-          iss = null;
-          issCooldown = ISS_COOLDOWN_DURATION; // inicia cooldown
-          return;
-        }
-        break;
+  // 1. Gerenciar Cooldown e Criação da ISS
+  if (!iss) { // Se não há ISS ativa
+    if (issCooldown > 0) {
+      issCooldown--;
+    } else {
+      // Cooldown terminou, criar uma nova ISS
+      iss = createNewISSInstance();
     }
+  }
+
+  // 2. Processar e Desenhar a ISS se ela existir
+  if (iss) {
+    // Atualizar temporizador de fade
+    iss.fadeTimer++;
+
+    // Lógica de Fade In/Out e Ativação
+    if (iss.fadePhase === 'fadein') {
+      iss.opacity = Math.min(0.8, iss.fadeTimer / iss.fadeDuration);
+      if (iss.fadeTimer >= iss.fadeDuration) {
+        iss.fadePhase = 'active';
+        iss.fadeTimer = 0; // Resetar timer para possível uso futuro (ex: fadeout)
+      }
+    } else if (iss.fadePhase === 'active') {
+      iss.opacity = 0.8; // Manter opacidade total enquanto ativa
+    } else if (iss.fadePhase === 'fadeout') {
+      iss.opacity = Math.max(0, 0.8 - (iss.fadeTimer / iss.fadeDuration));
+      if (iss.opacity <= 0) {
+        createSubtleExplosion(iss.x, iss.y, Math.max(iss.width, iss.height), {r:200,g:200,b:255});
+        iss = null; // Remover ISS
+        issCooldown = ISS_COOLDOWN_DURATION; // Iniciar cooldown para a próxima
+        return; // Sair da função para não processar mais esta ISS removida
+      }
+    }
+
+    // Mover a ISS
     iss.x += iss.velocity.x;
     iss.y += iss.velocity.y;
     iss.rotation += 0.002;
+
+    // 3. Verificar se a ISS saiu completamente do Viewport para iniciar o fade-out
+    // Condição para sair: estar completamente fora dos limites (x, y, w, h)
+    // Usamos as bordas da ISS (x - width/2, x + width/2, etc.)
+    const issLeft = iss.x - iss.width / 2;
+    const issRight = iss.x + iss.width / 2;
+    const issTop = iss.y - iss.height / 2;
+    const issBottom = iss.y + iss.height / 2;
+
+    if (iss.fadePhase === 'active' && 
+        (issRight < 0 || issLeft > w || issBottom < 0 || issTop > h)) {
+      iss.fadePhase = 'fadeout';
+      iss.fadeTimer = 0; // Iniciar timer para fade-out
+    }
+
+    // 4. Desenhar a ISS
     ctx.save();
     ctx.translate(iss.x, iss.y);
     ctx.rotate(iss.rotation);
     ctx.globalAlpha = iss.opacity;
-    ctx.drawImage(issImg, -iss.width/2, -iss.height/2, iss.width, iss.height);
+    ctx.drawImage(issImg, -iss.width / 2, -iss.height / 2, iss.width, iss.height);
     ctx.globalAlpha = 1;
     ctx.restore();
   }
@@ -1387,6 +1490,14 @@ function animate() {
   drawExplosions();
   drawSupernovas();
   checkCollisions();
+
+  // LÓGICA DE RESET DO BURACO NEGRO MOVIDA PARA CÁ
+  if (blackHoleReturning && blackHoleStarData.length > 0 && blackHoleStarData.every(d => d.state === 'done')) {
+    blackHoleActive = false;
+    blackHoleReturning = false;
+    blackHoleStarData = [];
+  }
+
   requestAnimationFrame(animate);
 }
 
@@ -1515,7 +1626,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function startAutoSlide() {
     stopAutoSlide();
-    autoSlide = setInterval(nextCard, 5000);
+    autoSlide = setInterval(nextCard, 7000);
   }
 
   function stopAutoSlide() {

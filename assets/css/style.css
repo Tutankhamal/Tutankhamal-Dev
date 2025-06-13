@@ -800,8 +800,10 @@ section * {
  
   background-color: #1a0a3d00; /* fundo escuro para destacar a box */
   align-items: center;
-  min-height: 90dvh
-
+  min-height: 100dvh;
+  /* Adicione um padding para evitar que o conteúdo toque as bordas em telas pequenas */
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 
@@ -814,26 +816,42 @@ section * {
   background-color: transparent;
 }
 .tech-box {
-  width: 300px;
+  /* width: 300px; */ /* Linha original comentada ou removida */
+  width: 100%; /* Faz o card ocupar a largura disponível */
+  max-width: 300px; /* Mantém o tamanho máximo em telas maiores */
   background-color: rgba(204, 0, 255, 0.11);
   padding: 30px 20px;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0,0,0,0.6);
-  transform: translateY(0); /* <--- ADICIONE ESTA LINHA */
-  opacity: 1; /* <--- assegura visibilidade */
-  transition: transform 0.3s ease;
-  backdrop-filter: blur(2px);
-  border: 2px solid var(--border-color-main);
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Adiciona transição para box-shadow e background */
+  
+  border: 1px solid #E040FB;
 }
 
 
 
 .tech-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 15px rgba(140, 0, 255, 0.671);
-  background-color: rgba(204, 0, 255, 0.192);
-  transition: transform 0.3s ease;
-  
+  transform: translateY(-10px); /* Aumenta um pouco o deslocamento para mais impacto */
+  box-shadow: 0 0 25px rgba(170, 50, 255, 0.8), 0 0 10px rgba(204, 0, 255, 0.5) inset; /* Brilho externo mais forte e um brilho interno sutil */
+  background-color: rgba(204, 0, 255, 0.22); /* Levemente mais claro no hover */
+  /* transition: transform 0.3s ease; // Removido pois já está no .tech-box base */
+}
+
+.tech-box.fade-in {
+  animation: fadeInBox 0.5s ease-out forwards;
+}
+
+@keyframes fadeInBox {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .tech-icon {
   font-size: 48px;
@@ -856,9 +874,35 @@ section * {
 .html { color: #E44D26; }
 .css { color: #1572B6; }
 .js { color: #F7DF1E; }
+
+/* Adicione esta media query ao final do seu arquivo ou em uma seção de responsividade */
+@media (max-width: 768px) {
+  .tech-section {
+    min-height: auto; /* Permite que a altura se ajuste ao conteúdo */
+    padding-top: 40px; /* Adiciona um pouco de espaço no topo */
+    padding-bottom: 40px; /* Adiciona um pouco de espaço na base */
+  }
+
+  .tech-boxes {
+    gap: 20px; /* Reduz o espaçamento entre os cards */
+  }
+
+  .tech-box {
+    /* Se quiser que os cards fiquem um pouco menores em mobile, pode ajustar o max-width aqui */
+    /* max-width: 280px; */
+    padding: 20px 15px; /* Ajusta o padding interno dos cards */
+  }
+
+  .tech-icon {
+    font-size: 40px; /* Reduz um pouco o tamanho do ícone */
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+}
+
 @keyframes bounceZoom {
-  0%, 100% { transform: scale(1) translateY(0); }
-  50% { transform: scale(1.2) translateY(-10px); }
+  0%, 100% { transform: scale(1) translateY(0) rotate(0deg); }
+  50% { transform: scale(1.1) translateY(-7px); } /* Reduz a escala e o deslocamento */
 }
 
 
@@ -934,18 +978,9 @@ section * {
 }
 
 @keyframes floatAround {
-  0%, 100% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(3px, -2px);
-  }
-  50% {
-    transform: translate(-3px, 2px);
-  }
-  75% {
-    transform: translate(2px, 3px);
-  }
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-12px) scale(1.07); } /* Aumenta um pouco no pico */
+  100% { transform: translateY(0) scale(1); }
 }
 
 .neon-section-title {
@@ -1083,7 +1118,7 @@ section * {
   pointer-events: none;
   transform: scale(0.96);
   transition: none;
-  border: 2px solid var(--border-color-main);
+  border: 1px solid #E040FB;
 }
 .benefit-card.active {
   display: flex;
@@ -1097,12 +1132,12 @@ section * {
 }
 @keyframes cardFadeInZoom {
   0% { opacity: 0; transform: scale(0.96); }
-  60% { opacity: 1; transform: scale(1.04); }
+  60% { opacity: 1; transform: scale(1.04); } /* Efeito de "overshoot" sutil */
   100% { opacity: 1; transform: scale(1); }
 }
 @keyframes cardFadeOutZoom {
   0% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1.08); }
+  100% { opacity: 0; transform: scale(1.08); } /* Efeito de "undershoot" sutil */
 }
 .benefit-icon {
   font-size: 3.5rem;
@@ -1194,4 +1229,222 @@ section * {
   .benefit-icon {
     font-size: 1.2rem;
   }
+}
+
+/* Interactive Guide Section */
+.interactive-guide-section {
+    /* padding: 80px 20px 60px; /* Original padding */
+    /* padding: 40px 20px 40px; /* Tentativa anterior */
+    /* padding: 20px 20px 20px; /* Segunda tentativa anterior */
+    padding: 10px 20px 10px; /* Nova tentativa: padding vertical mínimo */
+    text-align: center;
+    /* background-color: #1a0e29; /* Removido para mostrar o canvas */
+}
+
+/* Estilo do título da seção para corresponder a outras seções */
+.interactive-guide-section h2 {
+    font-size: 3em; /* Ou o tamanho padrão das outras seções */
+    color: #fff; /* Cor branca padrão para títulos de seção */
+    margin-bottom: 20px; /* Ou o margin padrão */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(112, 223, 255, 0.7), /* Sombra azul claro */
+                 0 0 20px rgba(112, 223, 255, 0.5),
+                 0 0 30px rgba(224, 64, 251, 0.5), /* Sombra magenta/rosa */
+                 0 0 40px rgba(224, 64, 251, 0.3);
+    /* Removendo a cor ciano direta e o text-shadow específico anterior */
+}
+
+.interactive-guide-section .section-subtitle {
+    font-size: 1.1em;
+    color: #ccc; /* Mantendo uma cor neutra para o subtítulo */
+    margin-bottom: 50px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.guide-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    /* gap: 30px; /* Original gap */
+    /* gap: 20px; /* Tentativa anterior */
+    gap: 5px; /* Nova tentativa: gap mínimo entre as caixas quando lado a lado */
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o container */
+}
+
+.guide-box {
+    background-color: rgba(30, 10, 54, 0.85); /* Roxo escuro translúcido para as caixas */
+    border: 2px solid #6A0DAD; /* Borda roxa mais vibrante */
+    border-radius: 15px;
+    /* padding: 30px; /* Original padding */
+    /* padding: 25px; /* Tentativa anterior */
+    padding: 20px; /* Nova tentativa: padding interno reduzido */
+    margin-bottom: 10px; /* Reduzido drasticamente para diminuir espaço vertical quando empilhado */
+    width: 100%;
+    max-width: 550px; /* Ajustado para permitir algum espaço entre eles */
+    box-shadow: 0 8px 25px rgba(106, 13, 173, 0.5); /* Sombra roxa mais pronunciada */
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.guide-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(224, 64, 251, 0.6), 0 0 40px rgba(74, 0, 114, 0.4);
+}
+
+.guide-box h3 { /* Título dentro da caixa roxa (Site Estático/Dinâmico) */
+    font-size: 1.8em;
+    color: #E040FB; /* Magenta/rosa para o título da caixa */
+    margin-bottom: 20px;
+    border-bottom: 1px solid #70DFFF; /* Linha azul claro */
+    padding-bottom: 10px;
+}
+
+.guide-box h3 .fas { /* Ícone ao lado de "Site Estático/Dinâmico" */
+    margin-right: 10px;
+    color: #70DFFF; /* Azul claro para o ícone principal da caixa */
+}
+
+.guide-box h4 { /* Títulos de categoria (Recursos Essenciais, Custo, etc.) */
+    font-size: 1.3em;
+    color: #E040FB; /* Magenta/rosa para os títulos de categoria */
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.guide-box h4 .fas { /* Ícones ao lado dos títulos de categoria */
+    margin-right: 8px;
+    color: #70DFFF; /* Azul claro para ícones de categoria */
+}
+
+.guide-box ul li {
+    background-color: rgba(255, 255, 255, 0.03); /* Fundo muito sutil para itens da lista */
+    margin-bottom: 10px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border-left: 3px solid #E040FB; /* Borda lateral magenta/rosa */
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-left-color 0.3s ease;
+    color: #e0e0e0; /* Texto claro para boa legibilidade */
+    font-size: 0.95em;
+}
+
+.guide-box ul li .fas { /* Ícones dos itens da lista */
+    margin-right: 10px;
+    color: #70DFFF; /* Azul claro para ícones de item de lista */
+    width: 20px;
+    text-align: center;
+}
+
+.guide-box ul li:hover {
+    background-color: rgba(224, 64, 251, 0.15); /* Fundo magenta/rosa claro no hover */
+    border-left-color: #70DFFF; /* Borda azul claro no hover */
+}
+
+.guide-box p {
+    color: #c0c0c0;
+    line-height: 1.7;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+/* Modal Styles - Ajustando cores do modal para consistência */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(10, 0, 20, 0.7); /* Fundo roxo escuro semi-transparente */
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #1E0A36; /* Roxo um pouco mais claro que o fundo do modal */
+    color: #e0e0e0;
+    margin: 10% auto;
+    padding: 30px 40px;
+    border: 1px solid #E040FB; /* Borda magenta/rosa */
+    border-radius: 15px;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 5px 25px rgba(224, 64, 251, 0.4); /* Sombra magenta */
+    position: relative;
+    animation: fadeInModal 0.5s ease-out;
+}
+
+.modal-content h4 { /* Título dentro do modal */
+    color: #E040FB; /* Magenta/rosa */
+    font-size: 1.6em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #70DFFF; /* Linha azul claro */
+    padding-bottom: 10px;
+}
+
+.modal-content h4 .fas { /* Ícone do título do modal */
+    margin-right: 12px;
+    color: #70DFFF; /* Azul claro */
+}
+
+.modal-content p {
+    font-size: 1em;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.modal-content p strong {
+    color: #E040FB; /* Magenta/rosa para destaque no texto do modal */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #E040FB; /* Magenta/rosa ao passar o mouse */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Responsive adjustments for guide */
+@media (max-width: 768px) {
+    .guide-box {
+        max-width: 100%;
+    }
+    .modal-content {
+        width: 90%;
+        margin: 15% auto;
+        padding: 20px;
+    }
+    .interactive-guide-section h2 {
+        font-size: 2.2em;
+    }
+    .guide-box h3 {
+        font-size: 1.6em;
+    }
 }
