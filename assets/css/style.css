@@ -749,9 +749,11 @@ section {
   color: white;
   text-align: center;
   background-color: transparent;
+  pointer-events: none;
 }
-
-
+section * {
+  pointer-events: auto;
+}
 
 
 .top-button {

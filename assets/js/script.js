@@ -105,6 +105,66 @@ let time = 0;
 let mouseVelocity = { x: 0, y: 0 };
 let backgroundRotation = 0;
 
+// === VARIÁVEIS DO FOGUETE ===
+const rocketImg = new Image();
+rocketImg.src = 'assets/images/rocket_sprite.png';
+let rockets = [];
+
+// Variáveis globais para o efeito do buraco negro
+let blackHoleActive = false;
+let blackHoleCenter = { x: 0, y: 0 };
+let blackHoleTimer = null;
+let blackHoleStarData = [];
+let blackHoleReturning = false;
+
+const ACCRETION_MIN_RADIUS = 60;
+const ACCRETION_MAX_RADIUS = 120;
+const ATTRACT_SPEED = 0.035; // velocidade de atração (mais lento)
+const RETURN_SPEED = 0.035;  // velocidade de retorno (mais lento)
+
+canvas.addEventListener('mousedown', function (e) {
+    if (blackHoleTimer) return;
+    blackHoleTimer = setTimeout(() => {
+        blackHoleActive = true;
+        blackHoleReturning = false;
+        const rect = canvas.getBoundingClientRect();
+        blackHoleCenter = {
+            x: (e.clientX - rect.left) * (canvas.width / rect.width),
+            y: (e.clientY - rect.top) * (canvas.height / rect.height)
+        };
+        // Seleciona 50% das estrelas aleatoriamente
+        const shuffled = stars.slice().sort(() => Math.random() - 0.5);
+        const selected = shuffled.slice(0, Math.floor(stars.length * 0.5));
+        blackHoleStarData = selected.map(star => {
+            const angle = Math.random() * Math.PI * 2;
+            const targetRadius = ACCRETION_MIN_RADIUS + Math.random() * (ACCRETION_MAX_RADIUS - ACCRETION_MIN_RADIUS);
+            return {
+                star: star,
+                originalX: star.x,
+                originalY: star.y,
+                state: 'toDisk',
+                angle: angle,
+                targetRadius: targetRadius,
+                currentRadius: null,
+                angularSpeed: 0.008 + Math.random() * 0.008
+            };
+        });
+    }, 3000);
+});
+
+canvas.addEventListener('mouseup', function () {
+    if (blackHoleTimer) {
+        clearTimeout(blackHoleTimer);
+        blackHoleTimer = null;
+    }
+    if (blackHoleActive && !blackHoleReturning) {
+        blackHoleReturning = true;
+        blackHoleStarData.forEach(data => {
+            data.state = 'returning';
+        });
+    }
+});
+
 window.addEventListener('resize', () => {
   w = canvas.width = window.innerWidth;
   h = canvas.height = window.innerHeight;
@@ -132,6 +192,8 @@ let supernovas = [];
 let nebulae = [];
 let spacecrafts = [];
 let iss = null;
+let issCooldown = 0; // cooldown em frames
+const ISS_COOLDOWN_DURATION = 1200; // ajuste conforme desejar (ex: 1200 frames ~20s a 60fps)
 
 function initAll() {
   initStarField();
@@ -297,44 +359,30 @@ function createSpacecraft() {
 }
 
 // === ISS (ESTAÇÃO ESPACIAL INTERNACIONAL) ===
+const issImg = new Image();
+issImg.src = 'assets/images/iss_sprite.png';
 function createISS() {
+  if (issCooldown > 0) {
+    issCooldown--;
+    return;
+  }
   // Chance muito rara de criar a ISS
-  if (Math.random() < 0.008 && !iss) {
+  if (Math.random() < 0.002 && !iss) {
     const side = Math.floor(Math.random() * 4);
     let startX, startY, targetX, targetY;
-    
     switch(side) {
-      case 0: // top -> bottom
-        startX = Math.random() * w;
-        startY = -40;
-        targetX = Math.random() * w;
-        targetY = h + 40;
-        break;
-      case 1: // right -> left
-        startX = w + 40;
-        startY = Math.random() * h;
-        targetX = -40;
-        targetY = Math.random() * h;
-        break;
-      case 2: // bottom -> top
-        startX = Math.random() * w;
-        startY = h + 40;
-        targetX = Math.random() * w;
-        targetY = -40;
-        break;
-      case 3: // left -> right
-        startX = -40;
-        startY = Math.random() * h;
-        targetX = w + 40;
-        targetY = Math.random() * h;
-        break;
+      case 0: startX = Math.random() * w; startY = -40; targetX = Math.random() * w; targetY = h + 40; break;
+      case 1: startX = w + 40; startY = Math.random() * h; targetX = -40; targetY = Math.random() * h; break;
+      case 2: startX = Math.random() * w; startY = h + 40; targetX = Math.random() * w; targetY = -40; break;
+      case 3: startX = -40; startY = Math.random() * h; targetX = w + 40; targetY = Math.random() * h; break;
     }
-    
     const dx = targetX - startX;
     const dy = targetY - startY;
     const distance = Math.sqrt(dx * dx + dy * dy);
-    const speed = 0.4; // Velocidade constante e lenta
-    
+    const speed = 0.4;
+    // Proporção do sprite: 100x63 = 1.587, reduzido para 80x50.4
+    const baseWidth = 100, baseHeight = 63;
+    const scale = 0.45; // ISS ficará com 45% do tamanho original
     iss = {
       x: startX,
       y: startY,
@@ -342,25 +390,90 @@ function createISS() {
         x: (dx / distance) * speed,
         y: (dy / distance) * speed
       },
-      size: 20, // Maior que espaçonaves normais
+      width: baseWidth * scale,
+      height: baseHeight * scale,
       angle: Math.atan2(dy, dx),
       rotation: 0,
-      lights: [
-        { offset: { x: -3, y: 0 }, color: 'white', phase: 0 },
-        { offset: { x: 3, y: 0 }, color: 'white', phase: Math.PI },
-        { offset: { x: 0, y: -2 }, color: 'red', phase: Math.PI/2 },
-        { offset: { x: 0, y: 2 }, color: 'green', phase: Math.PI * 1.5 }
-      ],
       opacity: 0,
       fadePhase: 'fadein',
       fadeTimer: 0,
-      fadeDuration: 800, // Fade muito longo
-      life: Math.random() * 1800 + 1200 // Vida muito longa
+      fadeDuration: 800,
+      life: Math.random() * 1800 + 1200
     };
   }
 }
 
 // === METEOROS E COMETAS ATRAVESSANDO A TELA ===
+function createRocket() {
+  if (rockets.length >= 2) return;
+  if (Math.random() < 0.002) {
+    const side = Math.floor(Math.random() * 4);
+    let startX, startY, targetX, targetY;
+    switch(side) {
+      case 0: startX = Math.random() * w; startY = -40; targetX = Math.random() * w; targetY = h + 40; break;
+      case 1: startX = w + 40; startY = Math.random() * h; targetX = -40; targetY = Math.random() * h; break;
+      case 2: startX = Math.random() * w; startY = h + 40; targetX = Math.random() * w; targetY = -40; break;
+      case 3: startX = -40; startY = Math.random() * h; targetX = w + 40; targetY = Math.random() * h; break;
+    }
+    const dx = targetX - startX;
+    const dy = targetY - startY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const speed = Math.random() * 0.7 + 0.4;
+    const baseWidth = 32; // ajuste conforme o sprite
+    const baseHeight = 96; // ajuste conforme o sprite
+    const scale = Math.random() * 0.15 + 0.15;
+    rockets.push({
+      x: startX,
+      y: startY,
+      velocity: { x: (dx / distance) * speed, y: (dy / distance) * speed },
+      size: Math.random() * 16 + 18,
+      angle: Math.atan2(dy, dx),
+      opacity: 0,
+      fadePhase: 'fadein',
+      fadeTimer: 0,
+      fadeDuration: 100,
+      life: Math.random() * 2400 + 1600,
+      width: baseWidth * scale,
+      height: baseHeight * scale
+    });
+  }
+}
+
+function drawRockets() {
+  createRocket();
+  for (let i = rockets.length - 1; i >= 0; i--) {
+    const rocket = rockets[i];
+    rocket.fadeTimer++;
+    switch(rocket.fadePhase) {
+      case 'fadein':
+        rocket.opacity = Math.min(1, rocket.fadeTimer / rocket.fadeDuration);
+        if (rocket.fadeTimer >= rocket.fadeDuration) { rocket.fadePhase = 'active'; rocket.fadeTimer = 0; }
+        break;
+      case 'active':
+        rocket.opacity = 1;
+        rocket.life--;
+        if (rocket.life < 100 || rocket.x < -100 || rocket.x > w + 100 || rocket.y < -100 || rocket.y > h + 100) {
+          rocket.fadePhase = 'fadeout'; rocket.fadeTimer = 0;
+        }
+        break;
+      case 'fadeout':
+        rocket.opacity = Math.max(0, 1 - (rocket.fadeTimer / rocket.fadeDuration));
+        if (rocket.opacity <= 0) { rockets.splice(i, 1); continue; }
+        break;
+    }
+    rocket.x += rocket.velocity.x;
+    rocket.y += rocket.velocity.y;
+    rocket.angle = Math.atan2(rocket.velocity.y, rocket.velocity.x);
+    ctx.save();
+    ctx.translate(rocket.x, rocket.y);
+    ctx.rotate(rocket.angle + Math.PI/2);
+    ctx.globalAlpha = rocket.opacity;
+    ctx.drawImage(rocketImg, -rocket.width/2, -rocket.height/2, rocket.width, rocket.height);
+    ctx.globalAlpha = 1;
+    ctx.restore();
+  }
+}
+
 function createMeteor() {
   if (Math.random() < 0.001) {
     const side = Math.floor(Math.random() * 4);
@@ -532,34 +645,79 @@ function createSubtleExplosion(x, y, size, color) {
 
 // === SISTEMA DE COLISÕES REDUZIDO ===
 function checkCollisions() {
+  // Colisão com ISS
+  if (iss && iss.fadePhase === 'active') {
+    for (const arr of [meteors, comets, rockets]) {
+      for (let i = arr.length - 1; i >= 0; i--) {
+        const obj = arr[i];
+        const dx = obj.x - iss.x;
+        const dy = obj.y - iss.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < (obj.size || Math.max(obj.width||0, obj.height||0)/2) + Math.max(iss.width, iss.height)/2) {
+          createSubtleExplosion(iss.x, iss.y, Math.max(iss.width, iss.height), {r:200,g:200,b:255});
+          iss.fadePhase = 'fadeout';
+          obj.fadePhase = 'fadeout';
+        }
+      }
+    }
+  }
+  // Colisão com foguetes
+  for (let r = rockets.length - 1; r >= 0; r--) {
+    const rocket = rockets[r];
+    if (rocket.fadePhase !== 'active') continue;
+    for (const arr of [meteors, comets]) {
+      for (let i = arr.length - 1; i >= 0; i--) {
+        const obj = arr[i];
+        const dx = obj.x - rocket.x;
+        const dy = obj.y - rocket.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < obj.size + rocket.size/2) {
+          createSubtleExplosion(rocket.x, rocket.y, rocket.size, {r:255,g:180,b:120});
+          rocket.fadePhase = 'fadeout';
+          obj.fadePhase = 'fadeout';
+        }
+      }
+    }
+  }
+  // Colisão com espaçonaves
+  for (let s = spacecrafts.length - 1; s >= 0; s--) {
+    const craft = spacecrafts[s];
+    if (craft.fadePhase !== 'active') continue;
+    for (const arr of [meteors, comets]) {
+      for (let i = arr.length - 1; i >= 0; i--) {
+        const obj = arr[i];
+        const dx = obj.x - craft.x;
+        const dy = obj.y - craft.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < obj.size + craft.size/2) {
+          createSubtleExplosion(craft.x, craft.y, craft.size, {r:60,g:60,b:80});
+          craft.fadePhase = 'fadeout';
+          obj.fadePhase = 'fadeout';
+        }
+      }
+    }
+  }
   // Verificar colisões apenas para cometas (com chance muito reduzida)
   for (let i = comets.length - 1; i >= 0; i--) {
     const comet = comets[i];
     if (comet.destroyed || comet.fadePhase === 'fadein') continue;
-    
     if (Math.random() > 0.5) continue; // Apenas 5% de chance
-    
     for (let j = stars.length - 1; j >= 0; j--) {
       const star = stars[j];
       if (star.destroyed) continue;
-      
       const dx = comet.x - star.x;
       const dy = comet.y - star.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
       const collisionDistance = comet.size + star.size + 3;
-      
       if (distance < collisionDistance) {
         const explosionX = (comet.x + star.x) / 2;
         const explosionY = (comet.y + star.y) / 2;
-        
         createSubtleExplosion(explosionX, explosionY, (comet.size + star.size) / 2, {
           r: (comet.color.r + star.color.r) / 2,
           g: (comet.color.g + star.color.g) / 2,
           b: (comet.color.b + star.color.b) / 2
         });
-        
         star.destroyed = true;
-        
         setTimeout(() => {
           if (j < stars.length) {
             const newX = Math.random() * w;
@@ -586,7 +744,6 @@ function checkCollisions() {
             };
           }
         }, Math.random() * 3000 + 2000);
-        
         break;
       }
     }
@@ -624,32 +781,64 @@ function checkSupernova() {
 // === EFEITOS SUTIS DE MOUSE ===
 function applySubtleMouseEffects(object) {
   if (object.destroyed) return;
-  
-  // Atualizar órbita local
+  if (blackHoleActive && blackHoleStarData.length > 0) {
+    let allReturned = true;
+    const data = blackHoleStarData.find(d => d.star === object);
+    if (data) {
+      if (data.state === 'toDisk') {
+        const dx = data.star.x - blackHoleCenter.x;
+        const dy = data.star.y - blackHoleCenter.y;
+        let currentRadius = Math.sqrt(dx * dx + dy * dy);
+        if (data.currentRadius === null) data.currentRadius = currentRadius;
+        data.currentRadius += (data.targetRadius - data.currentRadius) * ATTRACT_SPEED;
+        data.angle += data.angularSpeed;
+        data.star.x = blackHoleCenter.x + data.currentRadius * Math.cos(data.angle);
+        data.star.y = blackHoleCenter.y + data.currentRadius * Math.sin(data.angle);
+        if (Math.abs(data.currentRadius - data.targetRadius) < 1.5) {
+          data.state = 'inDisk';
+        } else {
+          allReturned = false;
+        }
+      } else if (data.state === 'inDisk') {
+        data.angle += data.angularSpeed;
+        data.star.x = blackHoleCenter.x + data.targetRadius * Math.cos(data.angle);
+        data.star.y = blackHoleCenter.y + data.targetRadius * Math.sin(data.angle);
+        allReturned = false;
+      } else if (data.state === 'returning') {
+        data.star.x += (data.originalX - data.star.x) * RETURN_SPEED;
+        data.star.y += (data.originalY - data.star.y) * RETURN_SPEED;
+        if (Math.abs(data.star.x - data.originalX) < 1.5 && Math.abs(data.star.y - data.originalY) < 1.5) {
+          data.star.x = data.originalX;
+          data.star.y = data.originalY;
+          data.state = 'done';
+        } else {
+          allReturned = false;
+        }
+      }
+    }
+    if (blackHoleReturning && blackHoleStarData.every(d => d.state === 'done')) {
+      blackHoleActive = false;
+      blackHoleReturning = false;
+      blackHoleStarData = [];
+    }
+    if (data) return;
+  }
   object.orbitAngle += object.orbitSpeed;
-  
-  // Calcular nova posição orbital
   const orbitX = Math.cos(object.orbitAngle) * object.orbitRadius;
   const orbitY = Math.sin(object.orbitAngle) * object.orbitRadius;
-  
   object.originalX = object.localCenterX + orbitX;
   object.originalY = object.localCenterY + orbitY;
-  
-  // Manter dentro dos limites da tela
   if (object.originalX < 0) object.localCenterX += w;
   if (object.originalX > w) object.localCenterX -= w;
   if (object.originalY < 0) object.localCenterY += h;
   if (object.originalY > h) object.localCenterY -= h;
-  
   const dx = object.x - mouse.x;
   const dy = object.y - mouse.y;
   const distance = Math.sqrt(dx * dx + dy * dy);
   const maxDistance = 200;
-  
   if (distance < maxDistance && distance > 0) {
     const force = (maxDistance - distance) / maxDistance;
     const effectStrength = force * force * 20;
-    
     const angle = Math.atan2(dy, dx);
     object.x = object.originalX + Math.cos(angle) * effectStrength;
     object.y = object.originalY + Math.sin(angle) * effectStrength;
@@ -886,77 +1075,33 @@ function drawSpacecrafts() {
 
 function drawISS() {
   createISS();
-  
   if (iss) {
-    // Gerenciar fases de fade
     iss.fadeTimer++;
-    
     switch(iss.fadePhase) {
       case 'fadein':
         iss.opacity = Math.min(0.8, iss.fadeTimer / iss.fadeDuration);
-        if (iss.fadeTimer >= iss.fadeDuration) {
-          iss.fadePhase = 'active';
-          iss.fadeTimer = 0;
-        }
+        if (iss.fadeTimer >= iss.fadeDuration) { iss.fadePhase = 'active'; iss.fadeTimer = 0; }
         break;
-        
       case 'active':
         iss.opacity = 0.8;
         iss.life--;
-        
-        if (iss.life < 150 || 
-            iss.x < -150 || iss.x > w + 150 || 
-            iss.y < -150 || iss.y > h + 150) {
-          iss.fadePhase = 'fadeout';
-          iss.fadeTimer = 0;
-        }
-        break;
-        
-      case 'fadeout':
-        iss.opacity = Math.max(0, 0.8 - (iss.fadeTimer / iss.fadeDuration));
-        if (iss.opacity <= 0) {
+        if (iss.life < 1 || iss.x < -150 || iss.x > w + 150 || iss.y < -150 || iss.y > h + 150) {
+          createSubtleExplosion(iss.x, iss.y, Math.max(iss.width, iss.height), {r:200,g:200,b:255});
           iss = null;
+          issCooldown = ISS_COOLDOWN_DURATION; // inicia cooldown
           return;
         }
         break;
     }
-    
     iss.x += iss.velocity.x;
     iss.y += iss.velocity.y;
-    iss.rotation += 0.002; // Rotação lenta
-    
-    // Desenhar ISS (estrutura mais complexa)
+    iss.rotation += 0.002;
     ctx.save();
     ctx.translate(iss.x, iss.y);
     ctx.rotate(iss.rotation);
-    
-    // Corpo principal
-    ctx.fillStyle = `rgba(180, 180, 200, ${iss.opacity * 0.7})`;
-    ctx.fillRect(-iss.size/2, -iss.size/6, iss.size, iss.size/3);
-    
-    // Painéis solares
-    ctx.fillStyle = `rgba(100, 100, 150, ${iss.opacity * 0.5})`;
-    ctx.fillRect(-iss.size, -iss.size/8, iss.size/3, iss.size/4);
-    ctx.fillRect(iss.size * 2/3, -iss.size/8, iss.size/3, iss.size/4);
-    
-    // Módulos
-    ctx.fillStyle = `rgba(160, 160, 180, ${iss.opacity * 0.6})`;
-    ctx.fillRect(-iss.size/4, -iss.size/4, iss.size/2, iss.size/8);
-    
-    // Luzes da ISS
-    for (let light of iss.lights) {
-      const lightOpacity = (Math.sin(time * 0.03 + light.phase) + 1) * 0.5;
-      const lightX = light.offset.x;
-      const lightY = light.offset.y;
-      
-      ctx.fillStyle = `rgba(${light.color === 'red' ? '255,150,150' : 
-                              light.color === 'green' ? '150,255,150' : '255,255,255'}, ${lightOpacity * iss.opacity})`;
-      
-      ctx.beginPath();
-      ctx.arc(lightX, lightY, 0.8, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    
+    ctx.globalAlpha = iss.opacity;
+    ctx.drawImage(issImg, -iss.width/2, -iss.height/2, iss.width, iss.height);
+    ctx.globalAlpha = 1;
     ctx.restore();
   }
 }
@@ -1230,20 +1375,18 @@ function drawSupernovas() {
 // === LOOP PRINCIPAL ===
 function animate() {
   time++;
-  
   drawBackground();
   drawNebulae();
   drawStars();
   drawCosmicDust();
   drawSpacecrafts();
   drawISS();
+  drawRockets();
   drawMeteors();
   drawComets();
   drawExplosions();
   drawSupernovas();
-  
   checkCollisions();
-  
   requestAnimationFrame(animate);
 }
 
