@@ -86,7 +86,7 @@ justify-content: space-between;
 align-items: center;
 padding: 0 5%;
 background-color: rgba(204, 0, 255, 0.075);
-backdrop-filter: blur(1px);
+backdrop-filter: blur(5px);
 z-index: 1000;
 border-bottom: 2px solid var(--border-color-main);
 transition: transform 0.3s ease;
@@ -1239,6 +1239,8 @@ section * {
     padding: 10px 20px 10px; /* Nova tentativa: padding vertical mínimo */
     text-align: center;
     /* background-color: #1a0e29; /* Removido para mostrar o canvas */
+    min-height: 100dvh;
+    margin-bottom: 100px;
 }
 
 /* Estilo do título da seção para corresponder a outras seções */
@@ -1274,10 +1276,11 @@ section * {
     gap: 5px; /* Nova tentativa: gap mínimo entre as caixas quando lado a lado */
     max-width: 1200px;
     margin: 0 auto; /* Centraliza o container */
+    margin-bottom: 125px;
 }
 
 .guide-box {
-    background-color: rgba(30, 10, 54, 0.85); /* Roxo escuro translúcido para as caixas */
+    background-color: rgba(204, 0, 255, 0.11); /* Roxo escuro translúcido para as caixas */
     border: 2px solid #6A0DAD; /* Borda roxa mais vibrante */
     border-radius: 15px;
     /* padding: 30px; /* Original padding */
@@ -1302,6 +1305,8 @@ section * {
     margin-bottom: 20px;
     border-bottom: 1px solid #70DFFF; /* Linha azul claro */
     padding-bottom: 10px;
+    text-align: center;
+    padding-right: 30px;
 }
 
 .guide-box h3 .fas { /* Ícone ao lado de "Site Estático/Dinâmico" */
@@ -1322,7 +1327,7 @@ section * {
 }
 
 .guide-box ul li {
-    background-color: rgba(255, 255, 255, 0.03); /* Fundo muito sutil para itens da lista */
+    background-color: rgba(204, 0, 255, 0.185); /* Fundo muito sutil para itens da lista */
     margin-bottom: 10px;
     padding: 12px 15px;
     border-radius: 8px;
