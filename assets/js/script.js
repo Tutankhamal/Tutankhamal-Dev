@@ -149,7 +149,7 @@ let h = canvas.height = window.innerHeight;
 // Adicione no topo, após variáveis globais como 'ctx', 'w', 'h':
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 let lastFrameTime = 0;
-const targetFPS = isMobile ? 60 : 60; // 30 FPS para mobile, 60 para desktop
+const targetFPS = isMobile ? 30 : 60; // 30 FPS para mobile, 60 para desktop
 const frameInterval = 1000 / targetFPS;
 
 const mouse = { x: w/2, y: h/2, prevX: w/2, prevY: h/2 };
@@ -312,7 +312,7 @@ function initAll() {
 function initStarField() {
   stars = [];
   // Ajuste a quantidade de estrelas com base no dispositivo
-  let totalStarsToCreate = isMobile ? 250 : 800; // Exemplo: 500 para mobile, 1200 para desktop
+  let totalStarsToCreate = isMobile ? 200 : 800; // 200 para mobile, 800 para desktop
   
   // A lógica de distribuição por camadas pode ser mantida ou simplificada.
   // Se simplificar, apenas crie 'totalStarsToCreate' estrelas com propriedades variadas.
@@ -331,13 +331,13 @@ function initStarField() {
       color: getStarColor(),
       layer: layer,
       speed: layer * 0.05,
-      twinkle: Math.random() * Math.PI * 2,
-      twinkleSpeed: Math.random() * 0.01 + 0.002,
+      twinkle: isMobile ? 0 : Math.random() * Math.PI * 2, // Desabilita twinkle em mobile
+      twinkleSpeed: isMobile ? 0 : Math.random() * 0.01 + 0.002, // Desabilita twinkle em mobile
       temperature: Math.random() * 10000 + 3000,
       destroyed: false,
       localCenterX: x + (Math.random() - 0.5) * 100,
       localCenterY: y + (Math.random() - 0.5) * 100,
-      orbitRadius: Math.random() * 20 + 5,
+      orbitRadius: isMobile ? 0 : Math.random() * 20 + 5, // Desabilita órbita local em mobile
       orbitAngle: Math.random() * Math.PI * 2,
       orbitSpeed: (Math.random() * 0.0005 + 0.0001) * (6 - layer)
     });
@@ -356,7 +356,8 @@ function getStarColor() {
 // === POEIRA CÓSMICA MAIS DINÂMICA ===
 function initCosmicDust() {
   cosmicDust = [];
-  for (let i = 0; i < 400; i++) {
+  const dustCount = isMobile ? 100 : 400; // 100 para mobile, 400 para desktop
+  for (let i = 0; i < dustCount; i++) {
     cosmicDust.push({
       x: Math.random() * w,
       y: Math.random() * h,
@@ -400,6 +401,7 @@ function initNebulae() {
 
 // === ESPAÇONAVES SUTIS ===
 function createSpacecraft() {
+  if (isMobile) return; // Desabilita naves em mobile
   // Chance muito baixa de criar espaçonave
   if (Math.random() < 0.003) {
     const side = Math.floor(Math.random() * 4);
@@ -576,6 +578,7 @@ function drawRockets() {
 }
 
 function createMeteor() {
+  if (isMobile) return; // Desabilita meteoros em mobile
   if (Math.random() < 0.001) {
     const side = Math.floor(Math.random() * 4);
     let startX, startY, targetX, targetY;
@@ -1499,14 +1502,18 @@ function drawSupernovas() {
 
 // === LOOP PRINCIPAL ===
 // Modifique a função animate:
-function animate(now) {
-  // Limitar FPS
-  if (now - lastFrameTime < frameInterval) {
-    requestAnimationFrame(animate);
-    return;
-  }
-  lastFrameTime = now;
+function animate(currentTime) { // Adicione currentTime como parâmetro se não existir
+    // Limitar FPS (applies to both mobile and desktop via frameInterval)
+    const now = currentTime; 
+    const elapsed = now - lastFrameTime;
 
+    if (elapsed < frameInterval) {
+        requestAnimationFrame(animate);
+        return; // Pula este frame para limitar o FPS
+    }
+    lastFrameTime = now - (elapsed % frameInterval); // More robust timing
+
+    ctx.clearRect(0, 0, w, h);
   time++;
   drawBackground();
   drawNebulae();
