@@ -145,6 +145,9 @@ const canvas = document.getElementById('universe');
 const ctx = canvas.getContext('2d');
 let w = canvas.width = window.innerWidth;
 let h = canvas.height = window.innerHeight;
+let lastKnownWidth = w;
+let lastKnownHeight = h;
+let resizeTimeout;
 
 // Adicione no topo, após variáveis globais como 'ctx', 'w', 'h':
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -270,9 +273,40 @@ canvas.addEventListener('touchcancel', function (e) {
 });
 
 window.addEventListener('resize', () => {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-  initAll();
+  if (isMobile) {
+    // Em dispositivos móveis, vamos usar um debounce e verificar a magnitude da mudança
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const newWidth = window.innerWidth;
+      const newHeight = window.innerHeight;
+
+      // Verifique se a mudança na largura é significativa ou se a altura mudou muito
+      // A mudança de altura devido à barra de endereço é geralmente pequena (e.g., < 150px)
+      // Ajuste o valor 150 conforme necessário, testando em dispositivos.
+      const heightDifference = Math.abs(newHeight - lastKnownHeight);
+
+      if (newWidth !== lastKnownWidth || heightDifference > 150) {
+        console.log("Redimensionamento significativo detectado em mobile, atualizando canvas.");
+        w = canvas.width = newWidth;
+        h = canvas.height = newHeight;
+        lastKnownWidth = newWidth;
+        lastKnownHeight = newHeight;
+        initAll(); // Chame initAll() apenas se o redimensionamento for substancial
+      } else {
+        // Se a mudança de altura for pequena, apenas atualize a altura do canvas sem reinicializar tudo.
+        // Isso pode ou não ser necessário dependendo de como seu CSS está configurado.
+        // Se o CSS com 100vh já estiver cuidando disso, esta parte pode ser omitida.
+        // canvas.height = newHeight; 
+        // h = newHeight;
+        console.log("Pequena mudança de altura em mobile, canvas não reinicializado.");
+      }
+    }, 250); // Atraso de 250ms para debounce
+  } else {
+    // Comportamento padrão para desktops
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    initAll();
+  }
 });
 
 canvas.addEventListener("mousemove", e => {
