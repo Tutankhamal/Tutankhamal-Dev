@@ -149,7 +149,7 @@ let h = canvas.height = window.innerHeight;
 // Adicione no topo, após variáveis globais como 'ctx', 'w', 'h':
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 let lastFrameTime = 0;
-const targetFPS = isMobile ? 30 : 60; // 30 FPS para mobile, 60 para desktop
+const targetFPS = isMobile ? 60 : 60; // 30 FPS para mobile, 60 para desktop
 const frameInterval = 1000 / targetFPS;
 
 const mouse = { x: w/2, y: h/2, prevX: w/2, prevY: h/2 };
