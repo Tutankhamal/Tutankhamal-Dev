@@ -312,7 +312,7 @@ function initAll() {
 function initStarField() {
   stars = [];
   // Ajuste a quantidade de estrelas com base no dispositivo
-  let totalStarsToCreate = isMobile ? 500 : 1200; // Exemplo: 500 para mobile, 1200 para desktop
+  let totalStarsToCreate = isMobile ? 250 : 800; // Exemplo: 500 para mobile, 1200 para desktop
   
   // A lógica de distribuição por camadas pode ser mantida ou simplificada.
   // Se simplificar, apenas crie 'totalStarsToCreate' estrelas com propriedades variadas.
