@@ -146,6 +146,12 @@ const ctx = canvas.getContext('2d');
 let w = canvas.width = window.innerWidth;
 let h = canvas.height = window.innerHeight;
 
+// Adicione no topo, após variáveis globais como 'ctx', 'w', 'h':
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+let lastFrameTime = 0;
+const targetFPS = isMobile ? 30 : 60; // 30 FPS para mobile, 60 para desktop
+const frameInterval = 1000 / targetFPS;
+
 const mouse = { x: w/2, y: h/2, prevX: w/2, prevY: h/2 };
 let time = 0;
 let mouseVelocity = { x: 0, y: 0 };
@@ -302,38 +308,39 @@ function initAll() {
 }
 
 // === CAMPO DE ESTRELAS DISTRIBUÍDO ===
+// Modifique a função initStarField:
 function initStarField() {
   stars = [];
+  // Ajuste a quantidade de estrelas com base no dispositivo
+  let totalStarsToCreate = isMobile ? 500 : 1200; // Exemplo: 500 para mobile, 1200 para desktop
   
-  for (let layer = 1; layer <= 5; layer++) {
-    const count = Math.floor(800 / layer); // Aumentado para mais estrelas
-    for (let i = 0; i < count; i++) {
-      // Distribuição uniforme por toda a tela
-      const x = Math.random() * w;
-      const y = Math.random() * h;
-      
-      stars.push({
-        x: x,
-        y: y,
-        originalX: x,
-        originalY: y,
-        size: (Math.random() * 1.2 + 0.3) * (layer * 0.2),
-        brightness: Math.random() * 0.8 + 0.2,
-        color: getStarColor(),
-        layer: layer,
-        speed: layer * 0.05,
-        twinkle: Math.random() * Math.PI * 2,
-        twinkleSpeed: Math.random() * 0.01 + 0.002,
-        temperature: Math.random() * 10000 + 3000,
-        destroyed: false,
-        // Movimento orbital sutil ao redor de pontos locais
-        localCenterX: x + (Math.random() - 0.5) * 100,
-        localCenterY: y + (Math.random() - 0.5) * 100,
-        orbitRadius: Math.random() * 20 + 5,
-        orbitAngle: Math.random() * Math.PI * 2,
-        orbitSpeed: (Math.random() * 0.0005 + 0.0001) * (6 - layer)
-      });
-    }
+  // A lógica de distribuição por camadas pode ser mantida ou simplificada.
+  // Se simplificar, apenas crie 'totalStarsToCreate' estrelas com propriedades variadas.
+  // Exemplo de criação direta (simplificado):
+  for (let i = 0; i < totalStarsToCreate; i++) {
+    const layer = Math.ceil(Math.random() * 5); // Distribui aleatoriamente em 5 camadas
+    const x = Math.random() * w;
+    const y = Math.random() * h;
+    stars.push({
+      x: x,
+      y: y,
+      originalX: x,
+      originalY: y,
+      size: (Math.random() * 1.2 + 0.3) * (layer * 0.2),
+      brightness: Math.random() * 0.8 + 0.2,
+      color: getStarColor(),
+      layer: layer,
+      speed: layer * 0.05,
+      twinkle: Math.random() * Math.PI * 2,
+      twinkleSpeed: Math.random() * 0.01 + 0.002,
+      temperature: Math.random() * 10000 + 3000,
+      destroyed: false,
+      localCenterX: x + (Math.random() - 0.5) * 100,
+      localCenterY: y + (Math.random() - 0.5) * 100,
+      orbitRadius: Math.random() * 20 + 5,
+      orbitAngle: Math.random() * Math.PI * 2,
+      orbitSpeed: (Math.random() * 0.0005 + 0.0001) * (6 - layer)
+    });
   }
 }
 
@@ -1491,7 +1498,15 @@ function drawSupernovas() {
 }
 
 // === LOOP PRINCIPAL ===
-function animate() {
+// Modifique a função animate:
+function animate(now) {
+  // Limitar FPS
+  if (now - lastFrameTime < frameInterval) {
+    requestAnimationFrame(animate);
+    return;
+  }
+  lastFrameTime = now;
+
   time++;
   drawBackground();
   drawNebulae();
@@ -1557,7 +1572,7 @@ function animate() {
 
 // === INICIALIZAÇÃO ===
 initAll();
-animate();
+requestAnimationFrame(animate);
 
 
 
