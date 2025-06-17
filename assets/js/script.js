@@ -145,6 +145,15 @@ const canvas = document.getElementById('universe');
 const ctx = canvas.getContext('2d');
 let w = canvas.width = window.innerWidth;
 let h = canvas.height = window.innerHeight;
+let lastKnownWidth = w;
+let lastKnownHeight = h;
+let resizeTimeout;
+
+// Adicione no topo, após variáveis globais como 'ctx', 'w', 'h':
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+let lastFrameTime = 0;
+const targetFPS = isMobile ? 30 : 60; // 30 FPS para mobile, 60 para desktop
+const frameInterval = 1000 / targetFPS;
 
 const mouse = { x: w/2, y: h/2, prevX: w/2, prevY: h/2 };
 let time = 0;
@@ -264,9 +273,40 @@ canvas.addEventListener('touchcancel', function (e) {
 });
 
 window.addEventListener('resize', () => {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-  initAll();
+  if (isMobile) {
+    // Em dispositivos móveis, vamos usar um debounce e verificar a magnitude da mudança
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const newWidth = window.innerWidth;
+      const newHeight = window.innerHeight;
+
+      // Verifique se a mudança na largura é significativa ou se a altura mudou muito
+      // A mudança de altura devido à barra de endereço é geralmente pequena (e.g., < 150px)
+      // Ajuste o valor 150 conforme necessário, testando em dispositivos.
+      const heightDifference = Math.abs(newHeight - lastKnownHeight);
+
+      if (newWidth !== lastKnownWidth || heightDifference > 150) {
+        console.log("Redimensionamento significativo detectado em mobile, atualizando canvas.");
+        w = canvas.width = newWidth;
+        h = canvas.height = newHeight;
+        lastKnownWidth = newWidth;
+        lastKnownHeight = newHeight;
+        initAll(); // Chame initAll() apenas se o redimensionamento for substancial
+      } else {
+        // Se a mudança de altura for pequena, apenas atualize a altura do canvas sem reinicializar tudo.
+        // Isso pode ou não ser necessário dependendo de como seu CSS está configurado.
+        // Se o CSS com 100vh já estiver cuidando disso, esta parte pode ser omitida.
+        // canvas.height = newHeight; 
+        // h = newHeight;
+        console.log("Pequena mudança de altura em mobile, canvas não reinicializado.");
+      }
+    }, 250); // Atraso de 250ms para debounce
+  } else {
+    // Comportamento padrão para desktops
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    initAll();
+  }
 });
 
 canvas.addEventListener("mousemove", e => {
@@ -302,38 +342,39 @@ function initAll() {
 }
 
 // === CAMPO DE ESTRELAS DISTRIBUÍDO ===
+// Modifique a função initStarField:
 function initStarField() {
   stars = [];
+  // Ajuste a quantidade de estrelas com base no dispositivo
+  let totalStarsToCreate = isMobile ? 200 : 800; // 200 para mobile, 800 para desktop
   
-  for (let layer = 1; layer <= 5; layer++) {
-    const count = Math.floor(800 / layer); // Aumentado para mais estrelas
-    for (let i = 0; i < count; i++) {
-      // Distribuição uniforme por toda a tela
-      const x = Math.random() * w;
-      const y = Math.random() * h;
-      
-      stars.push({
-        x: x,
-        y: y,
-        originalX: x,
-        originalY: y,
-        size: (Math.random() * 1.2 + 0.3) * (layer * 0.2),
-        brightness: Math.random() * 0.8 + 0.2,
-        color: getStarColor(),
-        layer: layer,
-        speed: layer * 0.05,
-        twinkle: Math.random() * Math.PI * 2,
-        twinkleSpeed: Math.random() * 0.01 + 0.002,
-        temperature: Math.random() * 10000 + 3000,
-        destroyed: false,
-        // Movimento orbital sutil ao redor de pontos locais
-        localCenterX: x + (Math.random() - 0.5) * 100,
-        localCenterY: y + (Math.random() - 0.5) * 100,
-        orbitRadius: Math.random() * 20 + 5,
-        orbitAngle: Math.random() * Math.PI * 2,
-        orbitSpeed: (Math.random() * 0.0005 + 0.0001) * (6 - layer)
-      });
-    }
+  // A lógica de distribuição por camadas pode ser mantida ou simplificada.
+  // Se simplificar, apenas crie 'totalStarsToCreate' estrelas com propriedades variadas.
+  // Exemplo de criação direta (simplificado):
+  for (let i = 0; i < totalStarsToCreate; i++) {
+    const layer = Math.ceil(Math.random() * 5); // Distribui aleatoriamente em 5 camadas
+    const x = Math.random() * w;
+    const y = Math.random() * h;
+    stars.push({
+      x: x,
+      y: y,
+      originalX: x,
+      originalY: y,
+      size: (Math.random() * 1.2 + 0.3) * (layer * 0.2),
+      brightness: Math.random() * 0.8 + 0.2,
+      color: getStarColor(),
+      layer: layer,
+      speed: layer * 0.05,
+      twinkle: isMobile ? 0 : Math.random() * Math.PI * 2, // Desabilita twinkle em mobile
+      twinkleSpeed: isMobile ? 0 : Math.random() * 0.01 + 0.002, // Desabilita twinkle em mobile
+      temperature: Math.random() * 10000 + 3000,
+      destroyed: false,
+      localCenterX: x + (Math.random() - 0.5) * 100,
+      localCenterY: y + (Math.random() - 0.5) * 100,
+      orbitRadius: isMobile ? 0 : Math.random() * 20 + 5, // Desabilita órbita local em mobile
+      orbitAngle: Math.random() * Math.PI * 2,
+      orbitSpeed: (Math.random() * 0.0005 + 0.0001) * (6 - layer)
+    });
   }
 }
 
@@ -349,7 +390,8 @@ function getStarColor() {
 // === POEIRA CÓSMICA MAIS DINÂMICA ===
 function initCosmicDust() {
   cosmicDust = [];
-  for (let i = 0; i < 400; i++) {
+  const dustCount = isMobile ? 100 : 400; // 100 para mobile, 400 para desktop
+  for (let i = 0; i < dustCount; i++) {
     cosmicDust.push({
       x: Math.random() * w,
       y: Math.random() * h,
@@ -393,6 +435,7 @@ function initNebulae() {
 
 // === ESPAÇONAVES SUTIS ===
 function createSpacecraft() {
+  if (isMobile) return; // Desabilita naves em mobile
   // Chance muito baixa de criar espaçonave
   if (Math.random() < 0.003) {
     const side = Math.floor(Math.random() * 4);
@@ -569,6 +612,7 @@ function drawRockets() {
 }
 
 function createMeteor() {
+  if (isMobile) return; // Desabilita meteoros em mobile
   if (Math.random() < 0.001) {
     const side = Math.floor(Math.random() * 4);
     let startX, startY, targetX, targetY;
@@ -1491,7 +1535,19 @@ function drawSupernovas() {
 }
 
 // === LOOP PRINCIPAL ===
-function animate() {
+// Modifique a função animate:
+function animate(currentTime) { // Adicione currentTime como parâmetro se não existir
+    // Limitar FPS (applies to both mobile and desktop via frameInterval)
+    const now = currentTime; 
+    const elapsed = now - lastFrameTime;
+
+    if (elapsed < frameInterval) {
+        requestAnimationFrame(animate);
+        return; // Pula este frame para limitar o FPS
+    }
+    lastFrameTime = now - (elapsed % frameInterval); // More robust timing
+
+    ctx.clearRect(0, 0, w, h);
   time++;
   drawBackground();
   drawNebulae();
@@ -1557,7 +1613,7 @@ function animate() {
 
 // === INICIALIZAÇÃO ===
 initAll();
-animate();
+requestAnimationFrame(animate);
 
 
 
