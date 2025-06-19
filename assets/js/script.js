@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
     scrollDownButtons.forEach(button => {
       button.classList.add("visible");
     });
-  }, 10000); // 10 segundos
+  }, 4000); // 4 segundos
 
   // Functions
   function handleScroll() {
@@ -1619,44 +1619,21 @@ requestAnimationFrame(animate);
 
 // Hero Terminal Style //
 
-const codeLines = [
-  ">_ Carregando Conteúdos......💾",
-  ">_ Otimizando Experiências...✨",
-  ">_ Expandindo Horizontes.....🌐",
-  "-------------------------------",  
-  ">_ CARREGAMENTO CONCLUÍDO....✅",
-  "-------------------------------",     
-  ">_ BOAS-VINDAS!..............💜" 
-];
-
-let terminalIndex = 0;
-const terminalEl = document.getElementById("terminal-content");
-const terminalBox = document.getElementById("terminal-box");
 const heroContent = document.getElementById("hero-content");
 const heroTitle = document.getElementById("hero-title");
-
-function typeTerminal() {
-  if (terminalIndex < codeLines.length) {
-    terminalEl.innerHTML += codeLines[terminalIndex] + "\n";
-    terminalEl.scrollTop = terminalEl.scrollHeight;
-    terminalIndex++;
-    setTimeout(typeTerminal, 900);
-  } else {
-    setTimeout(() => {
-      terminalBox.style.transition = "opacity 1s ease, transform 1s ease";
-      terminalBox.style.opacity = 0;
-      terminalBox.style.transform = "scale(0.9)";
-      setTimeout(() => {
-        terminalBox.style.display = "none";
-        showHeroContent();
-      }, 1000);
-    }, 1000);
-  }
-}
+const terminalBox = document.getElementById("terminal-box");
 
 function showHeroContent() {
+  // Esconder o terminal imediatamente
+  if (terminalBox) {
+    terminalBox.style.display = "none";
+  }
+  
+  // Mostrar o conteúdo da hero com fade in
   heroContent.style.display = "block";
   heroTitle.style.opacity = "0";
+  heroTitle.style.transition = "opacity 1s ease";
+  
   setTimeout(() => {
     heroTitle.style.opacity = "1";
   }, 100);
@@ -1699,7 +1676,7 @@ function startTypingCycle() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  typeTerminal();
+  showHeroContent();
 });
 
 // ... existing code ...

@@ -54,6 +54,20 @@ canvas {
   height: 100dvh; /* altura dinâmica real da viewport */
   z-index: 0;
   pointer-events: auto;
+  /* Otimizações para performance em dispositivos móveis */
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Reduzir qualidade do canvas em dispositivos móveis para melhor performance */
+@media (max-width: 768px) {
+  canvas {
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+  }
 }
 
 a {
@@ -382,7 +396,8 @@ main {
   box-sizing: border-box;
   text-align: center;
   pointer-events: none;
- 
+  opacity: 0;
+  animation: fadeInHero 1.5s ease forwards;
 }
 #hero-title {
   font-family: 'Bebas Neue', sans-serif;
@@ -454,61 +469,305 @@ main {
   }
 }
 
-
-
-
-
-/* Para telas pequenas (até 420px de largura) */
-@media (max-width: 420px) {
-#hero-wrapper {
-  padding-top: 40px;
-  min-height: 100dvh;
+@keyframes fadeInHero {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-#terminal-box {
-  width: 100%;
-  height: 260px;
-  padding: 15px;
+
+
+
+
+/* ===== MELHORIAS GERAIS DE RESPONSIVIDADE ===== */
+
+/* Garantir que todos os elementos sejam responsivos */
+* {
+  box-sizing: border-box;
 }
 
-#hero-title {
-  font-size: 12vw;
-  margin-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+/* Melhorar a experiência em dispositivos touch */
+@media (hover: none) and (pointer: coarse) {
+  .tech-box:hover,
+  .benefit-card:hover,
+  .carousel-nav:hover,
+  .scroll-down-button:hover {
+    transform: none;
+  }
+  
+  /* Aumentar área de toque para botões pequenos */
+  .carousel-nav {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .scroll-down-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
 }
 
-#typing-text {
-  font-size: 4vw;
-  margin-top: 8px;
-}
-}
-
-/* Telas médias (entre 421px e 768px) */
-@media (min-width: 421px) and (max-width: 768px) {
-#hero-wrapper {
-  padding-top: 20px;
-  min-height: 100dvh;
-  margin-bottom: 100px;
+/* Otimizações para telas de alta densidade (Retina) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .tech-icon,
+  .benefit-icon {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
 }
 
-#terminal-box {
-  width: 90%;
-  height: 300px;
-  padding: 18px;
+/* Melhorar legibilidade em telas pequenas */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Aumentar contraste em telas pequenas */
+  .neon-section-title,
+  #hero-title {
+    text-shadow: 
+      0 0 5px rgba(119, 0, 255, 0.8),
+      0 0 10px rgba(0, 89, 255, 0.6),
+      0 0 15px rgba(255, 255, 255, 0.3);
+  }
 }
 
-#hero-title {
-  font-size: 12vw;
-  margin-top: 12px;
-  padding-left: 12px;
-  padding-right: 12px;
+/* Otimizações para modo escuro do sistema */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #ffffff;
+    --bg-color: #000000;
+  }
 }
 
-#typing-text {
-  font-size: 4vw;
-  margin-top: 10px;
+/* Reduzir animações para usuários que preferem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .scroll-down-button.visible {
+    animation: none;
+  }
+  
+  #hero-title {
+    animation: fadeInHero 0.5s ease forwards;
+  }
 }
+
+/* ===== SISTEMA DE RESPONSIVIDADE APRIMORADO ===== */
+
+/* Mobile Portrait - Muito pequeno (até 320px) */
+@media (max-width: 320px) {
+  .navbar {
+    padding: 0 3%;
+    height: 70px;
+  }
+  
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .site-title {
+    font-size: 1.4rem;
+  }
+  
+  #hero-wrapper {
+    padding: 80px 10px 20px;
+    min-height: 100dvh;
+  }
+  
+  #hero-content {
+    padding: 0 10px;
+  }
+  
+  #hero-title {
+    font-size: clamp(32px, 12vw, 60px);
+    line-height: 1.1;
+    margin-bottom: 15px;
+  }
+  
+  #typing-text {
+    font-size: clamp(14px, 4vw, 18px);
+    line-height: 1.4;
+  }
+}
+
+/* Mobile Portrait - Pequeno (321px - 480px) */
+@media (min-width: 321px) and (max-width: 480px) {
+  .navbar {
+    padding: 0 4%;
+    height: 75px;
+  }
+  
+  .logo {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .site-title {
+    font-size: 1.6rem;
+  }
+  
+  #hero-wrapper {
+    padding: 85px 15px 20px;
+    min-height: 100dvh;
+  }
+  
+  #hero-content {
+    padding: 0 15px;
+  }
+  
+  #hero-title {
+    font-size: clamp(40px, 11vw, 70px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  
+  #typing-text {
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: 1.4;
+  }
+}
+
+/* Mobile Landscape / Small Tablet (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .navbar {
+    padding: 0 4%;
+    height: 80px;
+  }
+  
+  #hero-wrapper {
+    padding: 90px 20px 30px;
+    min-height: 100dvh;
+  }
+  
+  #hero-content {
+    padding: 0 20px;
+  }
+  
+  #hero-title {
+    font-size: clamp(50px, 10vw, 85px);
+    line-height: 1.1;
+    margin-bottom: 25px;
+  }
+  
+  #typing-text {
+    font-size: clamp(18px, 3.5vw, 24px);
+    line-height: 1.4;
+  }
+}
+
+/* Tablet Portrait (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  #hero-wrapper {
+    padding: 100px 30px 40px;
+    min-height: 100dvh;
+  }
+  
+  #hero-content {
+    padding: 0 30px;
+  }
+  
+  #hero-title {
+    font-size: clamp(60px, 9vw, 100px);
+    line-height: 1.1;
+    margin-bottom: 30px;
+  }
+  
+  #typing-text {
+    font-size: clamp(20px, 3vw, 26px);
+    line-height: 1.4;
+  }
+}
+
+/* Desktop Small (1025px - 1366px) */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  #hero-wrapper {
+    padding: 120px 40px 50px;
+    min-height: 100dvh;
+  }
+  
+  #hero-title {
+    font-size: clamp(70px, 8vw, 110px);
+    line-height: 1.1;
+    margin-bottom: 35px;
+  }
+  
+  #typing-text {
+    font-size: clamp(22px, 2.5vw, 28px);
+    line-height: 1.4;
+  }
+}
+
+/* Desktop Large (1367px+) */
+@media (min-width: 1367px) {
+  #hero-wrapper {
+    padding: 140px 50px 60px;
+    min-height: 100dvh;
+  }
+  
+  #hero-title {
+    font-size: clamp(80px, 7vw, 120px);
+    line-height: 1.1;
+    margin-bottom: 40px;
+  }
+  
+  #typing-text {
+    font-size: clamp(24px, 2vw, 30px);
+    line-height: 1.4;
+  }
+}
+
+/* ===== ORIENTAÇÃO ESPECÍFICA ===== */
+
+/* Landscape em dispositivos móveis */
+@media (max-height: 500px) and (orientation: landscape) {
+  .navbar {
+    height: 60px;
+  }
+  
+  #hero-wrapper {
+    padding: 70px 20px 20px;
+    min-height: 100dvh;
+  }
+  
+  #hero-title {
+    font-size: clamp(30px, 8vw, 50px);
+    margin-bottom: 10px;
+  }
+  
+  #typing-text {
+    font-size: clamp(14px, 3vw, 18px);
+  }
+}
+
+/* Ultra-wide screens */
+@media (min-width: 1920px) {
+  #hero-wrapper {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 160px 60px 80px;
+  }
+  
+  #hero-title {
+    font-size: clamp(90px, 6vw, 140px);
+  }
+  
+  #typing-text {
+    font-size: clamp(26px, 1.8vw, 32px);
+  }
 }
 
 
@@ -875,28 +1134,186 @@ section * {
 .css { color: #1572B6; }
 .js { color: #F7DF1E; }
 
-/* Adicione esta media query ao final do seu arquivo ou em uma seção de responsividade */
-@media (max-width: 768px) {
+/* ===== SEÇÃO IMPORTANCE - RESPONSIVIDADE CORRIGIDA ===== */
+
+.importance-section {
+  padding: clamp(40px, 8vw, 80px) clamp(15px, 4vw, 40px);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.neon-section-title {
+  font-size: clamp(20px, 6vw, 48px);
+  margin-bottom: clamp(30px, 6vw, 50px);
+  text-align: center;
+  line-height: 1.2;
+  padding: 0 10px;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.carousel-nav.next {
+  right: 10px;
+}
+
+/* Tech Section - Responsividade */
+.tech-section {
+  padding: 60px 20px;
+}
+
+.tech-boxes {
+  display: grid;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.tech-box {
+  padding: 30px 20px;
+  text-align: center;
+  background: rgba(108, 23, 219, 0.1);
+  border: 2px solid rgba(108, 23, 219, 0.3);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.tech-box h3 {
+  font-size: clamp(18px, 4vw, 22px);
+  margin-bottom: 15px;
+}
+
+.tech-box p {
+  font-size: clamp(14px, 3vw, 16px);
+  line-height: 1.6;
+}
+
+.tech-icon {
+  font-size: clamp(40px, 8vw, 60px);
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* ===== MEDIA QUERIES ESPECÍFICAS PARA SEÇÕES ===== */
+
+/* Mobile Portrait - Muito pequeno */
+@media (max-width: 320px) {
+  .importance-section,
   .tech-section {
-    min-height: auto; /* Permite que a altura se ajuste ao conteúdo */
-    padding-top: 40px; /* Adiciona um pouco de espaço no topo */
-    padding-bottom: 40px; /* Adiciona um pouco de espaço na base */
+    padding: 40px 10px;
   }
-
+  
+  .benefits-carousel-container {
+    padding: 0 35px;
+  }
+  
+  .carousel-nav {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+  
+  .carousel-nav.prev {
+    left: 5px;
+  }
+  
+  .carousel-nav.next {
+    right: 5px;
+  }
+  
+  .benefit-card {
+    padding: 20px 10px;
+  }
+  
   .tech-boxes {
-    gap: 20px; /* Reduz o espaçamento entre os cards */
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
-
+  
   .tech-box {
-    /* Se quiser que os cards fiquem um pouco menores em mobile, pode ajustar o max-width aqui */
-    /* max-width: 280px; */
-    padding: 20px 15px; /* Ajusta o padding interno dos cards */
+    padding: 20px 15px;
   }
+}
 
-  .tech-icon {
-    font-size: 40px; /* Reduz um pouco o tamanho do ícone */
-    margin-bottom: 15px;
-    margin-top: 15px;
+/* Mobile Portrait - Pequeno */
+@media (min-width: 321px) and (max-width: 480px) {
+  .importance-section,
+  .tech-section {
+    padding: 50px 15px;
+  }
+  
+  .benefits-carousel-container {
+    padding: 0 40px;
+  }
+  
+  .benefit-card {
+    padding: 25px 15px;
+  }
+  
+  .tech-boxes {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}
+
+/* Mobile Landscape / Small Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  .importance-section,
+  .tech-section {
+    padding: 60px 20px;
+  }
+  
+  .tech-boxes {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+/* Tablet Portrait */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .importance-section,
+  .tech-section {
+    padding: 80px 30px;
+  }
+  
+  .tech-boxes {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .importance-section,
+  .tech-section {
+    padding: 100px 40px;
+  }
+  
+  .tech-boxes {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1400px;
+  }
+}
+
+/* Landscape em dispositivos móveis */
+@media (max-height: 500px) and (orientation: landscape) {
+  .importance-section,
+  .tech-section {
+    padding: 40px 20px;
+  }
+  
+  .neon-section-title {
+    margin-bottom: 20px;
+  }
+  
+  .benefit-card {
+    padding: 20px 15px;
+  }
+  
+  .tech-box {
+    padding: 20px 15px;
   }
 }
 
@@ -1022,40 +1439,70 @@ section * {
   }
 }
 
-/* Botão de rolagem para baixo */
+/* Scroll Down Button - Responsivo */
 .scroll-down-button {
-  opacity: 0;
-  pointer-events: none; /* Impede cliques antes de aparecer */
-  transition: opacity 1s ease;
-  animation: neonPulseButton 1.5s infinite ease-in-out, bounceUpDown 2s infinite ease-in-out;
-  /* ...restante do seu estilo */
   position: absolute;
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2.5rem;
-  color: var(--primary-color); /* Cor base do neon */
-  text-decoration: none;
-  animation: neonPulseButton 1.5s infinite ease-in-out, bounceUpDown 2s infinite ease-in-out;
-  z-index: 5;
+  color: var(--primary-color);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: auto;
+  z-index: 10;
+  background: rgba(108, 23, 219, 0.1);
+  border: 2px solid rgba(108, 23, 219, 0.3);
+  border-radius: 50%;
+  width: clamp(50px, 8vw, 60px);
+  height: clamp(50px, 8vw, 60px);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;  
-  
+  backdrop-filter: blur(10px);
 }
 
 .scroll-down-button.visible {
   opacity: 1;
-  pointer-events: auto;
+  visibility: visible;
+  animation: bounceUpDown 2s ease-in-out infinite;
 }
 
 .scroll-down-button:hover {
-  color: var(--text-color);
-  border-color: var(--text-color);
- 
+  color: var(--accent-color);
+  background: rgba(108, 23, 219, 0.2);
+  border-color: rgba(108, 23, 219, 0.5);
+  transform: translateX(-50%) translateY(-5px) scale(1.1);
+}
+
+/* Responsividade específica para scroll button */
+@media (max-width: 320px) {
+  .scroll-down-button {
+    bottom: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .scroll-down-button {
+    bottom: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .scroll-down-button {
+    bottom: 50px;
+    width: 70px;
+    height: 70px;
+    font-size: 2.5rem;
+  }
 }
 
 @keyframes neonPulseButton {
@@ -1082,43 +1529,48 @@ section * {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: clamp(0.5rem, 2vw, 1rem);
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto 2rem auto;
+  max-width: clamp(300px, 90vw, 900px);
+  margin: 0 auto;
   position: relative;
   z-index: 2;
+  padding: 0 clamp(10px, 3vw, 20px);
 }
+
 .benefits-carousel-track {
   display: flex;
-  overflow: show;
+  overflow: hidden;
   width: 100%;
-  max-width: 600px;
-  min-height: 260px;
+  max-width: clamp(280px, 80vw, 600px);
+  min-height: clamp(280px, 50vw, 380px);
   position: relative;
+  border-radius: 10px;
 }
+
 .benefit-card {
   flex: 0 0 100%;
   display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(204, 0, 255, 0.192);
+  background-color: rgba(204, 0, 255, 0.11);
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0,0,0,0.6);
-  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  padding: clamp(1rem, 4vw, 2.5rem) clamp(0.8rem, 3vw, 1.5rem);
   text-align: center;
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  min-height: 260px;
+  height: 100%;
   z-index: 1;
   opacity: 0;
   pointer-events: none;
   transform: scale(0.96);
   transition: none;
   border: 1px solid #E040FB;
+  box-sizing: border-box;
 }
 .benefit-card.active {
   display: flex;
@@ -1140,47 +1592,65 @@ section * {
   100% { opacity: 0; transform: scale(1.08); } /* Efeito de "undershoot" sutil */
 }
 .benefit-icon {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 8vw, 3.5rem);
   color: #8559ff;
-  margin-bottom: 1.2rem;
+  margin-bottom: clamp(0.8rem, 3vw, 1.2rem);
   filter: drop-shadow(0 0 12px #a259ffcc);
   transition: color 0.3s, filter 0.3s;
+  flex-shrink: 0;
 }
+
 .benefit-icon.floating {
   animation: floatAround 3.5s ease-in-out infinite;
 }
+
 .benefit-card h3 {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 4vw, 1.5rem);
   color: #ffffff;
-  margin-bottom: 0.7rem;
+  margin-bottom: clamp(0.5rem, 2vw, 0.7rem);
   letter-spacing: 0.02em;
   text-shadow: 0 0 8px #a259ff99;
+  line-height: 1.3;
+  word-wrap: break-word;
+  hyphens: auto;
 }
+
 .benefit-card p {
-  font-size: 1.1rem;
+  font-size: clamp(0.85rem, 3vw, 1.1rem);
   color: #fff;
   margin-bottom: 0;
+  line-height: 1.5;
+  word-wrap: break-word;
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 .carousel-nav {
   background: none;
   border: none;
   outline: none;
-  padding: 0;
-  margin: 0 0.5rem;
+  padding: clamp(8px, 2vw, 12px);
+  margin: 0 clamp(0.3rem, 1vw, 0.5rem);
   cursor: pointer;
   position: relative;
   z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
+
 .carousel-nav i {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
   color: #a259ff;
-  transition: color 0.3s, filter 0.3s;
+  transition: color 0.3s, filter 0.3s, transform 0.3s;
   filter: drop-shadow(0 0 8px #a259ff99);
-  animation: neonPulseButton 1.5s infinite alternate;
 }
+
 .carousel-nav:hover i {
   color: #fff;
   filter: drop-shadow(0 0 16px #a259ffcc);
+  transform: scale(1.1);
 }
 @keyframes neonPulseButton {
   0% { filter: drop-shadow(0 0 8px #a259ff99); }
@@ -1191,44 +1661,112 @@ section * {
   50% { transform: translateY(-12px) scale(1.07); }
   100% { transform: translateY(0) scale(1); }
 }
-@media (max-width: 700px) {
+/* Media Queries para dispositivos móveis */
+@media (max-width: 768px) {
+  .importance-section {
+    padding: clamp(30px, 6vw, 60px) clamp(10px, 3vw, 20px);
+    min-height: 100vh;
+  }
+  
   .benefits-carousel-container {
-    max-width: 98vw;
-    gap: 0.5rem;
+    max-width: 95vw;
+    padding: 0 clamp(5px, 2vw, 15px);
+    gap: clamp(0.3rem, 1.5vw, 0.8rem);
   }
+  
   .benefits-carousel-track {
-    max-width: 98vw;
-    min-height: 200px;
-  }
+     max-width: 85vw;
+     min-height: clamp(260px, 45vw, 320px);
+   }
+  
   .benefit-card {
-    padding: 1.5rem 0.7rem 1.2rem 0.7rem;
-    min-height: 180px;
-  }
-  .benefit-icon {
-    font-size: 2.2rem;
-    margin-bottom: 0.7rem;
-  }
-  .benefit-card h3 {
-    font-size: 1.1rem;
-  }
-  .benefit-card p {
-    font-size: 0.95rem;
-  }
-  .carousel-nav i {
-    font-size: 1.6rem;
+    padding: clamp(0.8rem, 3vw, 1.5rem);
   }
 }
+
 @media (max-width: 480px) {
+  .importance-section {
+    padding: clamp(20px, 5vw, 40px) clamp(8px, 2vw, 15px);
+    min-height: 100vh;
+  }
+  
+  .neon-section-title {
+    font-size: clamp(18px, 5vw, 32px);
+    margin-bottom: clamp(20px, 4vw, 30px);
+    padding: 0 5px;
+  }
+  
+  .benefits-carousel-container {
+    max-width: 98vw;
+    padding: 0 clamp(3px, 1vw, 10px);
+    gap: clamp(0.2rem, 1vw, 0.5rem);
+  }
+  
   .benefits-carousel-track {
-    min-height: 140px;
-  }
+     max-width: 90vw;
+     min-height: clamp(240px, 40vw, 280px);
+   }
+  
   .benefit-card {
-    min-height: 120px;
-    padding: 1rem 0.3rem 0.7rem 0.3rem;
+    padding: clamp(0.6rem, 2.5vw, 1.2rem);
   }
+  
+  .carousel-nav {
+     padding: clamp(6px, 1.5vw, 10px);
+   }
+   
+   .carousel-nav i {
+     font-size: clamp(1.5rem, 4vw, 2rem);
+   }
+}
+
+@media (max-width: 320px) {
+  .importance-section {
+    padding: 15px 5px;
+  }
+  
+  .neon-section-title {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  .benefits-carousel-container {
+    max-width: 100vw;
+    padding: 0 2px;
+    gap: 0.2rem;
+  }
+  
+  .benefits-carousel-track {
+     max-width: 95vw;
+     min-height: 200px;
+   }
+  
+  .benefit-card {
+    padding: 0.5rem;
+  }
+  
   .benefit-icon {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
   }
+  
+  .benefit-card h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .benefit-card p {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+  
+  .carousel-nav {
+     padding: 5px;
+   }
+   
+   .carousel-nav i {
+     font-size: 1.2rem;
+   }
 }
 
 /* Interactive Guide Section */
