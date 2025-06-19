@@ -2,6 +2,79 @@ console.log("Script.js carregado e executando!");
 // ... existing code ...
 
 document.addEventListener("DOMContentLoaded", function() {
+  // Configurar otimizações para dispositivos móveis
+  setupMobileViewport();
+  
+  // Inicializar canvas do universo
+  canvas = document.getElementById('universe');
+  if (canvas) {
+    ctx = canvas.getContext('2d');
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    lastKnownWidth = w;
+    lastKnownHeight = h;
+    
+    // Inicializar variáveis dependentes do canvas
+    mouse = { x: w/2, y: h/2, prevX: w/2, prevY: h/2 };
+    time = 0;
+    mouseVelocity = { x: 0, y: 0 };
+    backgroundRotation = 0;
+    
+    // Inicializar o universo
+    initAll();
+    requestAnimationFrame(animate);
+    
+    // Adicionar event listeners do canvas
+    canvas.addEventListener('mousemove', function(e) {
+      mouse.prevX = mouse.x;
+      mouse.prevY = mouse.y;
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      
+      mouseVelocity.x = mouse.x - mouse.prevX;
+      mouseVelocity.y = mouse.y - mouse.prevY;
+    });
+    
+    canvas.addEventListener('mousedown', function (e) {
+      // Prevenir múltiplos timers se já houver um clique pressionado ou se as estrelas estiverem retornando
+      if (blackHoleTimer || blackHoleActive || blackHoleReturning) return;
+      
+      blackHoleTimer = setTimeout(() => {
+        startBlackHoleEffect(e.clientX, e.clientY);
+        blackHoleTimer = null; // Limpar o timer após a execução
+      }, 3000);
+    });
+    
+    canvas.addEventListener('mouseup', function () {
+      stopBlackHoleEffect();
+    });
+    
+    // Eventos de Toque para Dispositivos Móveis
+    canvas.addEventListener('touchstart', function (e) {
+      // Prevenir múltiplos timers ou se o buraco negro já estiver ativo ou se as estrelas estiverem retornando
+      if (blackHoleTimer || blackHoleActive || blackHoleReturning) return;
+    
+      // Usar o primeiro ponto de toque
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        blackHoleTimer = setTimeout(() => {
+          startBlackHoleEffect(touch.clientX, touch.clientY);
+          blackHoleTimer = null; // Limpar o timer após a execução
+        }, 3000);
+      }
+    }, { passive: false });
+    
+    canvas.addEventListener('touchend', function (e) {
+      stopBlackHoleEffect();
+    });
+    
+    canvas.addEventListener('touchcancel', function (e) {
+      stopBlackHoleEffect();
+    });
+  } else {
+    console.error('Canvas element with id "universe" not found!');
+  }
+  
   // Variables
   const navbar = document.querySelector(".navbar");
   const hamburger = document.querySelector(".hamburger");
@@ -141,24 +214,48 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Background Universe //
 
-const canvas = document.getElementById('universe');
-const ctx = canvas.getContext('2d');
-let w = canvas.width = window.innerWidth;
-let h = canvas.height = window.innerHeight;
-let lastKnownWidth = w;
-let lastKnownHeight = h;
+// Detectar dispositivo móvel primeiro
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+// Variáveis do canvas (serão inicializadas no DOMContentLoaded)
+let canvas, ctx, w, h;
+let lastKnownWidth, lastKnownHeight;
 let resizeTimeout;
 
-// Adicione no topo, após variáveis globais como 'ctx', 'w', 'h':
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+// Variáveis para otimização de viewport móvel
+let initialViewportHeight = window.innerHeight;
+let isViewportStable = true;
+let viewportStabilityTimeout;
+let lastResizeTime = 0;
+const RESIZE_DEBOUNCE_DELAY = isMobile ? 150 : 50;
+const MOBILE_HEIGHT_THRESHOLD = 100; // Threshold para mudanças significativas de altura
+
+// Função para detectar e configurar viewport móvel
+function setupMobileViewport() {
+  if (isMobile) {
+    // Armazenar altura inicial para referência
+    initialViewportHeight = window.innerHeight;
+    
+    // Configurar meta viewport para prevenir zoom
+    let viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport) {
+      viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+    }
+    
+    // Adicionar classe CSS para otimizações específicas
+    document.body.classList.add('mobile-optimized');
+    
+    console.log(`Viewport móvel configurado: ${initialViewportHeight}px`);
+  }
+}
+
+// Variáveis de performance e FPS
 let lastFrameTime = 0;
 const targetFPS = isMobile ? 30 : 60; // 30 FPS para mobile, 60 para desktop
 const frameInterval = 1000 / targetFPS;
 
-const mouse = { x: w/2, y: h/2, prevX: w/2, prevY: h/2 };
-let time = 0;
-let mouseVelocity = { x: 0, y: 0 };
-let backgroundRotation = 0;
+// Variáveis que dependem das dimensões do canvas (inicializadas no DOMContentLoaded)
+let mouse, time, mouseVelocity, backgroundRotation;
 
 // === VARIÁVEIS DO FOGUETE ===
 const rocketImg = new Image();
@@ -233,91 +330,75 @@ function stopBlackHoleEffect() {
     }
 }
 
-canvas.addEventListener('mousedown', function (e) {
-    // Prevenir múltiplos timers se já houver um clique pressionado ou se as estrelas estiverem retornando
-    if (blackHoleTimer || blackHoleActive || blackHoleReturning) return;
-    
-    blackHoleTimer = setTimeout(() => {
-        startBlackHoleEffect(e.clientX, e.clientY);
-        blackHoleTimer = null; // Limpar o timer após a execução
-    }, 3000);
-});
+// Canvas event listeners will be added after canvas initialization
 
-canvas.addEventListener('mouseup', function () {
-    stopBlackHoleEffect();
-});
-
-// Eventos de Toque para Dispositivos Móveis
-canvas.addEventListener('touchstart', function (e) {
-    // Prevenir múltiplos timers ou se o buraco negro já estiver ativo ou se as estrelas estiverem retornando
-    if (blackHoleTimer || blackHoleActive || blackHoleReturning) return;
-
-    // Usar o primeiro ponto de toque
-    if (e.touches.length > 0) {
-        const touch = e.touches[0];
-        blackHoleTimer = setTimeout(() => {
-            startBlackHoleEffect(touch.clientX, touch.clientY);
-            blackHoleTimer = null; // Limpar o timer após a execução
-        }, 3000);
-    }
-    // Prevenir comportamento padrão do navegador (como scroll ou zoom)
-    // e.preventDefault(); // Descomente se necessário, mas pode impedir o scroll da página se o canvas for grande
-}, { passive: false }); // passive: false é necessário para chamar preventDefault, se usado.
-
-canvas.addEventListener('touchend', function (e) {
-    stopBlackHoleEffect();
-});
-
-canvas.addEventListener('touchcancel', function (e) {
-    stopBlackHoleEffect(); // Tratar cancelamento de toque da mesma forma que touchend
-});
-
-window.addEventListener('resize', () => {
+// Função otimizada para redimensionamento inteligente
+function handleResize() {
+  const now = Date.now();
+  const newWidth = window.innerWidth;
+  const newHeight = window.innerHeight;
+  
   if (isMobile) {
-    // Em dispositivos móveis, vamos usar um debounce e verificar a magnitude da mudança
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      const newWidth = window.innerWidth;
-      const newHeight = window.innerHeight;
-
-      // Verifique se a mudança na largura é significativa ou se a altura mudou muito
-      // A mudança de altura devido à barra de endereço é geralmente pequena (e.g., < 150px)
-      // Ajuste o valor 150 conforme necessário, testando em dispositivos.
-      const heightDifference = Math.abs(newHeight - lastKnownHeight);
-
-      if (newWidth !== lastKnownWidth || heightDifference > 150) {
-        console.log("Redimensionamento significativo detectado em mobile, atualizando canvas.");
+    // Detectar se é uma mudança real de orientação/tamanho ou apenas barra de endereços
+    const widthChanged = newWidth !== lastKnownWidth;
+    const heightDifference = Math.abs(newHeight - lastKnownHeight);
+    const significantHeightChange = heightDifference > MOBILE_HEIGHT_THRESHOLD;
+    
+    // Marcar viewport como instável durante mudanças
+    isViewportStable = false;
+    clearTimeout(viewportStabilityTimeout);
+    
+    // Só redimensionar se for uma mudança significativa
+    if (widthChanged || significantHeightChange) {
+      // Throttle para evitar muitas execuções
+      if (now - lastResizeTime > RESIZE_DEBOUNCE_DELAY) {
+        console.log(`Redimensionamento significativo: ${widthChanged ? 'largura' : 'altura'} (${heightDifference}px)`);
+        
+        // Atualizar dimensões do canvas
         w = canvas.width = newWidth;
         h = canvas.height = newHeight;
         lastKnownWidth = newWidth;
         lastKnownHeight = newHeight;
-        initAll(); // Chame initAll() apenas se o redimensionamento for substancial
-      } else {
-        // Se a mudança de altura for pequena, apenas atualize a altura do canvas sem reinicializar tudo.
-        // Isso pode ou não ser necessário dependendo de como seu CSS está configurado.
-        // Se o CSS com 100vh já estiver cuidando disso, esta parte pode ser omitida.
-        // canvas.height = newHeight; 
-        // h = newHeight;
-        console.log("Pequena mudança de altura em mobile, canvas não reinicializado.");
+        lastResizeTime = now;
+        
+        // Reinicializar apenas se necessário
+        initAll();
       }
-    }, 250); // Atraso de 250ms para debounce
+    } else {
+      // Para mudanças pequenas (barra de endereços), apenas ajustar altura do canvas
+      // sem reinicializar todo o conteúdo
+      if (canvas.height !== newHeight) {
+        canvas.height = newHeight;
+        h = newHeight;
+      }
+    }
+    
+    // Marcar viewport como estável após um período sem mudanças
+    viewportStabilityTimeout = setTimeout(() => {
+      isViewportStable = true;
+      console.log('Viewport estabilizado');
+    }, 500);
+    
   } else {
-    // Comportamento padrão para desktops
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-    initAll();
+    // Desktop: comportamento padrão mais simples
+    if (now - lastResizeTime > 50) { // Throttle básico para desktop
+      w = canvas.width = newWidth;
+      h = canvas.height = newHeight;
+      lastKnownWidth = newWidth;
+      lastKnownHeight = newHeight;
+      lastResizeTime = now;
+      initAll();
+    }
   }
+}
+
+// Event listener otimizado com throttling
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(handleResize, isMobile ? RESIZE_DEBOUNCE_DELAY : 16);
 });
 
-canvas.addEventListener("mousemove", e => {
-  mouse.prevX = mouse.x;
-  mouse.prevY = mouse.y;
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-  
-  mouseVelocity.x = mouse.x - mouse.prevX;
-  mouseVelocity.y = mouse.y - mouse.prevY;
-});
+// Mousemove event listener will be added after canvas initialization
 
 // === SISTEMA DE ELEMENTOS ===
 let stars = [];
@@ -1536,8 +1617,9 @@ function drawSupernovas() {
 
 // === LOOP PRINCIPAL ===
 // Modifique a função animate:
-function animate(currentTime) { // Adicione currentTime como parâmetro se não existir
-    // Limitar FPS (applies to both mobile and desktop via frameInterval)
+function animate(currentTime) {
+  try {
+    // Limitar FPS e otimizar para dispositivos móveis
     const now = currentTime; 
     const elapsed = now - lastFrameTime;
 
@@ -1545,9 +1627,26 @@ function animate(currentTime) { // Adicione currentTime como parâmetro se não 
         requestAnimationFrame(animate);
         return; // Pula este frame para limitar o FPS
     }
-    lastFrameTime = now - (elapsed % frameInterval); // More robust timing
+    lastFrameTime = now - (elapsed % frameInterval);
+
+    // Em dispositivos móveis, reduzir ainda mais o FPS durante mudanças de viewport
+    if (isMobile && !isViewportStable) {
+        // Durante mudanças de viewport, renderizar a 15 FPS para reduzir lag
+        const reducedFrameInterval = 1000 / 15;
+        if (elapsed < reducedFrameInterval) {
+            requestAnimationFrame(animate);
+            return;
+        }
+    }
+
+    // Verificar se o canvas precisa ser redimensionado antes de renderizar
+    if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+    }
 
     ctx.clearRect(0, 0, w, h);
+    console.log('Frame rendered at:', now); // Debug log
   time++;
   drawBackground();
   drawNebulae();
@@ -1609,11 +1708,15 @@ function animate(currentTime) { // Adicione currentTime como parâmetro se não 
   }
 
   requestAnimationFrame(animate);
+  } catch (error) {
+    console.error('Erro na função animate:', error);
+    // Tentar continuar a animação mesmo com erro
+    requestAnimationFrame(animate);
+  }
 }
 
 // === INICIALIZAÇÃO ===
-initAll();
-requestAnimationFrame(animate);
+// Inicialização movida para DOMContentLoaded
 
 
 
