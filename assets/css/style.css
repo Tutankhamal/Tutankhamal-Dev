@@ -1052,17 +1052,18 @@ section * {
 
 
 .tech-section {
-
   display: flex;
   flex-direction: column;
   justify-content: center;
- 
   background-color: #1a0a3d00; /* fundo escuro para destacar a box */
   align-items: center;
   min-height: 100dvh;
   /* Adicione um padding para evitar que o conteúdo toque as bordas em telas pequenas */
   padding-left: 15px;
   padding-right: 15px;
+  position: relative;
+  z-index: 15;
+  padding-top: 80px;
 }
 
 
@@ -1071,7 +1072,6 @@ section * {
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  margin-bottom: 60px;
   background-color: transparent;
 }
 .tech-box {
@@ -1085,7 +1085,7 @@ section * {
   transform: translateY(0);
   opacity: 1;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Adiciona transição para box-shadow e background */
-  
+  margin-bottom: 50px;
   border: 1px solid #E040FB;
 }
 
@@ -1232,6 +1232,7 @@ section * {
   .tech-boxes {
     grid-template-columns: 1fr;
     gap: 20px;
+    
   }
   
   .tech-box {
