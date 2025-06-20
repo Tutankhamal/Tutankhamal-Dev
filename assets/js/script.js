@@ -1848,4 +1848,147 @@ document.addEventListener('DOMContentLoaded', function () {
   current = 0;
   startAutoSlide();
 });
+
+// ===== PRESENTATION CARD - ISOLATED NAMESPACE =====
+// Namespace isolado para evitar conflitos com código existente
+const PresentationCard = {
+  // Verificar se estamos na página sobre.html
+  isOnSobrePage: function() {
+    return window.location.pathname.includes('sobre.html') || 
+           window.location.pathname.endsWith('sobre') ||
+           document.querySelector('.presentation-card-section');
+  },
+
+  // Calcular idade dinamicamente
+  calculateAge: function(birthDate) {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    
+    return age;
+  },
+
+  // Efeito de digitação para especialização
+  typeWriter: function(element, text, speed = 100) {
+    if (!element) return;
+    
+    element.textContent = '';
+    let i = 0;
+    
+    const typing = setInterval(() => {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+      } else {
+        clearInterval(typing);
+        // Adicionar cursor piscante após completar
+        element.classList.add('typing-complete');
+      }
+    }, speed);
+  },
+
+  // Animação de entrada do cartão
+  animateCardEntrance: function() {
+    const card = document.querySelector('.presentation-card-container');
+    if (!card) return;
+
+    // Observador de interseção para animar quando entrar na viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-entrance');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    observer.observe(card);
+  },
+
+  // Inicializar todas as funcionalidades
+  init: function() {
+    // Só executar se estivermos na página sobre
+    if (!this.isOnSobrePage()) {
+      return;
+    }
+
+    // Aguardar o DOM estar completamente carregado
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => this.setupCard());
+    } else {
+      this.setupCard();
+    }
+  },
+
+  // Configurar o cartão de apresentação
+  setupCard: function() {
+    // Calcular e inserir idade
+    const ageElement = document.querySelector('.card-age');
+    if (ageElement) {
+      const age = this.calculateAge('1992-06-30');
+      ageElement.textContent = `${age} anos`;
+    }
+
+    // Efeito de digitação para especialização
+    const specializationElement = document.querySelector('.card-specialization');
+    if (specializationElement) {
+      const specializationText = 'Desenvolvimento Web com foco em Front-End';
+      
+      // Aguardar um pouco antes de iniciar o efeito
+      setTimeout(() => {
+        this.typeWriter(specializationElement, specializationText, 80);
+      }, 1000);
+    }
+
+    // Animação de entrada
+    this.animateCardEntrance();
+
+    // Adicionar eventos de hover para dispositivos que suportam
+    this.setupHoverEffects();
+  },
+
+  // Configurar efeitos de hover
+  setupHoverEffects: function() {
+    const card = document.querySelector('.presentation-card-container');
+    const photo = document.querySelector('.card-photo');
+    
+    if (!card || !photo) return;
+
+    // Verificar se o dispositivo suporta hover
+    const supportsHover = window.matchMedia('(hover: hover)').matches;
+    
+    if (supportsHover) {
+      // Efeito de paralaxe sutil no hover
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+      });
+    }
+  }
+};
+
+// Inicializar o cartão de apresentação
+PresentationCard.init();
+
 // ... existing code ...

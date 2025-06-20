@@ -621,6 +621,297 @@ main {
   }
 }
 
+/* ===== PRESENTATION CARD - TECH-BOX STYLE =====
+/* Seguindo exatamente o padrão visual das tech-box existentes */
+
+/* Seção do cartão de apresentação */
+.presentation-card-section {
+  isolation: isolate;
+  contain: layout style;
+  z-index: 10;
+  position: relative;
+}
+
+/* Container principal do cartão - seguindo padrão tech-box */
+.presentation-card-container {
+  width: 100%;
+  background-color: rgba(204, 0, 255, 0.11);
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  transform: translateY(0);
+  opacity: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  border: 1px solid #E040FB;
+  animation: cardFadeIn 1s ease-out 0.5s forwards;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+/* Animação de entrada */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efeito hover - seguindo padrão tech-box */
+.presentation-card-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px rgba(170, 50, 255, 0.8), 0 0 10px rgba(204, 0, 255, 0.5) inset;
+  background-color: rgba(204, 0, 255, 0.22);
+}
+
+/* Header do cartão */
+.card-header {
+  text-align: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(224, 64, 251, 0.3);
+}
+
+.card-title {
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-shadow: 0 0 10px rgba(224, 64, 251, 0.5);
+  letter-spacing: 1px;
+}
+
+.card-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: #E040FB;
+  font-weight: 500;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Conteúdo do cartão */
+.card-content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1.5rem, 3vw, 2rem);
+  align-items: start;
+}
+
+/* Container da foto */
+.card-photo-container {
+  position: relative;
+  align-self: center;
+}
+
+.card-photo {
+  width: clamp(100px, 18vw, 140px);
+  height: clamp(100px, 18vw, 140px);
+  border-radius: 15px;
+  object-fit: cover;
+  border: 2px solid #E040FB;
+  transition: all 0.3s ease;
+  filter: brightness(1) contrast(1.1);
+  box-shadow: 0 0 10px rgba(224, 64, 251, 0.3);
+}
+
+/* Efeito hover da foto */
+.card-photo:hover {
+  transform: scale(1.1);
+  border-color: #E040FB;
+  filter: brightness(1.2) contrast(1.2);
+  box-shadow: 0 0 20px rgba(224, 64, 251, 0.8);
+}
+
+/* Informações do cartão */
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.8rem, 2vw, 1rem);
+}
+
+.card-info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.card-info-item:hover {
+  padding-left: 0.5rem;
+  background: rgba(224, 64, 251, 0.1);
+  border-radius: 5px;
+}
+
+.card-icon {
+  font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+  color: #E040FB;
+  min-width: 1.5rem;
+  text-align: center;
+  animation: bounceZoom 2s infinite ease-in-out;
+}
+
+@keyframes bounceZoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.card-label {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  min-width: fit-content;
+}
+
+.card-value {
+  color: #ffffff;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 500;
+}
+
+/* Efeito de digitação para especialização */
+.card-specialization {
+  position: relative;
+  color: #E040FB !important;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.card-specialization::after {
+  content: '|';
+  animation: blink 1s infinite;
+  color: #E040FB;
+  font-weight: bold;
+}
+
+.card-specialization.typing-complete::after {
+  display: none;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ===== RESPONSIVIDADE TECH-BOX STYLE ===== */
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .presentation-card-container {
+    max-width: 90%;
+    padding: 20px 15px;
+    margin-bottom: 30px;
+  }
+  
+  .card-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .card-photo-container {
+    justify-self: center;
+  }
+  
+  .card-info {
+    align-items: center;
+  }
+  
+  .card-info-item {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .presentation-card-container {
+    padding: 15px 10px;
+  }
+  
+  .card-header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+  }
+  
+  .card-content {
+    gap: 1rem;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .presentation-card-container {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .card-header {
+    margin-bottom: 15px;
+  }
+  
+  .card-content {
+    gap: 1rem;
+  }
+}
+
+/* Touch devices - remove hover effects */
+@media (hover: none) and (pointer: coarse) {
+  .presentation-card-container:hover {
+    transform: translateY(0);
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    background-color: rgba(204, 0, 255, 0.11);
+  }
+  
+  .card-photo:hover {
+    transform: scale(1);
+    filter: brightness(1) contrast(1.1);
+    box-shadow: 0 0 10px rgba(224, 64, 251, 0.3);
+  }
+  
+  .card-info-item:hover {
+    padding-left: 0;
+    background: transparent;
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .presentation-card-container {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .card-photo,
+  .card-info-item,
+  .card-icon {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .card-specialization::after {
+    animation: none !important;
+  }
+}
+
+/* High density displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .card-photo {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* FIM DO BLOCO TECH-BOX STYLE */
+
 /* ===== SISTEMA DE RESPONSIVIDADE APRIMORADO ===== */
 
 /* Mobile Portrait - Muito pequeno (até 320px) */
