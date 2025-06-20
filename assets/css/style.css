@@ -1361,6 +1361,11 @@ section * {
   pointer-events: auto;
 }
 
+.div {
+
+pointer-events: auto;
+
+}
 
 .top-button {
   position: fixed;
