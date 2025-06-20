@@ -2330,6 +2330,288 @@ pointer-events: auto;
 }
 
 
+/* ===== GITHUB SECTION STYLES ===== */
+.github-section {
+    background: transparent;
+    position: relative;
+}
+
+.github-container {
+    position: relative;
+    z-index: 2;
+}
+
+.github-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.github-card {
+    background: rgba(108, 23, 219, 0.1);
+    border: 2px solid rgba(108, 23, 219, 0.4);
+    border-radius: 15px;
+    padding: 25px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 8px 32px rgba(108, 23, 219, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.github-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(108, 23, 219, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.github-card:hover::before {
+    left: 100%;
+}
+
+.github-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(108, 23, 219, 0.3);
+    border-color: rgba(108, 23, 219, 0.8);
+}
+
+.github-card-wide {
+    grid-column: 1 / -1;
+}
+
+.github-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.github-card-header i {
+    font-size: 24px;
+    color: rgba(108, 23, 219, 0.9);
+    text-shadow: 0 0 10px rgba(108, 23, 219, 0.6);
+}
+
+.github-card-header h3 {
+    color: #FFFFFF;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(108, 23, 219, 0.5);
+}
+
+.github-card-content {
+    position: relative;
+    z-index: 2;
+}
+
+.github-card-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.github-card-content img:hover {
+    transform: scale(1.02);
+}
+
+.loading-spinner {
+    color: rgba(108, 23, 219, 0.8);
+    font-size: 0.9rem;
+    margin-left: auto;
+    animation: pulse 1.5s infinite;
+}
+
+.repos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.repo-item {
+    background: rgba(108, 23, 219, 0.05);
+    border: 1px solid rgba(108, 23, 219, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.repo-item:hover {
+    background: rgba(108, 23, 219, 0.1);
+    border-color: rgba(108, 23, 219, 0.6);
+    transform: translateY(-2px);
+}
+
+.repo-name {
+    color: rgba(108, 23, 219, 0.9);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.repo-name:hover {
+    text-shadow: 0 0 10px rgba(108, 23, 219, 0.6);
+}
+
+.repo-description {
+    color: #CCCCCC;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.repo-stats {
+    display: flex;
+    gap: 15px;
+    font-size: 0.8rem;
+    color: #888888;
+}
+
+.repo-stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.repo-language {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.commits-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Estilização personalizada da barra de rolagem */
+.commits-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.commits-list::-webkit-scrollbar-track {
+    background: rgba(108, 23, 219, 0.1);
+    border-radius: 10px;
+}
+
+.commits-list::-webkit-scrollbar-thumb {
+    background: rgba(108, 23, 219, 0.4);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.commits-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(108, 23, 219, 0.6);
+}
+
+.commit-item {
+    background: rgba(108, 23, 219, 0.05);
+    border-left: 3px solid rgba(108, 23, 219, 0.6);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 0 10px 10px 0;
+    transition: all 0.3s ease;
+}
+
+.commit-item:hover {
+    background: rgba(108, 23, 219, 0.1);
+    transform: translateX(5px);
+}
+
+.commit-message {
+    color: #FFFFFF;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.commit-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #888888;
+}
+
+.commit-repo {
+    color: rgba(108, 23, 219, 0.9);
+    text-decoration: none;
+}
+
+.commit-repo:hover {
+    text-shadow: 0 0 5px rgba(108, 23, 219, 0.6);
+}
+
+.commit-date {
+    font-style: italic;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Responsividade para GitHub Section */
+@media (max-width: 768px) {
+    .github-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .github-card {
+        padding: 20px;
+    }
+    
+    .github-card-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .repos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .repo-stats {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .github-container {
+        padding: 0 15px;
+    }
+    
+    .github-card {
+        padding: 15px;
+    }
+    
+    .github-card-header {
+        gap: 10px;
+    }
+    
+    .github-card-header i {
+        font-size: 20px;
+    }
+    
+    .github-card-header h3 {
+        font-size: 1rem;
+    }
+}
+
 /* Screen Reader Only Text */
 .sr-only {
     position: absolute;

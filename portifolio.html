@@ -39,6 +39,8 @@
     <link rel="icon" href="/assets/images/mummy.gif" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@latest/src/lite-yt-embed.css" />
     <script src="https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@latest/src/lite-yt-embed.js" defer></script>
+    <script src="/assets/js/script.js" defer></script>
+    <script src="/assets/js/github.js" defer></script>
 
 </head>
 <body>
@@ -68,7 +70,91 @@
     </header>
     
 <main>
-   
+    <!-- Seção GitHub Profile -->
+    <section class="github-section" style="padding-top: 100px; padding-bottom: 50px; display: flex; flex-direction: column; justify-content: center; min-height: calc(100vh - var(--header-height));">
+        <h2 class="neon-section-title" style="text-align: center; margin-bottom: 50px;">GitHub Profile</h2>
+        
+        <div class="github-container" style="max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 20px;">
+            <!-- GitHub Stats Grid -->
+            <div class="github-stats-grid">
+                <!-- GitHub Stats Card -->
+                <div class="github-card">
+                    <div class="github-card-header">
+                        <i class="fab fa-github"></i>
+                        <h3>GitHub Stats</h3>
+                    </div>
+                    <div class="github-card-content">
+                        <img id="github-stats" src="https://github-readme-stats.vercel.app/api?username=Tutankhamal&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bfff&icon_color=00bfff&text_color=ffffff" alt="GitHub Stats" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Top Languages Card -->
+                <div class="github-card">
+                    <div class="github-card-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Top Languages</h3>
+                    </div>
+                    <div class="github-card-content">
+                        <img id="github-languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Tutankhamal&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bfff&text_color=ffffff" alt="Top Languages" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- GitHub Streak Card -->
+                <div class="github-card">
+                    <div class="github-card-header">
+                        <i class="fas fa-fire"></i>
+                        <h3>Contribution Streak</h3>
+                    </div>
+                    <div class="github-card-content">
+                        <img id="github-streak" src="https://github-readme-streak-stats.herokuapp.com/?user=Tutankhamal&theme=tokyonight&hide_border=true&background=0d1117&stroke=00bfff&ring=00bfff&fire=00bfff&currStreakLabel=00bfff" alt="GitHub Streak" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Activity Graph Card -->
+                <div class="github-card github-card-wide">
+                    <div class="github-card-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Contribution Activity</h3>
+                    </div>
+                    <div class="github-card-content">
+                        <img id="github-activity" src="https://github-readme-activity-graph.vercel.app/graph?username=Tutankhamal&theme=tokyo-night&hide_border=true&bg_color=0d1117&color=00bfff&line=00bfff&point=ffffff" alt="GitHub Activity Graph" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Pinned Repositories Card -->
+                <div class="github-card github-card-wide">
+                    <div class="github-card-header">
+                        <i class="fas fa-star"></i>
+                        <h3>Repositórios em Destaque</h3>
+                        <div class="loading-spinner" id="repos-loading">Carregando...</div>
+                    </div>
+                    <div class="github-card-content">
+                        <div id="pinned-repos" class="repos-grid">
+                            <!-- Repositórios serão carregados dinamicamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Commits Card -->
+                <div class="github-card github-card-wide">
+                    <div class="github-card-header">
+                        <i class="fas fa-code-branch"></i>
+                        <h3>Commits Recentes</h3>
+                        <div class="loading-spinner" id="commits-loading">Carregando...</div>
+                    </div>
+                    <div class="github-card-content">
+                        <div id="recent-commits" class="commits-list">
+                            <!-- Commits serão carregados dinamicamente -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a class="scroll-down-button">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
 </main>
 <button id="backToTop" class="top-button">▲</button>
     <footer>
