@@ -219,23 +219,308 @@ async function loadRecentCommits() {
     }
 }
 
+// URLs de fallback para contribution activity (ordenadas por confiabilidade)
+const CONTRIBUTION_ACTIVITY_URLS = [
+    // URLs principais
+    `https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&theme=react-dark&hide_border=true&bg_color=0a0a0a&color=6c17db&line=6c17db&point=ffffff&area=true&hide_title=true`,
+    `https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&theme=github-compact&hide_border=true&bg_color=0a0a0a&color=6c17db&line=6c17db&point=ffffff&area=true&hide_title=true`,
+    
+    // URLs alternativas
+    `https://github-readme-activity-graph.cyclic.app/graph?username=${GITHUB_USERNAME}&theme=react-dark&hide_border=true&bg_color=0a0a0a&color=6c17db&line=6c17db&point=ffffff&area=true&hide_title=true`,
+    `https://activity-graph.herokuapp.com/graph?username=${GITHUB_USERNAME}&theme=react-dark&hide_border=true&bg_color=0a0a0a&color=6c17db&line=6c17db&point=ffffff&area=true&hide_title=true`,
+    
+    // Fallback estático
+    `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_USERNAME}/main/assets/activity-graph.svg`,
+    
+    // URLs com parâmetros simplificados
+    `https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&theme=react-dark`,
+    `https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&theme=github-dark`
+];
+
+// Cache para URLs que funcionaram
+const WORKING_URLS_CACHE = 'github_activity_working_urls';
+const URL_CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 horas
+
+// Timeout para carregamento de imagens
+const IMAGE_LOAD_TIMEOUT = 10000; // 10 segundos
+
+// Função para verificar conectividade
+async function checkConnectivity() {
+    try {
+        const response = await fetch('https://api.github.com', { 
+            method: 'HEAD',
+            mode: 'no-cors',
+            cache: 'no-cache'
+        });
+        return true;
+    } catch {
+        return navigator.onLine;
+    }
+}
+
+// Funções de cache para URLs
+function getCachedWorkingUrls() {
+    try {
+        const cached = localStorage.getItem(WORKING_URLS_CACHE);
+        if (cached) {
+            const data = JSON.parse(cached);
+            if (Date.now() - data.timestamp < URL_CACHE_DURATION) {
+                return data.urls;
+            }
+        }
+    } catch (e) {
+        console.warn('Erro ao ler cache de URLs:', e);
+    }
+    return [];
+}
+
+function cacheWorkingUrl(url) {
+    try {
+        const cachedUrls = getCachedWorkingUrls();
+        if (!cachedUrls.includes(url)) {
+            cachedUrls.unshift(url); // Adicionar no início
+        }
+        localStorage.setItem(WORKING_URLS_CACHE, JSON.stringify({
+            urls: cachedUrls.slice(0, 3), // Manter apenas as 3 melhores
+            timestamp: Date.now()
+        }));
+    } catch (e) {
+        console.warn('Erro ao salvar cache de URLs:', e);
+    }
+}
+
+// Função para limpar contribution activity
+function cleanupContributionActivity() {
+    const activityImg = document.getElementById('github-activity');
+    if (!activityImg) return;
+    
+    const container = activityImg.parentElement;
+    const skeletons = container.querySelectorAll('.activity-skeleton');
+    skeletons.forEach(skeleton => skeleton.remove());
+    
+    console.log('🧹 Limpeza do contribution activity concluída');
+}
+
+// Função para tentar carregar contribution activity com fallbacks
+function setupContributionActivity() {
+    const activityImg = document.getElementById('github-activity');
+    if (!activityImg) return;
+    
+    // Limpar qualquer skeleton existente primeiro
+    cleanupContributionActivity();
+    
+    // Remover qualquer animação de loading residual
+    const existingLoadingStyle = document.querySelector('#loading-animation');
+    if (existingLoadingStyle) {
+        console.log('🧹 Removendo estilo de animação residual');
+        existingLoadingStyle.remove();
+    }
+    
+    // Combinar URLs em cache com URLs padrão
+     const cachedUrls = getCachedWorkingUrls();
+     const allUrls = [...cachedUrls, ...CONTRIBUTION_ACTIVITY_URLS.filter(url => !cachedUrls.includes(url))];
+     
+     console.log(`🚀 Inicializando Contribution Activity com ${allUrls.length} URLs`);
+     console.log(`💾 URLs em cache: ${cachedUrls.length}`);
+     if (cachedUrls.length > 0) {
+         console.log('📋 URLs prioritárias (cache):', cachedUrls);
+     }
+    
+    let currentUrlIndex = 0;
+    let retryCount = 0;
+    const MAX_RETRIES = 2;
+    let currentUrls = allUrls;
+    
+    // Criar skeleton loading específico para contribution activity
+    const container = activityImg.parentElement;
+    const skeleton = document.createElement('div');
+    skeleton.className = 'activity-skeleton';
+    skeleton.style.cssText = `
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+        border-radius: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: rgba(108, 23, 219, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        z-index: 1;
+    `;
+    skeleton.innerHTML = 'Carregando Contribution Activity...';
+    
+    container.style.position = 'relative';
+    container.appendChild(skeleton);
+    activityImg.style.opacity = '0';
+    
+    // Timeout de segurança para remover skeleton após 30 segundos
+    const safetyTimeout = setTimeout(() => {
+        console.warn('⚠️ Timeout de segurança: removendo skeleton após 30 segundos');
+        removeSkeleton();
+    }, 30000);
+    
+    function removeSkeleton() {
+        // Remover skeleton específico
+        if (skeleton && skeleton.parentElement) {
+            skeleton.style.animation = 'none'; // Parar animação imediatamente
+            skeleton.remove();
+        }
+        
+        // Remover qualquer skeleton órfão no container
+        const orphanSkeletons = container.querySelectorAll('.activity-skeleton');
+        orphanSkeletons.forEach(orphan => {
+            orphan.style.animation = 'none';
+            orphan.remove();
+        });
+        
+        // Limpar timeout de segurança
+        if (safetyTimeout) {
+            clearTimeout(safetyTimeout);
+        }
+        
+        console.log('🧹 Skeleton removido e animação parada');
+    }
+    
+    let loadTimeout;
+    
+    function clearLoadTimeout() {
+        if (loadTimeout) {
+            clearTimeout(loadTimeout);
+            loadTimeout = null;
+        }
+    }
+    
+    async function tryNextUrl() {
+         clearLoadTimeout();
+         
+         // Verificar conectividade primeiro
+         const isConnected = await checkConnectivity();
+         if (!isConnected) {
+             console.warn('🌐 Sem conectividade - usando fallback offline');
+             showOfflineFallback();
+             return;
+         }
+         
+         if (currentUrlIndex < currentUrls.length) {
+             const currentUrl = currentUrls[currentUrlIndex];
+             console.log(`🔄 Tentando URL ${currentUrlIndex + 1}/${currentUrls.length} para contribution activity... (Retry: ${retryCount + 1}/${MAX_RETRIES + 1})`);
+             console.log(`📍 URL atual: ${currentUrl}`);
+             
+             // Atualizar mensagem do skeleton
+             if (currentUrlIndex === currentUrls.length - 1) {
+                 skeleton.innerHTML = 'Carregando fallback...';
+             } else {
+                 skeleton.innerHTML = `Carregando Contribution Activity... (${currentUrlIndex + 1}/${currentUrls.length})`;
+             }
+             
+             // Configurar timeout
+             loadTimeout = setTimeout(() => {
+                 console.warn(`⏰ Timeout na URL ${currentUrlIndex}/${currentUrls.length}`);
+                 handleLoadFailure();
+             }, IMAGE_LOAD_TIMEOUT);
+             
+             activityImg.src = currentUrl;
+             currentUrlIndex++;
+         } else if (retryCount < MAX_RETRIES) {
+             console.log(`🔄 Reiniciando tentativas (${retryCount + 1}/${MAX_RETRIES})...`);
+             retryCount++;
+             currentUrlIndex = 0;
+             setTimeout(() => tryNextUrl(), 2000); // Aguardar 2 segundos antes de retry
+         } else {
+             console.warn('❌ Todas as URLs de contribution activity falharam após múltiplas tentativas');
+             showFailureFallback();
+         }
+     }
+     
+     function handleLoadFailure() {
+         clearLoadTimeout();
+         console.warn(`❌ Erro ao carregar URL ${currentUrlIndex - 1}`);
+         tryNextUrl();
+     }
+     
+     function showOfflineFallback() {
+         if (skeleton && skeleton.parentElement) {
+             skeleton.innerHTML = '🌐 Modo Offline<br><small>Contribution Activity indisponível</small>';
+             skeleton.style.background = 'rgba(0, 0, 0, 0.8)';
+             skeleton.style.border = '1px solid rgba(108, 23, 219, 0.3)';
+             skeleton.style.animation = 'none';
+             
+             // Remover após 5 segundos
+             setTimeout(() => removeSkeleton(), 5000);
+         }
+     }
+     
+     function showFailureFallback() {
+         if (skeleton && skeleton.parentElement) {
+             skeleton.innerHTML = '⚠️ Contribution Activity temporariamente indisponível<br><small>Clique para recarregar</small>';
+             skeleton.style.background = 'rgba(0, 0, 0, 0.8)';
+             skeleton.style.border = '1px solid rgba(108, 23, 219, 0.3)';
+             skeleton.style.cursor = 'pointer';
+             skeleton.style.animation = 'none';
+             skeleton.onclick = () => location.reload();
+             
+             // Remover após 10 segundos se não clicado
+             setTimeout(() => removeSkeleton(), 10000);
+         }
+     }
+    
+    activityImg.onload = () => {
+        clearLoadTimeout();
+        const successUrl = currentUrls[currentUrlIndex - 1];
+        console.log('✅ Contribution activity carregado com sucesso!');
+        console.log(`💾 Salvando URL no cache: ${successUrl}`);
+        
+        // Salvar URL que funcionou no cache
+        cacheWorkingUrl(successUrl);
+        
+        // Remover skeleton e mostrar imagem com animação
+        removeSkeleton();
+        
+        // Garantir que a imagem seja exibida corretamente
+        activityImg.style.display = 'block';
+        activityImg.style.opacity = '1';
+        activityImg.style.transition = 'opacity 0.3s ease';
+        activityImg.style.position = 'relative';
+        activityImg.style.zIndex = '2';
+        
+        console.log('🖼️ Imagem de contribution activity exibida com sucesso');
+    };
+    
+    activityImg.onerror = () => {
+        handleLoadFailure();
+    };
+    
+    // Tentar a primeira URL
+    tryNextUrl();
+}
+
 // Função para adicionar efeitos de loading nas imagens
 function setupImageLoading() {
     const images = document.querySelectorAll('.github-card-content img');
     
     images.forEach(img => {
-        // Adicionar skeleton loading
+        // Adicionar skeleton loading com fundo preto
         const skeleton = document.createElement('div');
         skeleton.style.cssText = `
             width: 100%;
             height: 200px;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
             border-radius: 10px;
             position: absolute;
             top: 0;
             left: 0;
+            color: rgba(108, 23, 219, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
         `;
         
         // Adicionar animação de loading
@@ -260,7 +545,7 @@ function setupImageLoading() {
         };
         
         img.onerror = () => {
-            skeleton.innerHTML = '<p style="color: #888; text-align: center; line-height: 200px;">Erro ao carregar imagem</p>';
+            skeleton.innerHTML = '<p style="color: rgba(108, 23, 219, 0.8); text-align: center; line-height: 200px;">Erro ao carregar imagem</p>';
         };
         
         img.style.opacity = '0';
@@ -431,7 +716,11 @@ function initGitHubSection() {
     
     console.log('🚀 Inicializando seção GitHub com otimizações...');
     
+    // Limpar qualquer estado anterior
+    cleanupContributionActivity();
+    
     setupImageLoading();
+    setupContributionActivity();
     
     if (!navigator.onLine) {
         console.log('📱 Offline mode - using cached data only');

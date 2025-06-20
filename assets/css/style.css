@@ -2429,6 +2429,12 @@ pointer-events: auto;
     font-size: 0.9rem;
     margin-left: auto;
     animation: pulse 1.5s infinite;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(108, 23, 219, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .repos-grid {
