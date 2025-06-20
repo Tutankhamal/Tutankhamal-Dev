@@ -94,7 +94,6 @@ canvas {
 .mobile-optimized {
   /* Prevenir bounce scrolling no iOS */
   -webkit-overflow-scrolling: touch;
-  overflow-scrolling: touch;
 }
 
 .mobile-optimized canvas {
