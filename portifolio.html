@@ -2,8 +2,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-
+    
+    <!-- Meta tags para HARD cache busting -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="If-Modified-Since" content="0">
+    
     <meta http-equiv="Content-Language" content="pt-br">
     <meta name="description" content="Explore o portfólio de Tutankhamal Dev - Projetos de desenvolvimento web, sites responsivos e aplicações front-end. Veja exemplos reais do meu trabalho e qualidade técnica.">
     <meta name="author" content="Tutankhamal DEV">
@@ -196,20 +202,46 @@
 
 
 
-    <script src="/assets/js/script.js"></script>
+    <script>
+// Hard cache busting - equivalente ao Ctrl+F5
+(function() {
+    // Força recarregamento se página foi carregada do cache
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            window.location.reload(true); // true = hard reload
+        }
+    });
     
-        
-
+    // Adiciona timestamp a todos os recursos para evitar cache
+    const timestamp = new Date().getTime();
     
-
-
-
-
-
-
-
-
-
-
+    // Recarrega CSS com timestamp
+    const cssLinks = document.querySelectorAll('link[rel="stylesheet"]');
+    cssLinks.forEach(link => {
+        const href = link.href.split('?')[0];
+        link.href = href + '?v=' + timestamp;
+    });
+    
+    // Recarrega JS com timestamp
+    const scripts = document.querySelectorAll('script[src]');
+    scripts.forEach(script => {
+        if (script.src && !script.src.includes('googleapis') && !script.src.includes('cdnjs')) {
+            const src = script.src.split('?')[0];
+            script.src = src + '?v=' + timestamp;
+        }
+    });
+    
+    // Força revalidação de imagens
+    window.addEventListener('load', function() {
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            if (img.src && !img.src.includes('http')) {
+                const src = img.src.split('?')[0];
+                img.src = src + '?v=' + timestamp;
+            }
+        });
+    });
+})();
+</script>
 
 </body>
