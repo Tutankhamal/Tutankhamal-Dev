@@ -1,6 +1,6 @@
 # Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 
-## Copyright (c) 2024 André Borba (Tutankhamal Dev)
+## Copyright (c) 2025 André Borba (Tutankhamal Dev)
 
 Este trabalho está licenciado sob a Licença Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional.
 
