@@ -95,8 +95,12 @@ Este software é fornecido "como está", sem garantias de qualquer tipo, express
 ## 🔧 Ferramentas de Desenvolvimento
 
 ### Editores e IDEs
-- **Visual Studio Code** - [https://code.visualstudio.com/](https://code.visualstudio.com/)
+- **TRAE AI IDE** - [https://www.trae.ai/](https://www.trae.ai/)
   - Editor principal utilizado no desenvolvimento
+  - Licença: MIT License
+
+- **Visual Studio Code IDE** - [https://code.visualstudio.com/](https://code.visualstudio.com/)
+  - Editor Secundário utilizado no desenvolvimento
   - Licença: MIT License
 
 ### Extensões VS Code Utilizadas
@@ -106,9 +110,7 @@ Este software é fornecido "como está", sem garantias de qualquer tipo, express
 - **Bracket Pair Colorizer** - Visualização de brackets
 
 ### Ferramentas de Design
-- **GIMP** - Edição de imagens e sprites
-- **Inkscape** - Criação de elementos vetoriais
-- **Figma** - Prototipagem e design de interface
+- **PHOTOSHOP** - Edição de imagens e sprites
 
 ## 🌐 Recursos Online
 
@@ -135,8 +137,8 @@ Este software é fornecido "como está", sem garantias de qualquer tipo, express
 ### Jogos e Franquias (Inspiração Visual e Conceitual)
 - **Metal Slug Series** - Inspiração para sprites animados e estética pixel art
 - **Akio Oyabu (Múmia do Metal Slug)** - Referência visual para elementos temáticos
-- **Warcraft Franchise** - Inspiração para design de interface e elementos fantásticos
-- **World of Warcraft** - Referência para sistemas de interface imersivos
+- **Warcraft Franchise** - Paixão desde criança
+- **World of Warcraft** - Continuação da paixão de infância
 
 *Nota: Este projeto foi desenvolvido com JavaScript vanilla, mas as bibliotecas acima serviram como inspiração conceitual.*
 
@@ -212,7 +214,7 @@ API usage subject to rate limiting and terms of service.
 
 Esta licença pode ser atualizada periodicamente para incluir novos recursos, bibliotecas ou agradecimentos. A versão mais recente estará sempre disponível no repositório oficial.
 
-**Última atualização:** Dezembro 2024
+**Última atualização:** Junho 2025
 
 ---
 
