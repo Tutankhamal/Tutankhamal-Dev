@@ -519,9 +519,9 @@ main {
   }
   50% {
     text-shadow:
-      0 0 6px rgb(98, 0, 255),
-      0 0 12px rgb(55, 0, 255);
-    filter: drop-shadow(0 0 12px rgba(111, 0, 255, 0.6));
+      0 0 4.5px rgb(143, 0, 255),
+      0 0 8.5px rgb(25, 0, 255);
+    filter: drop-shadow(0 0 6.5px rgba(140, 0, 255, 0.42));
   }
 }
 
@@ -604,9 +604,9 @@ main {
 
 /* Reduzir animações para usuários que preferem menos movimento */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *:not(#hero-title),
+  *:not(#hero-title)::before,
+  *:not(#hero-title)::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -617,7 +617,7 @@ main {
   }
   
   #hero-title {
-    animation: fadeInHero 0.5s ease forwards;
+    animation: fadeInHero 0.5s ease forwards, pulse 4s ease-in-out infinite;
   }
 }
 
@@ -2566,10 +2566,7 @@ pointer-events: auto;
     font-style: italic;
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
+
 
 /* Responsividade para GitHub Section */
 @media (max-width: 768px) {
