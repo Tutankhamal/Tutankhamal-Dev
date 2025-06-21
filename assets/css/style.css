@@ -2885,6 +2885,48 @@ pointer-events: auto;
 }
 
 /* Responsive Design for Sites Section */
+@media (max-width: 1280px) {
+  .sites-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    padding: 15px 0;
+    margin-bottom: 80px;
+  }
+  
+  .site-card {
+    height: 380px;
+  }
+  
+  .site-card-image {
+    height: 55%;
+  }
+  
+  .site-card-content {
+    padding: 20px;
+    height: 45%;
+  }
+  
+  .site-card-content h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+  
+  .site-card-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+  
+  .tech-tag {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+  
+  .modal-iframe-container iframe {
+    height: 350px;
+  }
+}
+
 @media (max-width: 768px) {
   .sites-grid {
     grid-template-columns: 1fr;
