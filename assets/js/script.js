@@ -109,6 +109,17 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
+  // Scroll to contact section functionality
+  window.scrollToContact = function() {
+    const contactSection = document.querySelector('.contact-section');
+    if (contactSection) {
+      contactSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   const scrollDownButtons = document.querySelectorAll(".scroll-down-button");
 
   scrollDownButtons.forEach(button => {
