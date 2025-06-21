@@ -1940,7 +1940,7 @@ const PresentationCard = {
     // Efeito de digitação para especialização
     const specializationElement = document.querySelector('.card-specialization');
     if (specializationElement) {
-      const specializationText = 'Desenvolvimento Web com foco em Front-End';
+      const specializationText = 'Desenvolvimento Web Front-End';
       
       // Aguardar um pouco antes de iniciar o efeito
       setTimeout(() => {
@@ -1975,14 +1975,18 @@ const PresentationCard = {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
         
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
+        const rotateX = (y - centerY) / 30;
+        const rotateY = (centerX - x) / 30;
         
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(5px)`;
       });
 
       card.addEventListener('mouseleave', () => {
         card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        card.style.transition = 'transform 0.5s ease-out';
+        setTimeout(() => {
+          card.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        }, 500);
       });
     }
   }

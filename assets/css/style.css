@@ -635,17 +635,22 @@ main {
 /* Container principal do cartão - seguindo padrão tech-box */
 .presentation-card-container {
   width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
   background-color: rgba(204, 0, 255, 0.11);
-  padding: 30px 20px;
-  border-radius: 10px;
+  padding: 40px 30px;
+  border-radius: 15px;
   box-shadow: 0 0 15px rgba(0,0,0,0.6);
   transform: translateY(0);
   opacity: 0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.1s ease-out, box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.4s ease;
   border: 1px solid #E040FB;
   animation: cardFadeIn 1s ease-out 0.5s forwards;
   text-align: center;
   margin-bottom: 100px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  cursor: pointer;
 }
 
 /* Animação de entrada */
@@ -662,9 +667,12 @@ main {
 
 /* Efeito hover - seguindo padrão tech-box */
 .presentation-card-container:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 0 25px rgba(170, 50, 255, 0.8), 0 0 10px rgba(204, 0, 255, 0.5) inset;
-  background-color: rgba(204, 0, 255, 0.22);
+  transform: translateY(-5px);
+  box-shadow: 
+    0 15px 35px rgba(170, 50, 255, 0.4),
+    0 0 20px rgba(224, 64, 251, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background-color: rgba(204, 0, 255, 0.18);
 }
 
 /* Header do cartão */
@@ -695,27 +703,30 @@ main {
 
 /* Conteúdo do cartão */
 .card-content {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: clamp(1.5rem, 3vw, 2rem);
-  align-items: start;
+  text-align: center;
 }
 
 /* Container da foto */
 .card-photo-container {
   position: relative;
-  align-self: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .card-photo {
-  width: clamp(100px, 18vw, 140px);
-  height: clamp(100px, 18vw, 140px);
-  border-radius: 15px;
+  width: clamp(120px, 20vw, 160px);
+  height: clamp(120px, 20vw, 160px);
+  border-radius: 20px;
   object-fit: cover;
-  border: 2px solid #E040FB;
-  transition: all 0.3s ease;
+  border: 3px solid #E040FB;
+  transition: all 0.4s ease;
   filter: brightness(1) contrast(1.1);
-  box-shadow: 0 0 10px rgba(224, 64, 251, 0.3);
+  box-shadow: 0 0 15px rgba(224, 64, 251, 0.4);
 }
 
 /* Efeito hover da foto */
@@ -731,6 +742,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: clamp(0.8rem, 2vw, 1rem);
+  width: 100%;
+  max-width: 400px;
 }
 
 .card-info-item {
@@ -806,19 +819,13 @@ main {
 /* Mobile devices */
 @media (max-width: 768px) {
   .presentation-card-container {
-    max-width: 90%;
-    padding: 20px 15px;
+    max-width: 95%;
+    padding: 25px 20px;
     margin-bottom: 30px;
   }
   
   .card-content {
-    grid-template-columns: 1fr;
     gap: 1.5rem;
-    text-align: center;
-  }
-  
-  .card-photo-container {
-    justify-self: center;
   }
   
   .card-info {
@@ -2882,6 +2889,36 @@ pointer-events: auto;
   border: none;
   border-radius: 10px;
   border: 1px solid #E040FB;
+}
+
+/* Full HD and larger screens - Enhanced iframe size */
+@media (min-width: 1920px) {
+  .modal-iframe-container iframe {
+    width: 1280px;
+    height: 768px;
+    max-width: 90vw;
+    max-height: 70vh;
+  }
+  
+  .modal-content {
+    max-width: 1400px;
+    width: 90%;
+  }
+}
+
+/* Large desktop screens */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .modal-iframe-container iframe {
+    width: 1200px;
+    height: 720px;
+    max-width: 85vw;
+    max-height: 65vh;
+  }
+  
+  .modal-content {
+    max-width: 1300px;
+    width: 85%;
+  }
 }
 
 /* Responsive Design for Sites Section */
