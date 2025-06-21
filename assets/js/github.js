@@ -716,23 +716,30 @@ function initGitHubSection() {
     
     console.log('🚀 Inicializando seção GitHub com otimizações...');
     
-    // Limpar qualquer estado anterior
-    cleanupContributionActivity();
-    
-    setupImageLoading();
-    setupContributionActivity();
-    
-    if (!navigator.onLine) {
-        console.log('📱 Offline mode - using cached data only');
-        loadCachedDataOnly();
-        return;
-    }
-    
-    loadDataWithPriority();
+    // Aguardar um pouco para não conflitar com o lazy loading
+    setTimeout(() => {
+        // Limpar qualquer estado anterior
+        cleanupContributionActivity();
+        
+        // Não configurar image loading se já temos placeholders
+        if (!document.querySelector('.image-placeholder')) {
+            setupImageLoading();
+        }
+        
+        setupContributionActivity();
+        
+        if (!navigator.onLine) {
+            console.log('📱 Offline mode - using cached data only');
+            loadCachedDataOnly();
+            return;
+        }
+        
+        loadDataWithPriority();
+    }, 500);
     
     window.addEventListener('online', () => {
         console.log('🌐 Back online - refreshing data');
-        loadDataWithPriority();
+        setTimeout(() => loadDataWithPriority(), 1000);
     });
     
     window.addEventListener('offline', () => {
