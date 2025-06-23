@@ -1818,6 +1818,11 @@ pointer-events: auto;
   border-radius: 50%;
   width: clamp(50px, 8vw, 60px);
   height: clamp(50px, 8vw, 60px);
+  /* Reset button default styles */
+  outline: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
