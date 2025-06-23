@@ -178,47 +178,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // Outras funções e inicializações que dependem do DOM podem vir aqui
 
   // Modal Interaction Logic (já fornecido anteriormente)
-  const modalTriggers = document.querySelectorAll('[data-modal-target]');
-  const modals = document.querySelectorAll('.modal');
-  const closeButtons = document.querySelectorAll('.close-button');
-
-  modalTriggers.forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      const modalId = trigger.getAttribute('data-modal-target');
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.style.display = 'block';
-      }
-    });
-  });
-
-  closeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const modal = button.closest('.modal');
-      if (modal) {
-        modal.style.display = 'none';
-      }
-    });
-  });
-
-  window.addEventListener('click', (event) => {
-    modals.forEach(modal => {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-  });
-
-  // Optional: Close modal with Escape key
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      modals.forEach(modal => {
-        if (modal.style.display === 'block') {
-          modal.style.display = 'none';
-        }
-      });
-    }
-  });
+  // Modal functionality moved to modal-system.js
+  // Legacy modal code removed for better performance and maintainability
 
 });
 
