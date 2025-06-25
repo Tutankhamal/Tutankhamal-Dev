@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function() {
     scrollDownButtons.forEach(button => {
       button.classList.add("visible");
     });
-  }, 4000); // 4 segundos
+  }, 1500); // 1.5 segundos
 
   // Functions
   function handleScroll() {
