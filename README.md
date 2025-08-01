@@ -586,7 +586,7 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 ## Contato
 
 **André Borba (Tutankhamal)**
-- 📧 Email: [tutankhamal@outlook.com]
+- 📧 Email: [contato@tutankhamal.com]
 - 🌐 Website: [https://tutankhamal.com]
 - 💼 LinkedIn: [https://www.linkedin.com/in/tutankhamal/]
 - 🐱 GitHub: [https://github.com/Tutankhamal]
