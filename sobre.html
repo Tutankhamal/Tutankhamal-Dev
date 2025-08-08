@@ -1,284 +1,182 @@
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-
-    <meta http-equiv="Content-Language" content="pt-br">
-    <meta name="description" content="Conheça Tutankhamal Dev - Desenvolvedor Web especializado em criar experiências digitais únicas. Saiba mais sobre minha trajetória, habilidades e paixão por tecnologia e design.">
-    <meta name="author" content="Tutankhamal DEV">
-    <meta name="keywords" content="sobre tutankhamal, desenvolvedor web, designer front-end, experiência profissional, habilidades técnicas, trajetória profissional, especialista web">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Tutankhamal Dev | Minha História e Experiência</title>
+    <meta name="description" content="Conheça a história e experiência de Tutankhamal Dev. Desenvolvedor Web Full Stack com mais de 3 anos de experiência em tecnologias modernas.">
+    <meta name="keywords" content="sobre tutankhamal, desenvolvedor web, experiência, história, full stack developer">
     <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://tutankhamal.com">
+    <link rel="canonical" href="https://tutankhamal.com/sobre.html">
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="Tutankhamal Dev">
-    <meta property="og:description" content="Tutankhamal Dev | Web Designer and Front-End Developer">
-    <meta property="og:image" content="https://i.imgur.com/g6ikmvA.gif">
-    <meta property="og:image:width" content="600">
-    <meta property="og:image:height" content="270">
-    <meta property="og:url" content="https://tutankhamal.com"> 
-    <meta property="og:site_name" content="Tutankhamal"> 
-    <meta property="og:type" content="website">
-    <meta property="og:color" content="#00BFFF">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Tutankhamal Dev">
-    <meta name="twitter:description" content="Tutankhamal Dev - Web Designer and Front-End Developer">
-    <meta name="twitter:image" content="https://i.imgur.com/g6ikmvA.gif">
-
-    <title>Sobre Tutankhamal Dev - Desenvolvedor Web Especialista | Conheça Minha Trajetória</title>
-
-    <!-- Fonts and Styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="icon" href="/assets/images/mummy.ico" type="image/x-icon">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-12DDY9N6FS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-12DDY9N6FS');
-</script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-    <canvas id="universe"></canvas>
-
-    
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="/assets/images/mummy.gif" alt="Mummy Gif" class="logo">
-            <h1 class="site-title"><a href="index.html">TUTANKHAMAL</a></h1>
-        </div>
-        
-        <nav class="nav-links">
-            <ul>
-                <li><a href="index.html">INÍCIO</a></li>
-                <li><a href="sobre.html" class="active">SOBRE</a></li>
-                <li><a href="portifolio.html">PORTIFÓLIO</a></li>
-                <li><a href="contato.html">CONTATO</a></li>
-            </ul>
-        </nav>
-        
-        <div class="hamburger">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </header>
-    
-<main>
-
-    <!-- Cartão de Apresentação do André Borba (Tutankhamal) -->
-    <section class="presentation-card-section" style="padding-top: 100px; padding-bottom: 50px; display: flex; flex-direction: column; justify-content: center; min-height: calc(100vh - var(--header-height));">
-        <h2 class="neon-section-title" style="text-align: center; margin-bottom: 50px;">Apresentação</h2>
-        <div style="display: flex; justify-content: center; padding: 0 20px;">
-            <div class="presentation-card-container" style="max-width: 800px; width: 100%; margin-bottom: 100px; pointer-events: none;">
-            <div class="card-header">
-                <h2 class="card-title">André Borba</h2>
-                <p class="card-subtitle">Tutankhamal</p>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <span class="logo-text">TUTANKHAMAL</span>
+                    <span class="logo-accent">DEV</span>
+                </a>
             </div>
-            
-            <div class="card-content">
-                <div class="card-photo-container">
-                    <img src="assets/images/team/tutas.webp" alt="André Borba - Tutankhamal" class="card-photo">
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">INÍCIO</a>
+                <a href="sobre.html" class="nav-link active">SOBRE</a>
+                <a href="portfolio.html" class="nav-link">PORTFÓLIO</a>
+                <a href="contato.html" class="nav-link">CONTATO</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Hero -->
+    <section class="page-hero">
+        <div class="cyber-grid"></div>
+        <div class="container">
+            <div class="page-hero-content">
+                <h1 class="page-title">SOBRE MIM</h1>
+                <p class="page-subtitle">Conheça minha jornada no desenvolvimento</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <div class="text-block">
+                        <h2>Minha História</h2>
+                        <p>Sou um desenvolvedor web apaixonado por tecnologia e inovação. Com mais de 3 anos de experiência, especializo-me em criar soluções digitais que combinam funcionalidade excepcional com design moderno.</p>
+                        <p>Minha jornada começou com curiosidade sobre como os sites funcionam, e desde então, tenho me dedicado a dominar as mais diversas tecnologias do desenvolvimento web.</p>
+                    </div>
+                    
+                    <div class="text-block">
+                        <h2>Filosofia de Trabalho</h2>
+                        <p>Acredito que cada projeto é uma oportunidade de criar algo extraordinário. Meu foco está em:</p>
+                        <ul class="cyber-list">
+                            <li>Código limpo e eficiente</li>
+                            <li>Experiência do usuário excepcional</li>
+                            <li>Performance otimizada</li>
+                            <li>Design responsivo e acessível</li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div class="card-info">
-                    <div class="card-info-item">
-                        <i class="fas fa-birthday-cake card-icon"></i>
-                        <span class="card-label">Idade:</span>
-                        <span class="card-value card-age">Calculando...</span>
-                    </div>
-                    
-                    <div class="card-info-item">
-                        <i class="fas fa-map-marker-alt card-icon"></i>
-                        <span class="card-label">Origem:</span>
-                        <span class="card-value">São Paulo - SP</span>
-                    </div>
-                    
-                    <div class="card-info-item">
-                        <i class="fas fa-home card-icon"></i>
-                        <span class="card-label">Cidade Atual:</span>
-                        <span class="card-value">Taguatinga - DF</span>
-                    </div>
-                    
-                    <div class="card-info-item card-specialization-container">
-                        <i class="fas fa-code card-icon"></i>
-                        <span class="card-label">Especialização:</span>
-                        <span class="card-value card-specialization"></span>
+                <div class="about-visual">
+                    <div class="profile-card">
+                        <div class="profile-frame">
+                            <div class="profile-image">
+                                <div class="code-overlay">
+                                    <span>const developer = {</span>
+                                    <span>  name: 'Tutankhamal',</span>
+                                    <span>  passion: 'coding',</span>
+                                    <span>  mission: 'innovation'</span>
+                                    <span>};</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <h3>Desenvolvedor Full Stack</h3>
+                            <p>Especialista em tecnologias modernas</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <button class="scroll-down-button" type="button" aria-label="Rolar para a próxima seção">
-            <i class="fas fa-chevron-down"></i>
-        </button>
     </section>
 
-    <section class="education-knowledge-section" style="padding-top: 100px; padding-bottom: 50px; display: flex; flex-direction: column; justify-content: center; min-height: calc(100vh - var(--header-height));">
-        <h2 class="neon-section-title" style="text-align: center; margin-bottom: 50px;">Formações e Conhecimento</h2>
-        <div style="display: flex; justify-content: center; padding: 0 20px;">
-            <div class="tech-box" style="max-width: 800px; width: 100%; text-align: center; margin-bottom: 100px;">
-                <i class="fas fa-graduation-cap tech-icon" style="font-size: 3rem; margin-bottom: 15px; color: var(--accent-color);"></i>
-                <h3 style="margin-bottom: 20px;">Conhecimento técnico</h3>
-                <p style="text-align: justify;">
-                    Em 2009, fiz um curso de Web Design na instituição Infolab, localizada em Taguatinga-DF. No entanto, a maior parte do conhecimento que adquiri ao longo dos anos veio de forma autodidata, pois sempre fui fascinado por tecnologia e tive facilidade em entrar em hiperfoco quando um assunto desperta meu interesse.
-                    Com o tempo, fui adquirindo conhecimentos sobre sites estáticos, utilizando as tecnologias HTML e CSS. À medida que evoluí, mantive-me atualizado com as novas versões dessas linguagens e adicionei JavaScript ao meu repertório, o que me permitiu criar animações, interações e avançar para o próximo nível: o desenvolvimento de sites dinâmicos.
-                    
-                </p>
+    <!-- Experience Timeline -->
+    <section class="timeline">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">EXPERIÊNCIA</h2>
+                <div class="section-line"></div>
             </div>
-        </div>
-        <button class="scroll-down-button" type="button" aria-label="Rolar para a próxima seção">
-            <i class="fas fa-chevron-down"></i>
-          </button>
-    </section>
-
-    <section class="about-tutankhamal-section" style="padding-top: 50px; padding-bottom: 50px; display: flex; flex-direction: column; justify-content: center; min-height: calc(100vh - var(--header-height));">
-        <h2 class="neon-section-title" style="text-align: center; margin-bottom: 50px;">Quem é Tutankhamal?</h2>
-        <div style="display: flex; justify-content: center; padding: 0 20px;">
-            <div class="tech-box" style="max-width: 800px; width: 100%; text-align: center; margin-bottom: 100px;">
-                <i class="fas fa-book-open tech-icon" style="font-size: 3rem; margin-bottom: 15px; color: var(--accent-color);"></i>
-                <h3 style="margin-bottom: 20px;">História</h3>
-                <p style="text-align: justify;">
-                    Na vastidão digital, sou conhecido como Tutankhamal, mas as pessoas mais próximas também me chamam de Tuta, Tutas ou Galego.
-                    Nascido em 1992, sou apaixonado por tecnologia e videogames. Desde cedo, tive contato com consoles e computadores, pois cresci em um bairro perigoso. Meus pais sempre me incentivaram a passar mais tempo dentro de casa jogando videogames, que, para eles, representavam um ambiente seguro e controlado.
-                    
-                    Sou autista de grau de suporte 1 e tenho TDAH, o que sempre trouxe desafios para minha socialização. Na escola, tive poucos amigos e sofri muito bullying por ser um rapaz mais reservado e quieto. Mas nem tudo é negativo: o autismo me proporcionou o que, para muitos, pode ser considerado um dom — o que eu chamo de hiperfoco.
-                    
-                    Trata-se de um estado de imersão profunda que pode durar horas ou até mesmo dias, no qual consigo permanecer absolutamente concentrado em algo que desperta meu interesse. E foi assim que consegui desbloquear habilidades musicais e desenvolver meu conhecimento em tecnologia.
-                    
-                    Obviamente, esse estado de hiperfoco também traz prejuízos, como a negligência em outras áreas do conhecimento ou até mesmo com a própria saúde — como esquecer de se alimentar enquanto estou focado..
-
-                </p>
-            </div>
-        </div>
-        <button class="scroll-down-button" type="button" aria-label="Rolar para a próxima seção">
-            <i class="fas fa-chevron-down"></i>
-          </button>
-    </section>
-    <section class="why-tutankhamal-section" style="padding-top: 50px; padding-bottom: 50px; display: flex; flex-direction: column; justify-content: center; min-height: calc(100vh - var(--header-height));">
-        <h2 class="neon-section-title" style="text-align: center; margin-bottom: 50px;">Por que "Tutankhamal"?</h2>
-        <div style="display: flex; justify-content: center; padding: 0 20px;">
-            <div class="tech-box" style="max-width: 800px; width: 100%; text-align: center; margin-bottom: 100px;">
-                <i class="fab fa-battle-net tech-icon" style="font-size: 3rem; margin-bottom: 15px; color: var(--accent-color);"></i>
-                <h3 style="margin-bottom: 20px;">A escolha do nome</h3>
-                <p style="text-align: justify;">
-                    O nickname "Tutankhamal" vem do nome do meu personagem principal no jogo World of Warcraft, da Activision Blizzard. Durante 15 anos e mais de 14.000 horas de jogo, aventurei-me pelos mapas de Azeroth com meu Death Knight Blood, ou DK TANK, chamado Tutankhamal.
-O nome foi escolhido como um trocadilho divertido, misturando o nome do faraó Tutankhamun e a expressão "Tu Tanka Mal", fazendo referência à função de Tank, muito comum em MMORPGs, e à minha falta de habilidade no jogo durante os primeiros meses.
-
-                </p>                
-            </div>
-        </div>
-        <button class="scroll-down-button" type="button" aria-label="Rolar para a próxima seção">
-            <i class="fas fa-chevron-down"></i>
-          </button>
-    </section> 
-
-    <section class="passion-tech-section" style="padding-top: 50px; padding-bottom: 50px; display: flex; flex-direction: column; justify-content: center; min-height: calc(100vh - var(--header-height));">
-        <h2 class="neon-section-title" style="text-align: center; margin-bottom: 50px;">A paixão por tecnologia</h2>
-        <div style="display: flex; justify-content: center; padding: 0 20px;">
-            <div class="tech-box" style="max-width: 800px; width: 100%; text-align: center; margin-bottom: 100px;">
-                <i class="fas fa-gamepad tech-icon" style="font-size: 3rem; margin-bottom: 15px; color: var(--accent-color);"></i>
-                <h3 style="margin-bottom: 20px;">Como tudo começou</h3>
-                <p style="text-align: justify;">
-                    Desde muito cedo, tive contato com videogames. Lembro que meu primeiro console foi um SNES, que veio acompanhado do jogo Super Mario World. Tempos depois, conheci o PlayStation 1 em uma locadora—ou "Fliperama", como é conhecida em muitos lugares. A experiência com o PS1 foi incrível, e o universo 3D só aumentou minha paixão pelos jogos.
-Na época, pedi um PS1 de Natal para meu pai, mas acabei ganhando um Polystation, famoso por ser um clone do NES (Nintendinho), com jogos 8-bits. Apesar disso, o Polystation me trouxe muita alegria com títulos como Duck Hunt, Adventure Island, Mario, entre outros.
-Anos depois, meu cunhado decidiu vender seu PlayStation 1 para comprar um PlayStation 2. Meu pai soube da oportunidade e correu para garantir o videogame como meu presente.
-Mais tarde, ganhei um computador antigo, um Pentium III de 500 MHz com 6GB de HDD. Foi nesse momento que nasceu minha paixão por computadores, algo que permanece vivo e cada vez mais intenso. Como a máquina era fraca e não rodava jogos, o desejo de ter consoles ainda persistia. Assim, ao longo dos anos, passei pelo PlayStation 2 e Xbox 360.
-No entanto, quando finalmente tive a oportunidade de investir em um computador mais potente, nunca mais me senti motivado a gastar dinheiro com consoles, já que sua tecnologia é fixa e limitada à data de lançamento. Com PCs, é possível realizar upgrades e estender sua vida útil, tornando cada centavo investido mais vantajoso. Além disso, um computador não é apenas um item de entretenimento, mas também uma ferramenta de trabalho e estudo.
-
-                </p>
-            </div>
-        </div>
-        <button class="scroll-down-button" type="button" aria-label="Rolar para a próxima seção">
-            <i class="fas fa-chevron-down"></i>
-          </button>
-    </section>
-
-
-
-    <section class="music-contact-section" style="padding-top: 50px; padding-bottom: 50px; display: flex; flex-direction: column; justify-content: center; min-height: calc(100vh - var(--header-height));">
-        <h2 class="neon-section-title" style="text-align: center; margin-bottom: 50px;">O contato com a Música</h2>
-        <div style="display: flex; justify-content: center; padding: 0 20px;">
-            <div class="tech-box" style="max-width: 800px; width: 100%; text-align: center; margin-bottom: 50px;">
-                <i class="fas fa-music tech-icon" style="font-size: 3rem; margin-bottom: 15px; color: var(--accent-color);"></i> <!-- Ícone de nota musical, pode ser trocado por fas fa-guitar, fas fa-drum, etc. se preferir -->
-                <h3 style="margin-bottom: 20px;">Uma breve carreira musical</h3>
-                <p style="text-align: justify;">
-                    Durante minha infância, enquanto estudava no Centro de Ensino SESI de Taguatinga-DF, tive a oportunidade de fazer aulas de teclado e, posteriormente, de piano clássico. Aos 12 anos, fui convidado por minha professora, Maria Christine, para tocar em um recital no Teatro Yara Amaral, dentro do próprio centro de ensino.
-Na adolescência, tive um breve contato com o violão, mas logo me apaixonei pelo contrabaixo elétrico, instrumento que toco até hoje. Pouco tempo depois, formei uma banda de garagem com alguns amigos que moravam próximos.
-Na época, bandas como CPM 22, Charlie Brown Jr. e Dead Fish estavam em alta, então decidimos montar uma banda de hardcore, inspirada nesses grupos que marcaram nossa geração. Durante esse período, passei por três bandas: Break UP, XNegando ValoresX e Ação Positiva, todas influenciadas pela cultura Straight Edge
-
-                </p>
-            </div>
-        </div>
-    </section>
-
-
-
-
-
-</main>
-<button id="backToTop" class="top-button">▲</button>
-    <footer>
-        <div class="footer-content">
             
-            <p>&copy; 2025 Tutankhamal. Todos os direitos reservados.</p>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/tutankhamal/" target="_blank" class="social-icon linkedin" aria-label="Visite meu perfil no LinkedIn">
-                    <i class="fab fa-linkedin" aria-hidden="true"></i>
-                    <span class="sr-only">LinkedIn</span>
-                </a>
-                <a href="https://github.com/Tutankhamal" target="_blank" class="social-icon github" aria-label="Veja meus projetos no GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
-                    <span class="sr-only">GitHub</span>
-                </a>
-                <a href="https://youtube.com/@Tutankhamal" target="_blank" class="social-icon youtube" aria-label="Assista meus vídeos no YouTube">
-                    <i class="fab fa-youtube" aria-hidden="true"></i>
-                    <span class="sr-only">YouTube</span>
-                </a>                
-                <a href="https://instagram.com/Tutankhamal" target="_blank" class="social-icon instagram" aria-label="Siga-me no Instagram">
-                    <i class="fab fa-instagram" aria-hidden="true"></i>
-                    <span class="sr-only">Instagram</span>
-                </a>
-                <a href="https://soundcloud.com/tutankhamal" target="_blank" class="social-icon soundcloud" aria-label="Ouça minhas músicas no SoundCloud">
-                    <i class="fab fa-soundcloud" aria-hidden="true"></i>
-                    <span class="sr-only">SoundCloud</span>
-                </a>
-                <a href="https://discord.gg/gE3zfksfZX" target="_blank" class="social-icon discord" aria-label="Conecte-se comigo no Discord">
-                    <i class="fab fa-discord" aria-hidden="true"></i>
-                    <span class="sr-only">Discord</span>
-                </a>
-                <a href="https://steamcommunity.com/id/Tutankhamal/" target="_blank" class="social-icon steam" aria-label="Veja meu perfil no Steam">
-                    <i class="fab fa-steam" aria-hidden="true"></i>
-                    <span class="sr-only">Steam</span>
-                </a>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025</div>
+                        <h3>Desenvolvedor Full Stack</h3>
+                        <p>Desenvolvimento de aplicações web complexas utilizando React, Node.js e bancos de dados modernos.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2015</div>
+                        <h3>Desenvolvedor Frontend</h3>
+                        <p>Especialização em interfaces modernas e responsivas, com foco em performance e acessibilidade.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2009</div>
+                        <h3>Início da Jornada</h3>
+                        <p>Primeiros passos no desenvolvimento web, aprendendo HTML.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">TUTANKHAMAL</span>
+                    <span class="logo-accent">DEV</span>
+                </div>
+                <div class="footer-links">
+                    <a href="sobre.html">Sobre</a>
+                    <a href="portfolio.html">Portfólio</a>
+                    <a href="contato.html">Contato</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/Tutankhamal" target="_blank" class="social-link" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tutankhamal/" target="_blank" class="social-link" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://instagram.com/Tutankhamal" target="_blank" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://discordapp.com/users/820522746622246963" target="_blank" class="social-link" aria-label="Discord">
+                        <i class="fab fa-discord"></i>
+                        <span>Discord</span>
+                    </a>
+                    <a href="https://youtube.com/@Tutankhamal" target="_blank" class="social-link" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tutankhamal Dev. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-
-
-    <script src="/assets/js/script.js"></script>
-    
-        
-
-    
-
-
-
-
-
-
-
-
-
-
-
+    <script src="assets/js/main.js"></script>
 </body>
+</html>

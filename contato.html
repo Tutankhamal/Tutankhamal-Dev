@@ -1,272 +1,240 @@
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-
-    <meta http-equiv="Content-Language" content="pt-br">
-    <meta name="description" content="Entre em contato com Tutankhamal Dev para desenvolvimento de sites profissionais. Solicite orçamento, tire dúvidas e transforme sua presença digital hoje mesmo.">
-    <meta name="author" content="Tutankhamal DEV">
-    <meta name="keywords" content="contato tutankhamal, orçamento site, desenvolvimento web, solicitar projeto, fale conosco, contato desenvolvedor, serviços web">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Tutankhamal Dev | Entre em Contato para Projetos</title>
+    <meta name="description" content="Entre em contato com Tutankhamal Dev para discutir seu projeto. Desenvolvedor Web Full Stack disponível para freelances e parcerias.">
+    <meta name="keywords" content="contato tutankhamal, desenvolvedor freelance, orçamento site, projeto web">
     <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://tutankhamal.com">
+    <link rel="canonical" href="https://tutankhamal.com/contato.html">
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="Tutankhamal Dev">
-    <meta property="og:description" content="Tutankhamal Dev | Web Designer and Front-End Developer">
-    <meta property="og:image" content="https://i.imgur.com/g6ikmvA.gif">
-    <meta property="og:image:width" content="600">
-    <meta property="og:image:height" content="270">
-    <meta property="og:url" content="https://tutankhamal.com"> 
-    <meta property="og:site_name" content="Tutankhamal"> 
-    <meta property="og:type" content="website">
-    <meta property="og:color" content="#00BFFF">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Tutankhamal Dev">
-    <meta name="twitter:description" content="Tutankhamal Dev - Web Designer and Front-End Developer">
-    <meta name="twitter:image" content="https://i.imgur.com/g6ikmvA.gif">
-
-    <title>Contato Tutankhamal Dev - Solicite seu Orçamento | Desenvolvimento Web Profissional</title>
-
-    <!-- Fonts and Styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="icon" href="/assets/images/mummy.ico" type="image/x-icon">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-12DDY9N6FS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-12DDY9N6FS');
-</script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-    <canvas id="universe"></canvas>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <span class="logo-text">TUTANKHAMAL</span>
+                    <span class="logo-accent">DEV</span>
+                </a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">INÍCIO</a>
+                <a href="sobre.html" class="nav-link">SOBRE</a>
+                <a href="portfolio.html" class="nav-link">PORTFÓLIO</a>
+                <a href="contato.html" class="nav-link active">CONTATO</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
-    
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="/assets/images/mummy.gif" alt="Mummy Gif" class="logo">
-            <h1 class="site-title"><a href="index.html">TUTANKHAMAL</a></h1>
-        </div>
-        
-        <nav class="nav-links">
-            <ul>
-                <li><a href="index.html">INÍCIO</a></li>
-                <li><a href="sobre.html">SOBRE</a></li>
-                <li><a href="portifolio.html">PORTIFÓLIO</a></li>
-                <li><a href="contato.html" class="active">CONTATO</a></li>
-            </ul>
-        </nav>
-        
-        <div class="hamburger">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </header>
-    
-<main>
-    <!-- Services Packages Section -->
-    <section class="services-section">
-        <h2 class="neon-section-title">PACOTES DE SERVIÇOS</h2>
-        <div class="services-container">
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-comments"></i>
-                </div>
-                <h3>Consultoria</h3>
-                <p>Análise completa do seu projeto, estratégias personalizadas e orientações técnicas para maximizar seus resultados digitais.</p>
-                <div class="service-price">A consultar</div>
-                <button class="service-cta" onclick="scrollToContact()">Solicitar Orçamento</button>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-file-code"></i>
-                </div>
-                <h3>Site Estático</h3>
-                <p>Website profissional com design moderno, otimizado para performance e SEO. Ideal para portfólios e empresas.</p>
-                <div class="service-price">A consultar</div>
-                <button class="service-cta" onclick="scrollToContact()">Solicitar Orçamento</button>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-cogs"></i>
-                </div>
-                <h3>Site Dinâmico</h3>
-                <p>Aplicação web completa com funcionalidades avançadas, painel administrativo e integração com sistemas externos.</p>
-                <div class="service-price">A consultar</div>
-                <button class="service-cta" onclick="scrollToContact()">Solicitar Orçamento</button>
+    <!-- Contact Hero -->
+    <section class="page-hero">
+        <div class="cyber-grid"></div>
+        <div class="container">
+            <div class="page-hero-content">
+                <h1 class="page-title">CONTATO</h1>
+                <p class="page-subtitle">Vamos criar algo incrível juntos</p>
             </div>
         </div>
-        <button class="scroll-down-button" type="button" aria-label="Rolar para a próxima seção">
-            <i class="fas fa-chevron-down"></i>
-          </button>
     </section>
 
-    <!-- Contact Methods Section -->
-    <section class="contact-section">
-        <h2 class="neon-section-title">CANAIS DE CONTATO</h2>
-        <div class="contact-container">
-            <div class="contact-card discord">
-                <div class="contact-icon">
-                    <i class="fab fa-discord"></i>
+    <!-- Contact Content -->
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="info-block">
+                        <h2>Vamos Conversar</h2>
+                        <p>Estou sempre aberto a novos projetos e oportunidades. Entre em contato para discutirmos como posso ajudar a transformar suas ideias em realidade digital.</p>
+                    </div>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>Email</h3>
+                                <p>contato@tutankhamal.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fab fa-discord"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>Discord</h3>
+                                <p>Tutankhamal#0000</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>Resposta</h3>
+                                <p>24 horas</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3>Discord</h3>
-                <p>Converse comigo em tempo real</p>
-                <a href="https://discordapp.com/users/820522746622246963" target="_blank" class="contact-action">Conectar</a>
-            </div>
-            
-            <div class="contact-card instagram">
-                <div class="contact-icon">
-                    <i class="fab fa-instagram"></i>
+                
+                <div class="social-connect">
+                    <h3>Conecte-se Comigo</h3>
+                    <div class="social-grid">
+                        <a href="https://github.com/Tutankhamal" target="_blank" class="social-card">
+                            <div class="social-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/tutankhamal/" target="_blank" class="social-card">
+                            <div class="social-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://instagram.com/Tutankhamal" target="_blank" class="social-card">
+                            <div class="social-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://discordapp.com/users/820522746622246963" target="_blank" class="social-card">
+                            <div class="social-icon">
+                                <i class="fab fa-discord"></i>
+                            </div>
+                            <span>Discord</span>
+                        </a>
+                        <a href="https://youtube.com/@Tutankhamal" target="_blank" class="social-card">
+                            <div class="social-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <span>YouTube</span>
+                        </a>
+                        <a href="https://soundcloud.com/tutankhamal" target="_blank" class="social-card">
+                            <div class="social-icon">
+                                <i class="fab fa-soundcloud"></i>
+                            </div>
+                            <span>SoundCloud</span>
+                        </a>
+                        <a href="https://steamcommunity.com/id/Tutankhamal/" target="_blank" class="social-card">
+                            <div class="social-icon">
+                                <i class="fab fa-steam"></i>
+                            </div>
+                            <span>Steam</span>
+                        </a>
+                    </div>
                 </div>
-                <h3>Instagram</h3>
-                <p>Acompanhe meus projetos</p>
-                <a href="https://instagram.com/Tutankhamal" target="_blank" class="contact-action">Seguir</a>
-            </div>
-            
-            <div class="contact-card whatsapp">
-                <div class="contact-icon">
-                    <i class="fab fa-whatsapp"></i>
+
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nome</label>
+                            <input type="text" id="name" name="name" required>
+                            <div class="input-glow"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="input-glow"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Assunto</label>
+                            <input type="text" id="subject" name="subject" required>
+                            <div class="input-glow"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                            <div class="input-glow"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <span>ENVIAR MENSAGEM</span>
+                            <div class="btn-glow"></div>
+                        </button>
+                    </form>
                 </div>
-                <h3>WhatsApp</h3>
-                <p>Mensagem direta e rápida</p>
-                <a href="https://wa.me/5511999999999" target="_blank" class="contact-action">Enviar Mensagem</a>
-            </div>
-            
-            <div class="contact-card linkedin">
-                <div class="contact-icon">
-                    <i class="fab fa-linkedin"></i>
-                </div>
-                <h3>LinkedIn</h3>
-                <p>Conecte-se profissionalmente</p>
-                <a href="https://www.linkedin.com/in/tutankhamal/" target="_blank" class="contact-action">Conectar</a>
-            </div>
-            
-            <div class="contact-card email">
-                <div class="contact-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <h3>Email</h3>
-                <p>Contato formal e detalhado</p>
-                <a href="mailto:contato@tutankhamal.com" class="contact-action">Enviar Email</a>
             </div>
         </div>
-                <button class="scroll-down-button" type="button" aria-label="Rolar para a próxima seção">
-            <i class="fas fa-chevron-down"></i>
-          </button>
     </section>
 
-    <!-- Discord Widget Section -->
-    <section class="discord-widget-section">
-        <h2 class="neon-section-title">COMUNIDADE DISCORD</h2>
-        <div class="discord-widget-container">
-            <div class="discord-widget-card">
-                <div class="widget-header">
-                    <div class="discord-icon">
-                        <i class="fab fa-discord"></i>
-                    </div>
-                    <h3>Servidor CHUVA Dev Community</h3>
-                    <p>Conecte-se com a comunidade, veja quem está online, tire dúvidas em tempo real e acompanhe novidades sobre projetos. Visualize membros ativos e suas atividades!</p>
-                </div>
-                <div class="widget-iframe-container">
-                    <iframe 
-                        src="https://discord.com/widget?id=1386653216338477127&theme=dark" 
-                        class="discord-iframe"
-                        allowtransparency="true" 
-                        frameborder="0" 
-                        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-                        title="Widget do Servidor Discord Tutankhamal">
-                    </iframe>
-                </div>
-                <div class="widget-info">
-                    <div class="widget-features">
-                        <div class="feature-item">
-                            <i class="fas fa-users"></i>
-                            <span>Membros Online</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-gamepad"></i>
-                            <span>Atividades dos Usuários</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-volume-up"></i>
-                            <span>Canais de Voz Ativos</span>
-                        </div>
-                    </div>
-                    <a href="https://discord.gg/gE3zfksfZX" target="_blank" class="discord-join-btn">
-                        <i class="fab fa-discord"></i>
-                        Entrar no Servidor
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Pronto para começar seu projeto?</h2>
+                <p>Transforme suas ideias em soluções digitais inovadoras</p>
+                <div class="cta-buttons">
+                    <a href="portfolio.html" class="btn btn-secondary">
+                        <span>VER PORTFÓLIO</span>
+                        <div class="btn-glow"></div>
                     </a>
                 </div>
             </div>
         </div>
     </section>
-</main>
-<button id="backToTop" class="top-button">▲</button>
-    <footer>
-        <div class="footer-content">
-            
-            <p>&copy; 2025 Tutankhamal. Todos os direitos reservados.</p>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/tutankhamal/" target="_blank" class="social-icon linkedin" aria-label="Visite meu perfil no LinkedIn">
-                    <i class="fab fa-linkedin" aria-hidden="true"></i>
-                    <span class="sr-only">LinkedIn</span>
-                </a>
-                <a href="https://github.com/Tutankhamal" target="_blank" class="social-icon github" aria-label="Veja meus projetos no GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
-                    <span class="sr-only">GitHub</span>
-                </a>
-                <a href="https://youtube.com/@Tutankhamal" target="_blank" class="social-icon youtube" aria-label="Assista meus vídeos no YouTube">
-                    <i class="fab fa-youtube" aria-hidden="true"></i>
-                    <span class="sr-only">YouTube</span>
-                </a>                
-                <a href="https://instagram.com/Tutankhamal" target="_blank" class="social-icon instagram" aria-label="Siga-me no Instagram">
-                    <i class="fab fa-instagram" aria-hidden="true"></i>
-                    <span class="sr-only">Instagram</span>
-                </a>
-                <a href="https://soundcloud.com/tutankhamal" target="_blank" class="social-icon soundcloud" aria-label="Ouça minhas músicas no SoundCloud">
-                    <i class="fab fa-soundcloud" aria-hidden="true"></i>
-                    <span class="sr-only">SoundCloud</span>
-                </a>
-                <a href="https://discord.gg/gE3zfksfZX" target="_blank" class="social-icon discord" aria-label="Conecte-se comigo no Discord">
-                    <i class="fab fa-discord" aria-hidden="true"></i>
-                    <span class="sr-only">Discord</span>
-                </a>
-                <a href="https://steamcommunity.com/id/Tutankhamal/" target="_blank" class="social-icon steam" aria-label="Veja meu perfil no Steam">
-                    <i class="fab fa-steam" aria-hidden="true"></i>
-                    <span class="sr-only">Steam</span>
-                </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">TUTANKHAMAL</span>
+                    <span class="logo-accent">DEV</span>
+                </div>
+                <div class="footer-links">
+                    <a href="sobre.html">Sobre</a>
+                    <a href="portfolio.html">Portfólio</a>
+                    <a href="contato.html">Contato</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/Tutankhamal" target="_blank" class="social-link" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tutankhamal/" target="_blank" class="social-link" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://instagram.com/Tutankhamal" target="_blank" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://discordapp.com/users/820522746622246963" target="_blank" class="social-link" aria-label="Discord">
+                        <i class="fab fa-discord"></i>
+                        <span>Discord</span>
+                    </a>
+                    <a href="https://youtube.com/@Tutankhamal" target="_blank" class="social-link" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tutankhamal Dev. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-
-
-    <script src="/assets/js/script.js"></script>
-    
-        
-
-    
-
-
-
-
-
-
-
-
-
-
-
+    <script src="assets/js/main.js"></script>
 </body>
+</html>

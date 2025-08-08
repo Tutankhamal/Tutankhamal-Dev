@@ -1,878 +1,264 @@
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-
-    <meta http-equiv="Content-Language" content="pt-br">
-    <meta name="description" content="Tutankhamal Dev - Desenvolvedor Web e Designer Front-End especializado em sites profissionais, aplicações responsivas e soluções digitais inovadoras. Transforme sua presença online com tecnologias modernas.">
-    <meta name="author" content="Tutankhamal DEV">
-    <meta name="keywords" content="desenvolvedor web, designer front-end, sites profissionais, desenvolvimento web, HTML5, CSS3, JavaScript, sites responsivos, aplicações web, soluções digitais, programador, web design">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutankhamal Dev - Desenvolvedor Web Full Stack | Criação de Sites e Aplicações</title>
+    <meta name="description" content="Tutankhamal Dev - Desenvolvedor Web Full Stack especializado em React, Node.js, JavaScript. Criação de sites modernos, aplicações web e soluções digitais inovadoras.">
+    <meta name="keywords" content="desenvolvedor web, full stack, React, Node.js, JavaScript, HTML, CSS, criação de sites, aplicações web, Tutankhamal">
+    <meta name="author" content="Tutankhamal Dev">
     <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
-    <meta name="theme-color" content="#6C17DB">
-    <link rel="canonical" href="https://tutankhamal.com">
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="Tutankhamal Dev - Desenvolvedor Web & Designer Front-End">
-    <meta property="og:description" content="Especialista em desenvolvimento web com HTML5, CSS3 e JavaScript. Criação de sites profissionais, responsivos e otimizados para seu negócio decolar no mundo digital.">
-    <meta property="og:image" content="https://i.imgur.com/g6ikmvA.gif">
-    <meta property="og:image:alt" content="Tutankhamal Dev - Desenvolvedor Web Profissional">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://tutankhamal.com"> 
-    <meta property="og:site_name" content="Tutankhamal Dev"> 
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tutankhamal.com/">
+    <meta property="og:title" content="Tutankhamal Dev - Desenvolvedor Web Full Stack">
+    <meta property="og:description" content="Desenvolvedor Web Full Stack especializado em React, Node.js, JavaScript. Criação de sites modernos e aplicações web inovadoras.">
+    <meta property="og:image" content="https://tutankhamal.com/assets/images/og-image.jpg">
+    <meta property="og:site_name" content="Tutankhamal Dev">
     <meta property="og:locale" content="pt_BR">
-
+    
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@tutankhamal">
-    <meta name="twitter:creator" content="@tutankhamal">
-    <meta name="twitter:title" content="Tutankhamal Dev - Desenvolvedor Web & Designer Front-End">
-    <meta name="twitter:description" content="Especialista em desenvolvimento web com HTML5, CSS3 e JavaScript. Sites profissionais e responsivos para seu negócio.">
-    <meta name="twitter:image" content="https://i.imgur.com/g6ikmvA.gif">
-    <meta name="twitter:image:alt" content="Tutankhamal Dev - Desenvolvedor Web">
-
-    <title>Tutankhamal Dev - Desenvolvedor Web & Designer Front-End | Sites Profissionais e Responsivos</title>
-
-    <!-- Dados Estruturados JSON-LD -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tutankhamal.com/">
+    <meta property="twitter:title" content="Tutankhamal Dev - Desenvolvedor Web Full Stack">
+    <meta property="twitter:description" content="Desenvolvedor Web Full Stack especializado em React, Node.js, JavaScript. Criação de sites modernos e aplicações web inovadoras.">
+    <meta property="twitter:image" content="https://tutankhamal.com/assets/images/og-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://tutankhamal.com/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Tutankhamal Dev",
-      "jobTitle": "Desenvolvedor Web e Designer Front-End",
-      "description": "Especialista em desenvolvimento web com HTML5, CSS3 e JavaScript. Criação de sites profissionais, responsivos e otimizados.",
+      "jobTitle": "Desenvolvedor Web Full Stack",
+      "description": "Desenvolvedor Web Full Stack especializado em React, Node.js, JavaScript",
       "url": "https://tutankhamal.com",
       "sameAs": [
-        "https://github.com/tutankhamal",
-        "https://linkedin.com/in/tutankhamal"
+        "https://github.com/Tutankhamal",
+        "https://www.linkedin.com/in/tutankhamal/",
+        "https://instagram.com/Tutankhamal",
+        "https://youtube.com/@Tutankhamal"
       ],
-      "knowsAbout": [
-        "HTML5",
-        "CSS3",
-        "JavaScript",
-        "Web Design",
-        "Front-End Development",
-        "Responsive Design",
-        "SEO"
-      ],
-      "offers": {
-        "@type": "Service",
-        "name": "Desenvolvimento de Sites Profissionais",
-        "description": "Criação de sites responsivos, otimizados e profissionais para empresas e negócios",
-        "provider": {
-          "@type": "Person",
-          "name": "Tutankhamal Dev"
-        }
-      }
+      "knowsAbout": ["JavaScript", "React", "Node.js", "HTML", "CSS", "Web Development", "Full Stack Development"],
+      "email": "contato@tutankhamal.com"
     }
     </script>
-
-    <!-- Fonts and Styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/modal-fix.css">
-    <link rel="icon" href="/assets/images/mummy.ico" type="image/x-icon">
-    <script src="/assets/js/modal-system.js" defer></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-12DDY9N6FS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-12DDY9N6FS');
-</script>
 </head>
 <body>
-    <canvas id="universe"></canvas>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="cyber-loader"></div>
+            <div class="loading-text">INICIALIZANDO...</div>
+        </div>
+    </div>
 
-    
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="/assets/images/mummy.gif" alt="Tutankhamal Dev - Logo da Múmia" class="logo">
-            <div class="site-title"><a href="index.html">TUTANKHAMAL</a></div>
-        </div>
-        
-        <nav class="nav-links">
-            <ul>
-                <li><a href="index.html" class="active">INÍCIO</a></li>
-                <li><a href="sobre.html">SOBRE</a></li>
-                <li><a href="portifolio.html">PORTIFÓLIO</a></li>
-                <li><a href="contato.html">CONTATO</a></li>
-            </ul>
-        </nav>
-        
-        <div class="hamburger">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </header>
-    
-<main>
-    <section>
-        <div id="hero-wrapper">
-            <div id="hero-content" style="display: none;">
-                <h1 id="hero-title">TUTANKHAMAL DEV</h1>
-                <p id="typing-text"></p>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <span class="logo-text">TUTANKHAMAL</span>
+                    <span class="logo-accent">DEV</span>
+                </a>
             </div>
-            <button class="scroll-down-button" type="button" aria-label="Rolar para a próxima seção">
-                <i class="fas fa-chevron-down"></i>
-            </button>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link active">INÍCIO</a>
+                <a href="sobre.html" class="nav-link">SOBRE</a>
+                <a href="portfolio.html" class="nav-link">PORTFÓLIO</a>
+                <a href="contato.html" class="nav-link">CONTATO</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="cyber-grid"></div>
+        <div class="particles" id="particles"></div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line">TUTANKHAMAL</span>
+                    <span class="title-line accent">DEV</span>
+                </h1>
+                <p class="hero-subtitle">Desenvolvedor Web Full Stack</p>
+                <div class="hero-description">
+                    <p>Criando experiências digitais inovadoras com tecnologias de ponta</p>
+                </div>
+                <div class="hero-buttons">
+                    <a href="portfolio.html" class="btn btn-primary">
+                        <span>VER PROJETOS</span>
+                        <div class="btn-glow"></div>
+                    </a>
+                    <a href="contato.html" class="btn btn-secondary">
+                        <span>CONTATO</span>
+                        <div class="btn-glow"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="cyber-avatar">
+                    <div class="avatar-frame">
+                        <div class="avatar-inner">
+                            <div class="code-lines">
+                                <span>&lt;developer&gt;</span>
+                                <span>  creativity: true;</span>
+                                <span>  innovation: 100%;</span>
+                                <span>&lt;/developer&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+            <span>SCROLL</span>
         </div>
     </section>
 
-    <section class="importance-section" id="importance-section">
-         <h2 class="neon-section-title">Por que seu negócio PRECISA de um site profissional?</h2>
-         <div class="benefits-carousel-container">
-           <button class="carousel-nav prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
-           <div class="benefits-carousel-track">
-             <div class="benefit-card active">
-               <div class="benefit-icon floating"><i class="fas fa-rocket"></i></div>
-               <h3>Decole no Mundo Digital</h3>
-               <p>Um site é sua vitrine online 24/7, alcançando clientes onde quer que estejam e a qualquer hora. Não perca mais oportunidades!</p>
-             </div>
-             <div class="benefit-card">
-               <div class="benefit-icon floating"><i class="fas fa-shield-alt"></i></div>
-               <h3>Construa Autoridade e Confiança</h3>
-               <p>Um design profissional e conteúdo relevante estabelecem sua marca como referência no mercado, transmitindo credibilidade instantânea.</p>
-             </div>
-             <div class="benefit-card">
-               <div class="benefit-icon floating"><i class="fas fa-hand-holding-usd"></i></div>
-               <h3>Venda Mais, Invista Menos</h3>
-               <p>Atraia leads, automatize processos e veja vendas crescerem com custo-benefício imbatível comparado ao marketing tradicional.</p>
-             </div>
-             <div class="benefit-card">
-               <div class="benefit-icon floating"><i class="fas fa-users-cog"></i></div>
-               <h3>Conecte-se e Fidelize Clientes</h3>
-               <p>Crie um canal direto de comunicação, ofereça suporte e conteúdo exclusivo, transformando visitantes em fãs da sua marca.</p>
-             </div>
-             <div class="benefit-card">
-               <div class="benefit-icon floating"><i class="fas fa-expand-arrows-alt"></i></div>
-               <h3>Sua Marca em Todas as Telas</h3>
-               <p>Garanta uma boa experiência em desktops, tablets e smartphones. Esteja onde seu cliente estiver, de forma adaptada e eficiente.</p>
-             </div>
-             <div class="benefit-card">
-               <div class="benefit-icon floating"><i class="fas fa-star"></i></div>
-               <h3>Inovação que Gera Resultados</h3>
-               <p>Destaque-se da concorrência com um site moderno, rápido e otimizado, mostrando que sua empresa está à frente no mercado.</p>
-             </div>
-           </div>
-           <button class="carousel-nav next" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
-         </div>
-         <button class="scroll-down-button" type="button" aria-label="Rolar para a próxima seção">
-          <i class="fas fa-chevron-down"></i>
-        </button>
-      </section>
-      
-
-      <section class="tech-section" id="tech-section" >
-        <h2 class="neon-section-title">SERVIÇOS E TECNOLOGIAS APLICADAS</h2>
-        <div class="tech-boxes">
-        <div class="tech-box" >
-            
-          <i class="fab fa-html5 tech-icon html"></i>
-          <h3 style="margin-bottom: 20px;">HTML5</h3>
-          <p>Desenvolvimento de estruturas web semânticas e bem organizadas utilizando HTML5, assegurando a correta apresentação de conteúdo, acessibilidade e otimização para mecanismos de busca.</p>
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">TECNOLOGIAS</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card" data-skill="frontend">
+                    <div class="skill-icon">
+                        <div class="icon-glow"></div>
+                        <span>{ }</span>
+                    </div>
+                    <h3>Frontend</h3>
+                    <p>HTML5, CSS3, JavaScript, React, Vue.js</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" data-progress="90"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-skill="backend">
+                    <div class="skill-icon">
+                        <div class="icon-glow"></div>
+                        <span>&lt;/&gt;</span>
+                    </div>
+                    <h3>Backend</h3>
+                    <p>Node.js, Python, PHP, MySQL, MongoDB</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" data-progress="85"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-skill="tools">
+                    <div class="skill-icon">
+                        <div class="icon-glow"></div>
+                        <span>⚡</span>
+                    </div>
+                    <h3>Ferramentas</h3>
+                    <p>Git, Docker, AWS, Figma, VS Code</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" data-progress="80"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="tech-box" >
-            
-          <i class="fab fa-css3-alt tech-icon css"></i>
-          <h3 style="margin-bottom: 20px;">CSS3</h3>
-          <p>Aplicação de CSS3 para a criação de interfaces visualmente atraentes e responsivas, desenvolvendo layouts adaptáveis, animações e estilizações que reforçam a identidade visual do projeto.</p>
-        </div>
-        <div class="tech-box" >
-          
-          <i class="fab fa-js tech-icon js"></i>
-          <h3 style="margin-bottom: 20px;">JavaScript</h3>
-          <p>Utilização de JavaScript para implementar interatividade e funcionalidades dinâmicas em aplicações web, abrangendo desde manipulações de interface até a integração com APIs e lógicas de front-end complexas.</p>
-        </div>
-      </div>
-      <button class="scroll-down-button" type="button" aria-label="Rolar para a próxima seção">
-        <i class="fas fa-chevron-down"></i>
-      </button>
     </section>
 
-      <section id="interactive-guide-section" class="interactive-guide-section">
-        <h2 class="neon-section-title">Guia Interativo: Seu Site Online</h2>
-          <p class="section-subtitle">Descubra o que é necessário para colocar seu site no ar, seja ele simples ou complexo.</p>
-          <div class="guide-container">
-              <div class="guide-box static-site">
-                  <h3><i class="fas fa-leaf"></i> Site Estático</h3>
-                  <p>Ideal para portfólios, sites institucionais pequenos, landing pages e blogs pessoais com conteúdo que não muda com frequência.</p>
-
-                  <h4><i class="fas fa-cogs"></i> Recursos Essenciais:</h4>
-                  <ul>
-                      <li data-modal-target="staticDomainModal"><i class="fas fa-globe"></i> Domínio</li>
-                      <li data-modal-target="staticHostingModal"><i class="fas fa-server"></i> Hospedagem Estática</li>
-                      <li data-modal-target="staticSSLModal"><i class="fas fa-lock"></i> Certificado SSL</li>
-                      <li data-modal-target="staticContentModal"><i class="fas fa-file-alt"></i> Conteúdo (Textos, Imagens)</li>
-                      <li data-modal-target="staticAnalyticsModal"><i class="fas fa-chart-line"></i> Ferramentas de Análise (Opcional)</li>
-                  </ul>
-
-                  <h4><i class="fas fa-dollar-sign"></i> Estimativa de Custo:</h4>
-                  <ul>
-                      <li data-modal-target="staticCostDomainModal"><i class="fas fa-tag"></i> Domínio: R$40 - R$80/ano</li>
-                      <li data-modal-target="staticCostHostingModal"><i class="fas fa-coins"></i> Hospedagem: R$0 - R$50/mês</li>
-                      <li data-modal-target="staticCostSSLModal"><i class="fas fa-shield-alt"></i> SSL: R$0 (Let's Encrypt) - R$300+/ano</li>
-                      <li data-modal-target="staticCostDevelopmentServiceModal2221"><i class="fas fa-laptop-code"></i> Desenvolvimento: R$1.000 - R$10.000</li>
-                      <li data-modal-target="staticCostMaintenanceServiceModal123"><i class="fas fa-wrench"></i> Manutenção: R$100 - R$500+/mês</li>
-                  </ul>
-
-                  <h4><i class="fas fa-thumbs-up"></i> Benefícios:</h4>
-                  <ul>
-                      <li data-modal-target="staticBenefitSpeedModal"><i class="fas fa-tachometer-alt"></i> Velocidade e Performance</li>
-                      <li data-modal-target="staticBenefitSecurityModal"><i class="fas fa-user-shield"></i> Segurança Aprimorada</li>
-                      <li data-modal-target="staticBenefitCostModal"><i class="fas fa-hand-holding-usd"></i> Baixo Custo</li>
-                      <li data-modal-target="staticBenefitMaintenanceModal"><i class="fas fa-tools"></i> Manutenção Simplificada</li>
-                  </ul>
-
-                  <h4><i class="fas fa-bullseye"></i> Aplicações Ideais:</h4>
-                  <ul>
-                      <li data-modal-target="staticAppPortfolioModal"><i class="fas fa-briefcase"></i> Portfólios Pessoais/Profissionais</li>
-                      <li data-modal-target="staticAppLandingPageModal"><i class="fas fa-rocket"></i> Landing Pages de Produtos/Serviços</li>
-                      <li data-modal-target="staticAppInstitutionalModal"><i class="fas fa-building"></i> Sites Institucionais Pequenos</li>
-                      <li data-modal-target="staticAppBlogModal"><i class="fas fa-feather-alt"></i> Blogs Pessoais (com geradores estáticos)</li>
-                  </ul>
-              </div>
-
-              <div class="guide-box dynamic-site">
-                  <h3><i class="fas fa-atom"></i> Site Dinâmico</h3>
-                  <p>Necessário para e-commerce, plataformas sociais, sistemas de gerenciamento de conteúdo (CMS), aplicações web interativas e sites que exigem login de usuário ou personalização.</p>
-
-                  <h4><i class="fas fa-cogs"></i> Recursos Essenciais:</h4>
-                  <ul>
-                      <li data-modal-target="dynamicDomainModal"><i class="fas fa-globe"></i> Domínio</li>
-                      <li data-modal-target="dynamicHostingModal"><i class="fas fa-server"></i> Hospedagem Dinâmica/VPS/Cloud</li>
-                      <li data-modal-target="dynamicSSLModal"><i class="fas fa-lock"></i> Certificado SSL</li>
-                      <li data-modal-target="dynamicBackendModal"><i class="fas fa-code"></i> Backend (Linguagem de Programação)</li>
-                      <li data-modal-target="dynamicDatabaseModal"><i class="fas fa-database"></i> Banco de Dados</li>
-                      <li data-modal-target="dynamicCMSModal"><i class="fas fa-puzzle-piece"></i> CMS (Opcional, ex: WordPress)</li>
-                      <li data-modal-target="dynamicEcommerceModal"><i class="fas fa-shopping-cart"></i> Plataforma de E-commerce (se aplicável)</li>
-                      <li data-modal-target="dynamicAPIsModal"><i class="fas fa-cogs"></i> APIs e Integrações</li>
-                      <li data-modal-target="dynamicSecurityMeasuresModal"><i class="fas fa-shield-alt"></i> Medidas de Segurança Avançadas</li>
-                      <li data-modal-target="dynamicMaintenanceSupportModal"><i class="fas fa-headset"></i> Manutenção e Suporte Contínuos</li>
-                  </ul>
-
-                  <h4><i class="fas fa-dollar-sign"></i> Estimativa de Custo:</h4>
-                  <ul>
-                      <li data-modal-target="dynamicCostDomainModal"><i class="fas fa-tag"></i> Domínio: R$40 - R$80/ano</li>
-                      <li data-modal-target="dynamicCostHostingModal"><i class="fas fa-coins"></i> Hospedagem/VPS: R$50 - R$1.000+/mês</li>
-                      <li data-modal-target="dynamicCostDevelopmentServiceModal"><i class="fas fa-laptop-code"></i> Desenvolvimento: R$10.000 - R$50.000+</li>
-                      <!-- Removido o dynamicCostDevelopmentModal original, pois agora temos o de serviço -->
-                      <li data-modal-target="dynamicCostMaintenanceModal"><i class="fas fa-wrench"></i> Manutenção Contínua: R$500 - R$1.000+/mês</li>
-                  </ul>
-
-                  <h4><i class="fas fa-thumbs-up"></i> Benefícios:</h4>
-                  <ul>
-                      <li data-modal-target="dynamicBenefitInteractivityModal"><i class="fas fa-users-cog"></i> Interatividade e Personalização</li>
-                      <li data-modal-target="dynamicBenefitScalabilityModal"><i class="fas fa-chart-area"></i> Escalabilidade</li>
-                      <li data-modal-target="dynamicBenefitFeaturesModal"><i class="fas fa-star"></i> Funcionalidades Avançadas</li>
-                      <li data-modal-target="dynamicBenefitDataModal"><i class="fas fa-server"></i> Gerenciamento de Dados Complexos</li>
-                  </ul>
-
-                  <h4><i class="fas fa-bullseye"></i> Aplicações Ideais:</h4>
-                  <ul>
-                      <li data-modal-target="dynamicAppEcommerceModal"><i class="fas fa-store"></i> Lojas Virtuais (E-commerce)</li>
-                      <li data-modal-target="dynamicAppSocialModal"><i class="fas fa-users"></i> Redes Sociais e Comunidades Online</li>
-                      <li data-modal-target="dynamicAppPlatformsModal"><i class="fas fa-cubes"></i> Plataformas SaaS (Software como Serviço)</li>
-                      <li data-modal-target="dynamicAppLargePortalsModal"><i class="fas fa-newspaper"></i> Portais de Notícias e Conteúdo Extenso</li>
-                      <li data-modal-target="dynamicAppWebAppsModal"><i class="fas fa-laptop"></i> Aplicações Web Complexas</li>
-                  </ul>
-              </div>
-          </div>
-
-          <div id="staticCostDevelopmentServiceModal2221" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h4><i class="fas fa-laptop-code"></i> Desenvolvimento de Site Estático</h4>
-                <p><strong>Escopo do Serviço:</strong></p>
-                <ul>
-                    <li>Consultoria inicial e definição de requisitos.</li>
-                    <li>Criação de layout personalizado ou baseado em template.</li>
-                    <li>Desenvolvimento HTML, CSS e JavaScript.</li>
-                    <li>Design responsivo para desktops, tablets e mobile.</li>
-                    <li>Otimização básica para SEO (meta tags, estrutura semântica).</li>
-                    <li>Configuração de hospedagem estática (se necessário).</li>
-                    <li>Integração com ferramentas de análise (Google Analytics).</li>
-                </ul>
-                <p><strong>Estimativa de Custo:</strong> R$1.000 - R$10.000</p>
-                <p><strong>Fatores que influenciam o preço:</strong></p>
-                <ul>
-                    <li>Número de páginas.</li>
-                    <li>Complexidade do design e interatividade.</li>
-                    <li>Necessidade de criação de conteúdo (textos, imagens).</li>
-                    <li>Integrações específicas.</li>
-                </ul>
-                <p><strong>Ideal para:</strong> Portfólios, landing pages, sites institucionais pequenos, blogs pessoais que não necessitam de backend complexo.</p>
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="10+">0</div>
+                    <div class="stat-label">PROJETOS</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="15+">0</div>
+                    <div class="stat-label">ANOS EXP.</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="100">0</div>
+                    <div class="stat-label">% DEDICAÇÃO</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="12">0</div>
+                    <div class="stat-label">HORAS/DIA</div>
+                </div>
             </div>
         </div>
+    </section>
 
-
-          <!-- ADICIONE ESTE MODAL ABAIXO -->
-          <div id="staticCostMaintenanceServiceModal123" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-wrench"></i> Manutenção de Site Estático (Meu Serviço)</h4>
-                  <p><strong>Serviços Incluídos (Plano Mensal Fixo):</strong></p>
-                  <ul>
-                      <li><strong>Monitoramento Básico:</strong> Verificação periódica da disponibilidade do site.</li>
-                      <li><strong>Pequenas Atualizações de Conteúdo:</strong> Alterações simples em textos ou imagens (ex: até 1 hora de trabalho/mês, não cumulativo).</li>
-                      <li><strong>Backups (se aplicável à hospedagem):</strong> Verificação e gestão de backups, se a plataforma de hospedagem oferecer e necessitar de intervenção.</li>
-                      <li><strong>Suporte Técnico Básico:</strong> Esclarecimento de dúvidas sobre o funcionamento do site.</li>
-                      <li><strong>Verificação de Links Quebrados:</strong> Anual ou sob demanda.</li>
-                  </ul>
-                  <p><strong>Custo Fixo Mensal:</strong> R$100 - R$500</p>
-                  <p><strong>Observações Importantes:</strong></p>
-                  <ul>
-                      <li>Este plano é ideal para sites estáticos que não exigem atualizações frequentes ou complexas.</li>
-                      <li>Não inclui: Redesign, desenvolvimento de novas funcionalidades, grandes alterações de conteúdo, SEO avançado, marketing digital, ou custos de domínio e hospedagem.</li>
-                      <li>Horas de atualização de conteúdo não utilizadas em um mês não são transferidas para o mês seguinte.</li>
-                      <li>Serviços adicionais ou que excedam o escopo do plano mensal serão orçados separadamente.</li>
-                  </ul>
-                  <p><strong>Ideal para:</strong> Manter seu site estático funcionando, seguro (dentro das limitações da natureza estática) e com conteúdo minimamente atualizado sem que você precise se preocupar com os detalhes técnicos básicos.</p>
-              </div>
-          </div>
-          <!-- FIM DO MODAL staticCostMaintenanceServiceModal -->
-
-          <div id="dynamicCostDevelopmentServiceModal" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h4><i class="fas fa-laptop-code"></i> Desenvolvimento de Site Dinâmico (Meu Serviço)</h4>
-                <p><strong>Serviços Abrangentes (Frontend & Backend):</strong></p>
-                <ul>
-                    <li><strong>Consultoria e Planejamento:</strong> Definição de escopo, arquitetura da informação e tecnologias.
-                    <li><strong>Design UX/UI Personalizado:</strong> Criação de interfaces intuitivas, responsivas e focadas na experiência do usuário.
-                    <li><strong>Desenvolvimento Frontend:</strong> HTML5, CSS3, JavaScript (com frameworks como React, Angular ou Vue.js, se necessário) para interfaces ricas e interativas.
-                    <li><strong>Desenvolvimento Backend:</strong> Lógica de servidor, APIs, integração com bancos de dados (Node.js, Python/Django, PHP/Laravel, etc.).
-                    <li><strong>Configuração de Banco de Dados:</strong> Modelagem e implementação de bancos de dados relacionais (PostgreSQL, MySQL) ou NoSQL (MongoDB).
-                    <li><strong>Integração com CMS:</strong> Desenvolvimento ou customização de temas e plugins para WordPress, Drupal, etc., se aplicável.
-                    <li><strong>Funcionalidades E-commerce:</strong> Configuração de plataformas, gateways de pagamento, gestão de produtos e pedidos (se for uma loja virtual).
-                    <li><strong>Sistemas de Login e Gerenciamento de Usuários:</strong> Autenticação, autorização e perfis de usuário.
-                    <li><strong>Otimização de Performance e Segurança:</strong> Melhores práticas para velocidade, escalabilidade e proteção contra vulnerabilidades.
-                    <li><strong>Testes e QA:</strong> Garantia de qualidade em diferentes dispositivos e navegadores.
-                    <li><strong>Implantação (Deploy):</strong> Configuração de ambiente de produção em servidores VPS, Cloud (AWS, Google Cloud, Azure) ou PaaS.
-                    <li><strong>Treinamento e Documentação:</strong> Para que você ou sua equipe possam gerenciar o site/aplicação.
-                </ul>
-                <p><strong>Estimativa de Custo:</strong> R$10.000 - R$50.000+</p>
-                <p><strong>Fatores que Influenciam o Preço:</strong></p>
-                <ul>
-                    <li>Complexidade das funcionalidades e integrações.
-                    <li>Número de páginas/telas e complexidade do design.
-                    <li>Necessidade de migração de dados de sistemas existentes.
-                    <li>Escolha de tecnologias e frameworks.
-                    <li>Nível de personalização e desenvolvimento customizado.
-                    <li>Requisitos de segurança e escalabilidade.
-                    <li>Prazos de entrega e tamanho da equipe envolvida.
-                </ul>
-                <p><strong>Ideal para:</strong> E-commerce robusto, plataformas sociais, sistemas de gerenciamento complexos, aplicações web interativas, portais com alto volume de tráfego e conteúdo, ou qualquer projeto que exija funcionalidades personalizadas e escalabilidade.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">TUTANKHAMAL</span>
+                    <span class="logo-accent">DEV</span>
+                </div>
+                <div class="footer-links">
+                    <a href="sobre.html">Sobre</a>
+                    <a href="portfolio.html">Portfólio</a>
+                    <a href="contato.html">Contato</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/Tutankhamal" target="_blank" class="social-link" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tutankhamal/" target="_blank" class="social-link" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://instagram.com/Tutankhamal" target="_blank" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://discordapp.com/users/820522746622246963" target="_blank" class="social-link" aria-label="Discord">
+                        <i class="fab fa-discord"></i>
+                        <span>Discord</span>
+                    </a>
+                    <a href="https://youtube.com/@Tutankhamal" target="_blank" class="social-link" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                </div>
             </div>
-            
-        </div>
-
-          <!-- FIM DO MODAL staticCostMaintenanceServiceModal -->
-
-          
-
-          <!-- Outros modais existentes -->
-          <div id="staticBenefitSpeedModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-tachometer-alt"></i> Benefício: Velocidade e Performance</h4>
-                  <p><strong>Descrição:</strong> Sites estáticos são servidos diretamente como arquivos HTML, CSS e JavaScript, sem processamento de banco de dados ou scripts complexos no servidor a cada requisição. Isso resulta em tempos de carregamento muito mais rápidos.</p>
-                  <p><strong>Impacto:</strong> Melhor experiência do usuário, taxas de rejeição mais baixas e melhor posicionamento em mecanismos de busca (SEO).</p>
-              </div>
-          </div>
-
-          <div id="staticBenefitSecurityModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-user-shield"></i> Benefício: Segurança Aprimorada</h4>
-                  <p><strong>Descrição:</strong> Com menos componentes móveis (sem banco de dados ou processamento do lado do servidor complexo), a superfície de ataque para hackers é significativamente reduzida. Vulnerabilidades comuns em CMS ou plugins não se aplicam.</p>
-                  <p><strong>Impacto:</strong> Menor risco de invasões, defacements ou roubo de dados.</p>
-              </div>
-          </div>
-
-          <div id="staticBenefitCostModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-hand-holding-usd"></i> Benefício: Baixo Custo</h4>
-                  <p><strong>Descrição:</strong> A hospedagem para sites estáticos é frequentemente gratuita ou muito barata. Não há custos de licença para bancos de dados ou plataformas de CMS complexas.</p>
-                  <p><strong>Impacto:</strong> Ideal para projetos com orçamento limitado ou para quem busca uma solução econômica e eficiente.</p>
-              </div>
-          </div>
-
-          <div id="staticBenefitMaintenanceModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-tools"></i> Benefício: Manutenção Simplificada</h4>
-                  <p><strong>Descrição:</strong> Menos partes para quebrar significa menos manutenção. Não há necessidade de atualizações constantes de plugins, temas ou core de CMS para corrigir falhas de segurança.</p>
-                  <p><strong>Impacto:</strong> Menos tempo e esforço dedicados à manutenção do site.</p>
-              </div>
-          </div>
-
-          <div id="staticAppPortfolioModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-briefcase"></i> Aplicação Ideal: Portfólios Pessoais/Profissionais</h4>
-                  <p><strong>Descrição:</strong> Sites estáticos são perfeitos para exibir trabalhos, habilidades e informações de contato de forma rápida e elegante. O foco é na apresentação do conteúdo.</p>
-                  <p><strong>Exemplo:</strong> Site de um designer, fotógrafo, desenvolvedor, escritor.</p>
-              </div>
-          </div>
-
-          <div id="staticAppLandingPageModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-rocket"></i> Aplicação Ideal: Landing Pages</h4>
-                  <p><strong>Descrição:</strong> Páginas focadas em uma única ação ou campanha. A velocidade e simplicidade de um site estático ajudam a maximizar as conversões.</p>
-                  <p><strong>Exemplo:</strong> Página de lançamento de um produto, inscrição em um webinar, download de um e-book.</p>
-              </div>
-          </div>
-
-          <div id="staticAppInstitutionalModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-building"></i> Aplicação Ideal: Sites Institucionais Pequenos</h4>
-                  <p><strong>Descrição:</strong> Para empresas ou organizações que precisam de uma presença online informativa, mas não necessitam de interatividade complexa ou atualizações frequentes de conteúdo.</p>
-                  <p><strong>Exemplo:</strong> Site de uma pequena empresa local, organização sem fins lucrativos com informações básicas.</p>
-              </div>
-          </div>
-
-          <div id="staticAppBlogModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-feather-alt"></i> Aplicação Ideal: Blogs Pessoais (com Geradores Estáticos)</h4>
-                  <p><strong>Descrição:</strong> Usando Geradores de Sites Estáticos (SSGs) como Jekyll, Hugo, ou Gatsby, é possível criar blogs rápidos, seguros e de baixa manutenção. O conteúdo é escrito em arquivos de texto (Markdown) e o SSG gera os arquivos HTML.</p>
-                  <p><strong>Exemplo:</strong> Blog de um desenvolvedor sobre tecnologia, diário de viagem pessoal.</p>
-              </div>
-          </div>
-
-          <!-- Novo Modal Adicionado Abaixo -->
-          <div id="staticDomainModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-globe"></i> Domínio</h4>
-                  <p><strong>Descrição:</strong> É o endereço do seu site na internet (ex: www.seusite.com.br). É como as pessoas encontrarão seu site.</p>
-                  <p><strong>Importância:</strong> Essencial para identidade online e credibilidade. Um bom nome de domínio é fácil de lembrar e relevante para o seu conteúdo.</p>
-                  <p><strong>Onde Registrar:</strong> Plataformas como Registro.br (para domínios .br), GoDaddy, Namecheap, Hostinger, etc.</p>
-                  <p><strong>Dicas para Escolha:</strong></p>
-                  <ul>
-                      <li>Curto e memorável.</li>
-                      <li>Fácil de pronunciar e soletrar.</li>
-                      <li>Relacionado ao seu nicho ou marca.</li>
-                      <li>Evite hífens e números, se possível.</li>
-                  </ul>
-                  <p><strong>Custo Estimado:</strong> Geralmente entre R$40 e R$80 por ano para domínios comuns (.com, .com.br). Preços podem variar para extensões premium.</p>
-              </div>
-          </div>
-
-          <div id="staticHostingModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-server"></i> Hospedagem Estática</h4>
-                  <p><strong>Descrição:</strong> É o serviço que armazena os arquivos do seu site (HTML, CSS, JavaScript, imagens) e os torna acessíveis na internet. Para sites estáticos, as opções são geralmente mais simples e baratas.</p>
-                  <p><strong>Opções Populares:</strong></p>
-                  <ul>
-                      <li><strong>Gratuitas/Freemium:</strong> GitHub Pages, Netlify, Vercel, Cloudflare Pages, Render. Excelentes para projetos pessoais e pequenos sites, muitas vezes com generosos planos gratuitos.</li>
-                      <li><strong>Pagas (Baixo Custo):</strong> Hospedagem compartilhada tradicional (Hostinger, Hostgator - configure para servir arquivos estáticos), Amazon S3 (armazenamento), Google Cloud Storage.</li>
-                  </ul>
-                  <p><strong>Considerações:</strong> Facilidade de uso, limites de tráfego e armazenamento (nos planos gratuitos), necessidade de CDN (Content Delivery Network) para melhor performance global (muitas opções gratuitas já incluem).</p>
-                  <p><strong>Custo Estimado:</strong> R$0 (para muitas opções excelentes) até R$50/mês para hospedagens pagas mais robustas ou com maior tráfego.</p>
-              </div>
-          </div>
-
-          <div id="staticSSLModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-lock"></i> Certificado SSL</h4>
-                  <p><strong>Descrição:</strong> Garante que a conexão entre o navegador do visitante e o seu site seja criptografada (HTTPS). Isso protege os dados transmitidos e aumenta a confiança do usuário.</p>
-                  <p><strong>Importância:</strong></p>
-                  <ul>
-                      <li><strong>Segurança:</strong> Protege contra interceptação de dados.</li>
-                      <li><strong>Confiança:</strong> Navegadores marcam sites HTTP como "Não Seguros".</li>
-                      <li><strong>SEO:</strong> Google considera HTTPS um fator de ranqueamento.</li>
-                  </ul>
-                  <p><strong>Como Obter:</strong></p>
-                  <ul>
-                      <li><strong>Let's Encrypt:</strong> Autoridade certificadora gratuita, amplamente suportada por provedores de hospedagem estática modernos (Netlify, Vercel, GitHub Pages geralmente configuram automaticamente).</li>
-                      <li><strong>Provedor de Hospedagem:</strong> Muitos oferecem SSL gratuito integrado.</li>
-                      <li><strong>Comprado:</strong> Para necessidades específicas ou validação estendida (geralmente não necessário para sites estáticos simples).</p>
-                  </ul>
-                  <p><strong>Custo Estimado:</strong> R$0 (com Let's Encrypt ou SSL gratuito do provedor) até R$300+/ano para certificados pagos (raramente necessários para sites estáticos).</p>
-              </div>
-          </div>
-
-          <div id="staticContentModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-file-alt"></i> Conteúdo (Textos, Imagens)</h4>
-                  <p><strong>Descrição:</strong> O coração do seu site. Inclui todos os textos, imagens, vídeos e outros arquivos de mídia que você deseja apresentar aos seus visitantes.</p>
-                  <p><strong>Criação e Preparação:</strong></p>
-                  <ul>
-                      <li><strong>Textos:</strong> Devem ser claros, concisos, bem escritos e otimizados para SEO (se aplicável).</li>
-                      <li><strong>Imagens:</strong> Devem ser de boa qualidade, otimizadas para web (tamanho e formato corretos para carregamento rápido) e com direitos de uso adequados.</li>
-                      <li><strong>Vídeos:</strong> Geralmente hospedados em plataformas como YouTube ou Vimeo e incorporados no site para melhor performance.</li>
-                  </ul>
-                  <p><strong>Organização:</strong> Planeje a estrutura do seu conteúdo e como ele será apresentado nas diferentes páginas do site.</p>
-                  <p><strong>Custo:</strong> Pode variar de R$0 (se você criar todo o conteúdo) a valores significativos se contratar redatores, fotógrafos, videomakers ou bancos de imagens/vídeos.</p>
-              </div>
-          </div>
-
-          <div id="staticAnalyticsModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-chart-line"></i> Ferramentas de Análise (Opcional)</h4>
-                  <p><strong>Descrição:</strong> Softwares que coletam dados sobre os visitantes do seu site, como número de visitas, páginas mais acessadas, origem do tráfego, tempo de permanência, etc.</p>
-                  <p><strong>Importância:</strong> Ajudam a entender o comportamento do seu público, medir o sucesso de campanhas e identificar áreas para melhoria no site.</p>
-                  <p><strong>Opções Populares:</strong></p>
-                  <ul>
-                      <li><strong>Google Analytics:</strong> A ferramenta mais popular e gratuita. Oferece uma vasta gama de relatórios e métricas.</li>
-                      <li><strong>Plausible Analytics, Fathom Analytics, Simple Analytics:</strong> Alternativas focadas em privacidade, geralmente pagas, mas mais simples de usar e sem cookies (em alguns casos).</li>
-                      <li><strong>Analytics do Provedor de Hospedagem:</strong> Alguns provedores (Netlify, Vercel) oferecem suas próprias ferramentas de análise, às vezes com planos gratuitos básicos.</li>
-                  </ul>
-                  <p><strong>Custo:</strong> R$0 (Google Analytics, planos básicos de outros) a R$50+/mês para ferramentas pagas com mais recursos ou foco em privacidade.</p>
-              </div>
-          </div>
-
-          <div id="staticCostDomainModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-tag"></i> Custo: Domínio</h4>
-                  <p><strong>Descrição:</strong> Refere-se ao custo anual para registrar e manter o nome do seu site (ex: www.seusite.com.br).</p>
-                  <p><strong>Frequência:</strong> Pagamento anual (alguns registradores oferecem descontos para registros de múltiplos anos).</p>
-                  <p><strong>Fatores de Custo:</strong></p>
-                  <ul>
-                      <li><strong>Extensão do Domínio:</strong> Domínios .com, .net, .org, .com.br geralmente têm preços similares. Extensões mais novas ou premium (ex: .app, .store, .tech) podem ser mais caras.</li>
-                      <li><strong>Registrador:</strong> Os preços podem variar ligeiramente entre diferentes empresas registradoras.</li>
-                      <li><strong>Promoções:</strong> É comum encontrar promoções para o primeiro ano de registro. Fique atento ao preço de renovação.</li>
-                      <li><strong>Privacidade de Domínio (WHOIS Privacy):</strong> Alguns registradores cobram uma taxa extra para ocultar suas informações pessoais do registro público WHOIS. Outros incluem gratuitamente.</li>
-                  </ul>
-                  <p><strong>Estimativa de Custo:</strong> R$40 - R$80 por ano para extensões comuns.</p>
-              </div>
-          </div>
-
-          <div id="staticCostHostingModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-coins"></i> Custo: Hospedagem Estática</h4>
-                  <p><strong>Descrição:</strong> Custo para manter os arquivos do seu site online e acessíveis.</p>
-                  <p><strong>Frequência:</strong> Mensal ou Anual (planos anuais costumam ter desconto).</p>
-                  <p><strong>Fatores de Custo:</strong></p>
-                  <ul>
-                      <li><strong>Provedor Escolhido:</strong> Muitas plataformas modernas (Netlify, Vercel, GitHub Pages, Cloudflare Pages) oferecem planos gratuitos generosos para sites estáticos, suficientes para a maioria dos projetos pessoais e pequenos negócios.</li>
-                      <li><strong>Recursos Necessários:</strong> Se você precisar de limites de tráfego/armazenamento muito altos, builds mais rápidos, mais membros na equipe, ou recursos premium, pode ser necessário um plano pago.</li>
-                      <li><strong>Serviços Adicionais:</strong> Alguns provedores podem cobrar por analytics avançado, funções serverless além do limite gratuito, etc.</li>
-                  </ul>
-                  <p><strong>Estimativa de Custo:</strong> R$0 (com opções gratuitas) - R$50/mês. A maioria dos sites estáticos pode operar sem custo de hospedagem.</p>
-              </div>
-          </div>
-
-          <div id="staticCostSSLModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-shield-alt"></i> Custo: Certificado SSL</h4>
-                  <p><strong>Descrição:</strong> Custo para adquirir e manter o certificado que habilita o HTTPS no seu site.</p>
-                  <p><strong>Frequência:</strong> Geralmente anual para certificados pagos, ou renovação automática e gratuita para Let's Encrypt.</p>
-                  <p><strong>Fatores de Custo:</strong></p>
-                  <ul>
-                      <li><strong>Tipo de Certificado:</strong>
-                          <ul>
-                              <li><strong>Validação de Domínio (DV):</strong> O mais comum e barato (muitas vezes gratuito via Let's Encrypt). Valida apenas que você controla o domínio.</li>
-                              <li><strong>Validação de Organização (OV):</strong> Requer verificação da organização. Mais caro.</li>
-                              <li><strong>Validação Estendida (EV):</strong> O mais caro, envolve uma verificação rigorosa da organização e exibe o nome da empresa na barra de endereços (menos comum hoje em dia).</li>
-                          </ul>
-                      </li>
-                      <li><strong>Provedor:</strong> Let's Encrypt é gratuito. Provedores de hospedagem como Netlify, Vercel, GitHub Pages geralmente integram e automatizam SSL gratuito. Certificados pagos são vendidos por autoridades certificadoras (Comodo, DigiCert, etc.) ou revendedores.</li>
-                  </ul>
-                  <p><strong>Estimativa de Custo:</strong> R$0 (com Let's Encrypt ou SSL gratuito do provedor) - R$300+/ano. Para a grande maioria dos sites estáticos, o custo será R$0.</p>
-              </div>
-          </div>
-
-          <!-- Modals para Site Dinâmico -->
-          <div id="dynamicDomainModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-globe"></i> Domínio </h4>
-                  <p><strong>Descrição:</strong> Similar ao site estático, é o endereço do seu site na internet (ex: www.seusitecomplexo.com). Essencial para identidade online.</p>
-                  <p><strong>Importância:</strong> Fundamental para construir uma marca e facilitar o acesso dos usuários. A escolha do nome deve ser estratégica.</p>
-                  <p><strong>Onde Registrar:</strong> Mesmos registradores (Registro.br, GoDaddy, etc.).</p>
-                  <p><strong>Custo Estimado:</strong> R$40-R$80 por ano, similar aos sites estáticos.</p>
-              </div>
-          </div>
-
-          <div id="dynamicHostingModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-server"></i> Hospedagem Dinâmica/VPS/Cloud</h4>
-                  <p><strong>Descrição:</strong> Requer servidores com capacidade de processar linguagens de programação (PHP, Python, Ruby, Node.js, etc.) e interagir com bancos de dados. Opções incluem hospedagem compartilhada (para sites menores), VPS (Servidor Virtual Privado) para mais controle, ou soluções em nuvem (AWS, Google Cloud, Azure) para escalabilidade.</p>
-                  <p><strong>Importância:</strong> A espinha dorsal do site dinâmico, precisa ser confiável, escalável e segura.</p>
-                  <p><strong>Custo Estimado:</strong> R$50/mês (hospedagem compartilhada básica) até R$1000+/mês (VPS robusto ou cloud, dependendo dos recursos).</p>
-              </div>
-          </div>
-
-          <div id="dynamicSSLModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-lock"></i> Certificado SSL</h4>
-                  <p><strong>Descrição:</strong> Igualmente crucial para sites dinâmicos, especialmente se lidam com dados de usuários, transações financeiras ou informações sensíveis. Garante a criptografia HTTPS.</p>
-                  <p><strong>Importância:</strong> Confiança, segurança, conformidade (LGPD/GDPR) e SEO.</p>
-                  <p><strong>Como Obter:</strong> Muitos provedores de hospedagem oferecem Let's Encrypt gratuitamente. Certificados pagos (OV, EV) podem ser considerados para e-commerces e sites que exigem maior validação de identidade.</p>
-                  <p><strong>Custo Estimado:</strong> R$0 (Let's Encrypt) até R$500+/ano para certificados avançados.</p>
-              </div>
-          </div>
-
-          <div id="dynamicBackendModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-code"></i> Backend (Linguagem de Programação)</h4>
-                  <p><strong>Descrição:</strong> A lógica do lado do servidor que processa dados, interage com o banco de dados, gerencia autenticação de usuários, e executa as funcionalidades complexas do site. Exemplos de linguagens: PHP (com frameworks como React, Angular ou Vue.js, se necessário) para interfaces ricas e interativas.</p>
-                  <p><strong>Importância:</strong> O motor do site dinâmico. A escolha da tecnologia depende dos requisitos do projeto, escalabilidade e familiaridade da equipe de desenvolvimento.</p>
-                  <p><strong>Desenvolvimento:</strong> Requer programadores backend qualificados.</p>
-              </div>
-          </div>
-
-          <div id="dynamicDatabaseModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-database"></i> Banco de Dados</h4>
-                  <p><strong>Descrição:</strong> Sistema para armazenar e gerenciar os dados do site de forma estruturada. Exemplos: MySQL, PostgreSQL (relacionais), MongoDB, Cassandra (NoSQL).</p>
-                  <p><strong>Importância:</strong> Essencial para armazenar informações de usuários, produtos, posts, pedidos, etc. A escolha depende do tipo de dados e da complexidade das consultas.</p>
-                  <p><strong>Gerenciamento:</strong> Requer configuração, otimização e backups regulares.</p>
-              </div>
-          </div>
-
-          <div id="dynamicCMSModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-puzzle-piece"></i> CMS (Sistema de Gerenciamento de Conteúdo)</h4>
-                  <p><strong>Descrição:</strong> Plataforma que facilita a criação, edição e gerenciamento de conteúdo sem necessidade de conhecimento técnico profundo em programação. Exemplos: WordPress, Joomla, Drupal (open-source), ou CMSs headless/proprietários.</p>
-                  <p><strong>Quando Usar:</strong> Ideal para sites com muito conteúdo que precisa ser atualizado frequentemente por não-desenvolvedores (blogs, portais de notícias, sites institucionais com muitas páginas).</p>
-                  <p><strong>Vantagens:</strong> Interface amigável, vasta gama de plugins e temas.</p>
-                  <p><strong>Desvantagens:</strong> Pode exigir manutenção constante (atualizações de segurança) e, às vezes, pode ser mais lento ou menos flexível que soluções customizadas.</p>
-              </div>
-          </div>
-
-          <div id="dynamicEcommerceModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-shopping-cart"></i> Plataforma de E-commerce</h4>
-                  <p><strong>Descrição:</strong> Solução específica para lojas virtuais, incluindo funcionalidades como catálogo de produtos, carrinho de compras, checkout, integração com gateways de pagamento, gerenciamento de pedidos e clientes.</p>
-                  <p><strong>Opções:</strong> WooCommerce (plugin para WordPress), Shopify (SaaS), Magento (robusto, para grandes operações), Tray, Loja Integrada (plataformas brasileiras).</p>
-                  <p><strong>Importância:</strong> Fundamental para vender online. A escolha depende do tamanho do negócio, orçamento e necessidades específicas.</p>
-              </div>
-          </div>
-
-          <div id="dynamicAPIsModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-cogs"></i> APIs e Integrações</h4>
-                  <p><strong>Descrição:</strong> Interfaces de Programação de Aplicativos (APIs) permitem que seu site se comunique com outros serviços e sistemas. Exemplos: integração com gateways de pagamento (Stripe, PayPal, PagSeguro), redes sociais, ferramentas de email marketing, sistemas de CRM, ERPs.</p>
-                  <p><strong>Importância:</strong> Essencial para automatizar processos, enriquecer funcionalidades e oferecer uma experiência conectada.</p>
-                  <p><strong>Desenvolvimento:</strong> Pode envolver o consumo de APIs de terceiros ou o desenvolvimento de APIs próprias para seu sistema.</p>
-              </div>
-          </div>
-
-          <div id="dynamicSecurityMeasuresModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-shield-alt"></i> Medidas de Segurança Avançadas</h4>
-                  <p><strong>Descrição:</strong> Além do SSL, sites dinâmicos exigem uma abordagem de segurança mais robusta: Web Application Firewall (WAF), proteção contra DDoS, sanitização de inputs, senhas fortes, autenticação de dois fatores (2FA), monitoramento de logs, atualizações regulares de software e frameworks.</p>
-                  <p><strong>Importância:</strong> Proteger dados de usuários, transações financeiras e a integridade do site contra ameaças cibernéticas.</p>
-                  <p><strong>Implementação:</strong> Uma combinação de boas práticas de desenvolvimento, configurações de servidor e, possivelmente, serviços de segurança especializados.</p>
-              </div>
-          </div>
-
-          <div id="dynamicMaintenanceSupportModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-headset"></i> Manutenção e Suporte Contínuos</h4>
-                  <p><strong>Descrição:</strong> Sites dinâmicos requerem atenção constante: atualizações de segurança para o servidor, linguagem de programação, frameworks, CMS e plugins; backups regulares; monitoramento de performance e uptime; correção de bugs.</p>
-                  <p><strong>Importância:</strong> Garantir que o site funcione corretamente, esteja seguro e disponível para os usuários.</p>
-                  <p><strong>Opções:</strong> Pode ser feito pela equipe interna, desenvolvedores freelancers ou agências especializadas em contratos de manutenção.</p>
-              </div>
-          </div>
-
-          <div id="dynamicCostDomainModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-tag"></i> Custo do Domínio</h4>
-                  <p><strong>Detalhes:</strong> Similar ao site estático, o custo anual para o nome de domínio.</p>
-                  <p><strong>Estimativa:</strong> R$40 - R$80/ano.</p>
-              </div>
-          </div>
-
-          <div id="dynamicCostHostingModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-coins"></i> Custo da Hospedagem/VPS</h4>
-                  <p><strong>Detalhes:</strong> Custo mensal ou anual para o servidor que executa seu backend e banco de dados.</p>
-                  <p><strong>Fatores:</strong> Tipo de hospedagem (compartilhada, VPS, cloud), recursos (CPU, RAM, armazenamento, largura de banda), nível de gerenciamento.</p>
-                  <p><strong>Estimativa:</strong> Desde R$50/mês para hospedagem compartilhada básica, R$100 - R$500/mês para um VPS decente, e R$200 - R$1000+/mês para soluções cloud mais robustas ou VPS com mais recursos. Pode aumentar significativamente com o tráfego e complexidade.</p>
-              </div>
-          </div>
-
-          <div id="dynamicCostDevelopmentServiceModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-laptop-code"></i> Custo de Desenvolvimento</h4>
-                  <p><strong>Detalhes:</strong> O maior investimento inicial. Inclui design, desenvolvimento frontend, desenvolvimento backend, configuração de banco de dados, integrações, testes.</p>
-                  <p><strong>Fatores:</strong> Complexidade das funcionalidades, tamanho do site, experiência da equipe/agência, tecnologias utilizadas.</p>
-                  <p><strong>Estimativa:</strong> Extremamente variável. Um site dinâmico simples pode começar em alguns milhares de reais (R$3.000 - R$10.000). Projetos complexos, e-commerces robustos ou plataformas SaaS podem custar de dezenas a centenas de milhares de reais (R$15.000 - R$100.000+).</p>
-              </div>
-          </div>
-
-          <div id="dynamicCostMaintenanceModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-wrench"></i> Custo de Manutenção</h4>
-                  <p><strong>Detalhes:</strong> Custo recorrente para manter o site funcionando, seguro e atualizado.</p>
-                  <p><strong>Serviços Inclusos:</strong> Atualizações de segurança, backups, monitoramento, pequenas correções, suporte técnico.</p>
-                  <p><strong>Estimativa:</strong> Pode variar de R$100/mês para planos básicos de manutenção até R$1000+/mês ou mais para sites complexos que exigem monitoramento proativo e suporte especializado. Geralmente, um percentual do custo de desenvolvimento pode ser usado como estimativa anual (ex: 15-20%).</p>
-              </div>
-          </div>
-
-          <div id="dynamicBenefitInteractivityModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-users-cog"></i> Benefício: Interatividade e Personalização</h4>
-                  <p><strong>Descrição:</strong> Sites dinâmicos podem oferecer experiências personalizadas para os usuários, como áreas de login, conteúdo recomendado, formulários complexos, comentários, fóruns e funcionalidades baseadas nas ações do usuário.</p>
-                  <p><strong>Impacto:</strong> Maior engajamento, retenção de usuários e capacidade de oferecer serviços sob medida.</p>
-              </div>
-          </div>
-
-          <div id="dynamicBenefitScalabilityModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-chart-area"></i> Benefício: Escalabilidade</h4>
-                  <p><strong>Descrição:</strong> Embora exija planejamento, a arquitetura de sites dinâmicos (especialmente em cloud) pode ser projetada para escalar e suportar um grande volume de tráfego e dados. É possível adicionar mais recursos de servidor conforme a necessidade.</p>
-                  <p><strong>Impacto:</strong> Capacidade de crescer junto com o negócio ou a base de usuários.</p>
-              </div>
-          </div>
-
-          <div id="dynamicBenefitFeaturesModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-star"></i> Benefício: Funcionalidades Avançadas</h4>
-                  <p><strong>Descrição:</strong> Permite a implementação de praticamente qualquer funcionalidade imaginável: sistemas de busca complexos, e-commerce completo, integração com múltiplos serviços externos, processamento de pagamentos, gerenciamento de usuários, etc.</p>
-                  <p><strong>Impacto:</strong> Criação de soluções web robustas e completas para atender necessidades específicas de negócios.</p>
-              </div>
-          </div>
-
-          <div id="dynamicBenefitDataModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-server"></i> Benefício: Gerenciamento de Dados Complexos</h4>
-                  <p><strong>Descrição:</strong> Capacidade de armazenar, organizar, consultar e manipular grandes volumes de dados de forma eficiente através de bancos de dados.</p>
-                  <p><strong>Impacto:</strong> Fundamental para e-commerce (produtos, pedidos, clientes), redes sociais (perfis, posts, conexões), plataformas de conteúdo (artigos, usuários, metadados).</p>
-              </div>
-          </div>
-
-          <div id="dynamicAppEcommerceModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-store"></i> Aplicação Ideal: Lojas Virtuais (E-commerce)</h4>
-                  <p><strong>Descrição:</strong> Sites que vendem produtos ou serviços online. Requerem catálogo de produtos, carrinho de compras, checkout seguro, gerenciamento de inventário e pedidos, integração com pagamentos.</p>
-                  <p><strong>Exemplo:</strong> Qualquer loja online, desde pequenos varejistas até grandes marketplaces.</p>
-              </div>
-          </div>
-
-          <div id="dynamicAppSocialModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-users"></i> Aplicação Ideal: Redes Sociais e Comunidades Online</h4>
-                  <p><strong>Descrição:</strong> Plataformas que permitem aos usuários criar perfis, conectar-se com outros, compartilhar conteúdo, participar de discussões.</p>
-                  <p><strong>Exemplo:</strong> Facebook, Twitter, Instagram, fóruns especializados.</p>
-              </div>
-          </div>
-
-          <div id="dynamicAppPlatformsModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-cubes"></i> Aplicação Ideal: Plataformas SaaS (Software como Serviço)</h4>
-                  <p><strong>Descrição:</strong> Aplicações web que oferecem um serviço ou ferramenta online, geralmente mediante assinatura. Requerem gerenciamento de contas, funcionalidades específicas do software, e muitas vezes, processamento de dados complexos.</p>
-                  <p><strong>Exemplo:</strong> Ferramentas de CRM (Salesforce), gerenciadores de projetos (Asana, Trello), plataformas de email marketing (Mailchimp).</p>
-              </div>
-          </div>
-
-          <div id="dynamicAppLargePortalsModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-newspaper"></i> Aplicação Ideal: Portais de Notícias e Conteúdo Extenso</h4>
-                  <p><strong>Descrição:</strong> Sites com grande volume de artigos, categorias, tags, autores, e que necessitam de um sistema robusto para gerenciar e apresentar esse conteúdo de forma organizada e pesquisável. Frequentemente usam CMS.</p>
-                  <p><strong>Exemplo:</strong> Grandes jornais online, revistas digitais, blogs corporativos com muito conteúdo.</p>
-              </div>
-          </div>
-
-          <div id="dynamicAppWebAppsModal" class="modal">
-              <div class="modal-content">
-                  <span class="close-button">&times;</span>
-                  <h4><i class="fas fa-laptop"></i> Aplicação Ideal: Aplicações Web Complexas</h4>
-                  <p><strong>Descrição:</strong> Qualquer aplicação acessada via navegador que envolva lógica de negócios complexa, manipulação de dados em tempo real, interações sofisticadas com o usuário, ou integrações com múltiplos sistemas.</p>
-                  <p><strong>Exemplo:</strong> Sistemas de reserva online, ferramentas de análise de dados, plataformas de e-learning interativas.</p>
-              </div>
-          </div>
-      </section>
-</main>
-<button id="backToTop" class="top-button">▲</button>
-    <footer>
-        <div class="footer-content">
-            
-            <p>&copy; 2025 Tutankhamal. Todos os direitos reservados.</p>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/tutankhamal/" target="_blank" class="social-icon linkedin" aria-label="Visite meu perfil no LinkedIn">
-                    <i class="fab fa-linkedin" aria-hidden="true"></i>
-                    <span class="sr-only">LinkedIn</span>
-                </a>
-                <a href="https://github.com/Tutankhamal" target="_blank" class="social-icon github" aria-label="Veja meus projetos no GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
-                    <span class="sr-only">GitHub</span>
-                </a>
-                <a href="https://youtube.com/@Tutankhamal" target="_blank" class="social-icon youtube" aria-label="Assista meus vídeos no YouTube">
-                    <i class="fab fa-youtube" aria-hidden="true"></i>
-                    <span class="sr-only">YouTube</span>
-                </a>                
-                <a href="https://instagram.com/Tutankhamal" target="_blank" class="social-icon instagram" aria-label="Siga-me no Instagram">
-                    <i class="fab fa-instagram" aria-hidden="true"></i>
-                    <span class="sr-only">Instagram</span>
-                </a>
-                <a href="https://soundcloud.com/tutankhamal" target="_blank" class="social-icon soundcloud" aria-label="Ouça minhas músicas no SoundCloud">
-                    <i class="fab fa-soundcloud" aria-hidden="true"></i>
-                    <span class="sr-only">SoundCloud</span>
-                </a>
-                <a href="https://discord.gg/gE3zfksfZX" target="_blank" class="social-icon discord" aria-label="Conecte-se comigo no Discord">
-                    <i class="fab fa-discord" aria-hidden="true"></i>
-                    <span class="sr-only">Discord</span>
-                </a>
-                <a href="https://steamcommunity.com/id/Tutankhamal/" target="_blank" class="social-icon steam" aria-label="Veja meu perfil no Steam">
-                    <i class="fab fa-steam" aria-hidden="true"></i>
-                    <span class="sr-only">Steam</span>
-                </a>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tutankhamal Dev. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-
-
-    <script src="/assets/js/script.js"></script>
-    
-        
-
-    
-
-
-
-
-
-
-
-
-
-
-
+    <script src="assets/js/main.js"></script>
 </body>
+</html>
