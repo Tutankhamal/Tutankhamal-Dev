@@ -1,4 +1,6 @@
 # Esta pasta contém as imagens do site
+# This file ensures the images directory is tracked by Git
+# Place your images in this directory
 # Adicione aqui:
 # - favicon.ico
 # - apple-touch-icon.png
